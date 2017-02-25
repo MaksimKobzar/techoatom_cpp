@@ -25,19 +25,19 @@ public:
     //---------------------------------------------
     //! @Element_access
     //---------------------------------------------
-    value_type *top(size_type index);
+    value_type *top();
 
     //---------------------------------------------
     //! @Capacity
     //---------------------------------------------
-    bool        empty();
-    size_type   size();
+    bool empty();
+    size_type size();
 
     //---------------------------------------------
     //! @Modifiers
     //---------------------------------------------
-    bool empty();
-    bool pop    () { };
+    bool push(value_type&& value);
+    bool pop() { };
 
 private:
     static const size_type capacity = 100; // Wthat is static const ?!
@@ -49,12 +49,40 @@ private:
     //------------------------------------------------
     // Implementation
     //------------------------------------------------
-    value_type *top(){
+    value_type *top() {
         if(size_ == 0)
             return nullptr;
         else
             return &data_[size_];
     };
+
+    bool empty() {
+        if(size_ == 0)
+            return 1;
+        return 0;
+    }
+
+    size_type size() {
+        return size_;
+    }
+
+    bool push(value_type&& value) {
+        if(size_ == capacity)
+            return 0;
+        else {
+            data_[size_++] = value;            
+            return 1;
+        }
+    } 
+
+    bool pop() {
+        if(size_ == 0)
+            return 0;
+        else {
+            size_--;            
+            return 1;
+        }
+    }  
 
 
 };
