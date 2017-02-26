@@ -8,9 +8,21 @@
 
 #include "Stack.hpp"
 
+const Stack::size_type POISON_INT = 1322;
+
 //------------------------------------------------
 // Implementation
 //------------------------------------------------
+
+Stack::Stack() : size_ (0)
+{
+    std::cout << __func__ << std::endl;
+}
+
+Stack::~Stack() {
+    size_ = POISON_INT;
+}
+
 Stack::value_type *Stack::top() {
     if(size_ == 0)
         return nullptr;

@@ -8,15 +8,12 @@
 
 #ifndef STACK_STACK_HPP
 #define STACK_STACK_HPP
+#endif //STACK_STACK_HPP
+
 
 class Stack
 {
 public:
-
-//    value_type	Container::value_type
-//    size_type	Container::size_type
-//    reference	Container::reference
-//    const_reference	Container::const_reference
 
     typedef float value_type;
     typedef int size_type;
@@ -24,10 +21,11 @@ public:
     //---------------------------------------------
     //! @Constructor
     //---------------------------------------------
-    Stack()
-    {
-        size_ = 0;
-    }
+    Stack();
+    //---------------------------------------------
+    //! @Destructor
+    //---------------------------------------------
+    ~Stack();
 
     //---------------------------------------------
     //! @Element_access
@@ -52,5 +50,3 @@ private:
     size_type size_;
 
 };
-
-#endif //STACK_STACK_HPP
