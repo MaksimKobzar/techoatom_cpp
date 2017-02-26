@@ -4,7 +4,6 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "D:/techoatom_cpp/exercises/Stack/Stack.cpp" "D:/techoatom_cpp/exercises/Stack/cmake-build-debug/CMakeFiles/Stack.dir/Stack.cpp.obj"
   "D:/techoatom_cpp/exercises/Stack/main.cpp" "D:/techoatom_cpp/exercises/Stack/cmake-build-debug/CMakeFiles/Stack.dir/main.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")

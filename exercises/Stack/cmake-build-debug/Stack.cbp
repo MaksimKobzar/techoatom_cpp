@@ -80,13 +80,13 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="D:/techoatom_cpp/exercises/Stack/Stack.cpp">
-			<Option target="Stack"/>
-		</Unit>
-		<Unit filename="D:/techoatom_cpp/exercises/Stack/Stack.h">
+		<Unit filename="D:/techoatom_cpp/exercises/Stack/Stack.hpp">
 			<Option target="Stack"/>
 		</Unit>
 		<Unit filename="D:/techoatom_cpp/exercises/Stack/main.cpp">
+			<Option target="Stack"/>
+		</Unit>
+		<Unit filename="D:/techoatom_cpp/exercises/Stack/src.h">
 			<Option target="Stack"/>
 		</Unit>
 		<Unit filename="D:/techoatom_cpp/exercises/Stack/CMakeLists.txt">

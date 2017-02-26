@@ -122,33 +122,6 @@ Stack/fast:
 	$(MAKE) -f CMakeFiles\Stack.dir\build.make CMakeFiles/Stack.dir/build
 .PHONY : Stack/fast
 
-Stack.obj: Stack.cpp.obj
-
-.PHONY : Stack.obj
-
-# target to build an object file
-Stack.cpp.obj:
-	$(MAKE) -f CMakeFiles\Stack.dir\build.make CMakeFiles/Stack.dir/Stack.cpp.obj
-.PHONY : Stack.cpp.obj
-
-Stack.i: Stack.cpp.i
-
-.PHONY : Stack.i
-
-# target to preprocess a source file
-Stack.cpp.i:
-	$(MAKE) -f CMakeFiles\Stack.dir\build.make CMakeFiles/Stack.dir/Stack.cpp.i
-.PHONY : Stack.cpp.i
-
-Stack.s: Stack.cpp.s
-
-.PHONY : Stack.s
-
-# target to generate assembly for a file
-Stack.cpp.s:
-	$(MAKE) -f CMakeFiles\Stack.dir\build.make CMakeFiles/Stack.dir/Stack.cpp.s
-.PHONY : Stack.cpp.s
-
 main.obj: main.cpp.obj
 
 .PHONY : main.obj
@@ -185,9 +158,6 @@ help:
 	@echo ... Stack
 	@echo ... edit_cache
 	@echo ... rebuild_cache
-	@echo ... Stack.obj
-	@echo ... Stack.i
-	@echo ... Stack.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
