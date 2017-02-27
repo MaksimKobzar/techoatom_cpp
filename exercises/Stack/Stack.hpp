@@ -8,7 +8,6 @@
 
 #ifndef STACK_STACK_HPP
 #define STACK_STACK_HPP
-#endif //STACK_STACK_HPP
 
 
 class Stack
@@ -37,6 +36,7 @@ public:
     //---------------------------------------------
     bool empty();
     size_type size();
+    size_type capacity();
 
     //---------------------------------------------
     //! @Modifiers
@@ -44,9 +44,17 @@ public:
     bool push(value_type& value);
     bool pop();
 
+    //---------------------------------------------
+    //! @Test
+    //---------------------------------------------
+    bool ok();
+    bool dump();
+
 private:
-    static const size_type capacity_ = 10;
+    const size_type capacity_;
     value_type data_ [capacity_];
     size_type size_;
 
 };
+
+#endif //STACK_STACK_HPP
