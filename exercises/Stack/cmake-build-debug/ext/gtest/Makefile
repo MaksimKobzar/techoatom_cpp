@@ -56,6 +56,17 @@ CMAKE_BINARY_DIR = /home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-de
 #=============================================================================
 # Targets provided globally by CMake.
 
+# Special rule for the target test
+test:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
+	/home/maksim/Soft/CLion/bin/cmake/bin/ctest --force-new-ctest-process $(ARGS)
+.PHONY : test
+
+# Special rule for the target test
+test/fast: test
+
+.PHONY : test/fast
+
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
@@ -78,27 +89,16 @@ rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
 
-# Special rule for the target test
-test:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
-	/home/maksim/Soft/CLion/bin/cmake/bin/ctest --force-new-ctest-process $(ARGS)
-.PHONY : test
-
-# Special rule for the target test
-test/fast: test
-
-.PHONY : test/fast
-
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug/CMakeFiles /home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug/CMakeFiles/progress.marks
-	$(MAKE) -f CMakeFiles/Makefile2 all
+	cd /home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_progress_start /home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug/CMakeFiles /home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug/ext/gtest/CMakeFiles/progress.marks
+	cd /home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 ext/gtest/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	$(MAKE) -f CMakeFiles/Makefile2 clean
+	cd /home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 ext/gtest/clean
 .PHONY : clean
 
 # The main clean target
@@ -108,71 +108,33 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	$(MAKE) -f CMakeFiles/Makefile2 preinstall
+	cd /home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 ext/gtest/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	$(MAKE) -f CMakeFiles/Makefile2 preinstall
+	cd /home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 ext/gtest/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	$(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
-#=============================================================================
-# Target rules for targets named Stack_test
+# Convenience name for target.
+ext/gtest/CMakeFiles/googletest.dir/rule:
+	cd /home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug && $(MAKE) -f CMakeFiles/Makefile2 ext/gtest/CMakeFiles/googletest.dir/rule
+.PHONY : ext/gtest/CMakeFiles/googletest.dir/rule
 
-# Build rule for target.
-Stack_test: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 Stack_test
-.PHONY : Stack_test
+# Convenience name for target.
+googletest: ext/gtest/CMakeFiles/googletest.dir/rule
 
-# fast build rule for target.
-Stack_test/fast:
-	$(MAKE) -f CMakeFiles/Stack_test.dir/build.make CMakeFiles/Stack_test.dir/build
-.PHONY : Stack_test/fast
-
-#=============================================================================
-# Target rules for targets named googletest
-
-# Build rule for target.
-googletest: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 googletest
 .PHONY : googletest
 
 # fast build rule for target.
 googletest/fast:
-	$(MAKE) -f ext/gtest/CMakeFiles/googletest.dir/build.make ext/gtest/CMakeFiles/googletest.dir/build
+	cd /home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug && $(MAKE) -f ext/gtest/CMakeFiles/googletest.dir/build.make ext/gtest/CMakeFiles/googletest.dir/build
 .PHONY : googletest/fast
-
-test/gtestStack.o: test/gtestStack.cpp.o
-
-.PHONY : test/gtestStack.o
-
-# target to build an object file
-test/gtestStack.cpp.o:
-	$(MAKE) -f CMakeFiles/Stack_test.dir/build.make CMakeFiles/Stack_test.dir/test/gtestStack.cpp.o
-.PHONY : test/gtestStack.cpp.o
-
-test/gtestStack.i: test/gtestStack.cpp.i
-
-.PHONY : test/gtestStack.i
-
-# target to preprocess a source file
-test/gtestStack.cpp.i:
-	$(MAKE) -f CMakeFiles/Stack_test.dir/build.make CMakeFiles/Stack_test.dir/test/gtestStack.cpp.i
-.PHONY : test/gtestStack.cpp.i
-
-test/gtestStack.s: test/gtestStack.cpp.s
-
-.PHONY : test/gtestStack.s
-
-# target to generate assembly for a file
-test/gtestStack.cpp.s:
-	$(MAKE) -f CMakeFiles/Stack_test.dir/build.make CMakeFiles/Stack_test.dir/test/gtestStack.cpp.s
-.PHONY : test/gtestStack.cpp.s
 
 # Help Target
 help:
@@ -180,14 +142,10 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... test"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... test"
-	@echo "... Stack_test"
 	@echo "... googletest"
-	@echo "... test/gtestStack.o"
-	@echo "... test/gtestStack.i"
-	@echo "... test/gtestStack.s"
 .PHONY : help
 
 
@@ -199,6 +157,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	$(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

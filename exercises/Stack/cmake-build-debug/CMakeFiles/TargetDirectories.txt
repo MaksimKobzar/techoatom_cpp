@@ -1,0 +1,8 @@
+/home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug/CMakeFiles/test.dir
+/home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug/CMakeFiles/Stack_test.dir
+/home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug/ext/gtest/CMakeFiles/test.dir
+/home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug/ext/gtest/CMakeFiles/edit_cache.dir
+/home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug/ext/gtest/CMakeFiles/rebuild_cache.dir
+/home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug/ext/gtest/CMakeFiles/googletest.dir

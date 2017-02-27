@@ -4,6 +4,7 @@
 //! Implements functions of a stack class
 //!
 //! @author Maksim_Kobzar, 2017
+// TODO add dump in file
 //---------------------------------------------
 
 #include "Stack.hpp"

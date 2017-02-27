@@ -5,92 +5,126 @@
 		<Option title="Stack"/>
 		<Option makefile_is_custom="1"/>
 		<Option compiler="gcc"/>
-		<Option virtualFolders="CMake Files\;"/>
+		<Option virtualFolders="CMake Files\;CMake Files\ext\;CMake Files\ext\gtest\;CMake Files\cmake-build-debug\;CMake Files\cmake-build-debug\ext\;CMake Files\cmake-build-debug\ext\gtest\;CMake Files\cmake-build-debug\ext\gtest\tmp\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="D:/techoatom_cpp/exercises/Stack/cmake-build-debug"/>
+				<Option working_dir="/home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/PROGRA~2/MINGW-~1/I686-6~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;D:/techoatom_cpp/exercises/Stack/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="C:/PROGRA~2/MINGW-~1/I686-6~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;D:/techoatom_cpp/exercises/Stack/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/PROGRA~2/MINGW-~1/I686-6~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;D:/techoatom_cpp/exercises/Stack/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/PROGRA~2/MINGW-~1/I686-6~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;D:/techoatom_cpp/exercises/Stack/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="Stack">
-				<Option output="D:/techoatom_cpp/exercises/Stack/cmake-build-debug/Stack.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="D:/techoatom_cpp/exercises/Stack/cmake-build-debug"/>
-				<Option object_output="./"/>
-				<Option type="1"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="C:/Program Files (x86)/mingw-w64/i686-6.3.0-posix-dwarf-rt_v5-rev1/mingw32/bin/../lib/gcc/i686-w64-mingw32/6.3.0/include"/>
-					<Add directory="C:/Program Files (x86)/mingw-w64/i686-6.3.0-posix-dwarf-rt_v5-rev1/mingw32/bin/../lib/gcc/i686-w64-mingw32/6.3.0/include-fixed"/>
-					<Add directory="C:/Program Files (x86)/mingw-w64/i686-6.3.0-posix-dwarf-rt_v5-rev1/mingw32/bin/../lib/gcc/i686-w64-mingw32/6.3.0/../../../../i686-w64-mingw32/include"/>
-					<Add directory="C:/Program Files (x86)/mingw-w64/i686-6.3.0-posix-dwarf-rt_v5-rev1/mingw32/bin/../lib/gcc/i686-w64-mingw32/6.3.0/include/c++"/>
-					<Add directory="C:/Program Files (x86)/mingw-w64/i686-6.3.0-posix-dwarf-rt_v5-rev1/mingw32/bin/../lib/gcc/i686-w64-mingw32/6.3.0/include/c++/i686-w64-mingw32"/>
-					<Add directory="C:/Program Files (x86)/mingw-w64/i686-6.3.0-posix-dwarf-rt_v5-rev1/mingw32/bin/../lib/gcc/i686-w64-mingw32/6.3.0/include/c++/backward"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="C:/PROGRA~2/MINGW-~1/I686-6~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;D:/techoatom_cpp/exercises/Stack/cmake-build-debug/Makefile&quot;  VERBOSE=1 Stack"/>
-					<CompileFile command="C:/PROGRA~2/MINGW-~1/I686-6~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;D:/techoatom_cpp/exercises/Stack/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/PROGRA~2/MINGW-~1/I686-6~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;D:/techoatom_cpp/exercises/Stack/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/PROGRA~2/MINGW-~1/I686-6~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;D:/techoatom_cpp/exercises/Stack/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="Stack/fast">
-				<Option output="D:/techoatom_cpp/exercises/Stack/cmake-build-debug/Stack.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="D:/techoatom_cpp/exercises/Stack/cmake-build-debug"/>
-				<Option object_output="./"/>
-				<Option type="1"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="C:/Program Files (x86)/mingw-w64/i686-6.3.0-posix-dwarf-rt_v5-rev1/mingw32/bin/../lib/gcc/i686-w64-mingw32/6.3.0/include"/>
-					<Add directory="C:/Program Files (x86)/mingw-w64/i686-6.3.0-posix-dwarf-rt_v5-rev1/mingw32/bin/../lib/gcc/i686-w64-mingw32/6.3.0/include-fixed"/>
-					<Add directory="C:/Program Files (x86)/mingw-w64/i686-6.3.0-posix-dwarf-rt_v5-rev1/mingw32/bin/../lib/gcc/i686-w64-mingw32/6.3.0/../../../../i686-w64-mingw32/include"/>
-					<Add directory="C:/Program Files (x86)/mingw-w64/i686-6.3.0-posix-dwarf-rt_v5-rev1/mingw32/bin/../lib/gcc/i686-w64-mingw32/6.3.0/include/c++"/>
-					<Add directory="C:/Program Files (x86)/mingw-w64/i686-6.3.0-posix-dwarf-rt_v5-rev1/mingw32/bin/../lib/gcc/i686-w64-mingw32/6.3.0/include/c++/i686-w64-mingw32"/>
-					<Add directory="C:/Program Files (x86)/mingw-w64/i686-6.3.0-posix-dwarf-rt_v5-rev1/mingw32/bin/../lib/gcc/i686-w64-mingw32/6.3.0/include/c++/backward"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="C:/PROGRA~2/MINGW-~1/I686-6~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;D:/techoatom_cpp/exercises/Stack/cmake-build-debug/Makefile&quot;  VERBOSE=1 Stack/fast"/>
-					<CompileFile command="C:/PROGRA~2/MINGW-~1/I686-6~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;D:/techoatom_cpp/exercises/Stack/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/PROGRA~2/MINGW-~1/I686-6~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;D:/techoatom_cpp/exercises/Stack/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/PROGRA~2/MINGW-~1/I686-6~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;D:/techoatom_cpp/exercises/Stack/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="D:/techoatom_cpp/exercises/Stack/cmake-build-debug"/>
+				<Option working_dir="/home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/PROGRA~2/MINGW-~1/I686-6~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;D:/techoatom_cpp/exercises/Stack/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="C:/PROGRA~2/MINGW-~1/I686-6~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;D:/techoatom_cpp/exercises/Stack/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/PROGRA~2/MINGW-~1/I686-6~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;D:/techoatom_cpp/exercises/Stack/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/PROGRA~2/MINGW-~1/I686-6~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;D:/techoatom_cpp/exercises/Stack/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="D:/techoatom_cpp/exercises/Stack/cmake-build-debug"/>
+				<Option working_dir="/home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/PROGRA~2/MINGW-~1/I686-6~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;D:/techoatom_cpp/exercises/Stack/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="C:/PROGRA~2/MINGW-~1/I686-6~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;D:/techoatom_cpp/exercises/Stack/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/PROGRA~2/MINGW-~1/I686-6~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;D:/techoatom_cpp/exercises/Stack/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/PROGRA~2/MINGW-~1/I686-6~1.0-P/mingw32/bin/mingw32-make.exe -f &quot;D:/techoatom_cpp/exercises/Stack/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test">
+				<Option working_dir="/home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug/Makefile&quot;  VERBOSE=1 test"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Stack_test">
+				<Option output="/home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug/Stack_test" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug/ext/gtest/src/googletest/googletest/include"/>
+					<Add directory="/home/maksim/git/techoatom_cpp/exercises/Stack/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/usr/include/c++/4.9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.9"/>
+					<Add directory="/usr/include/c++/4.9/backward"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug/Makefile&quot;  VERBOSE=1 Stack_test"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Stack_test/fast">
+				<Option output="/home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug/Stack_test" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug/ext/gtest/src/googletest/googletest/include"/>
+					<Add directory="/home/maksim/git/techoatom_cpp/exercises/Stack/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/usr/include/c++/4.9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/4.9"/>
+					<Add directory="/usr/include/c++/4.9/backward"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug/Makefile&quot;  VERBOSE=1 Stack_test/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="googletest">
+				<Option working_dir="/home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug/ext/gtest"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug/ext/gtest/Makefile&quot;  VERBOSE=1 googletest"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug/ext/gtest/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug/ext/gtest/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug/ext/gtest/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="D:/techoatom_cpp/exercises/Stack/Stack.hpp">
-			<Option target="Stack"/>
+		<Unit filename="/home/maksim/git/techoatom_cpp/exercises/Stack/test/gtestStack.cpp">
+			<Option target="Stack_test"/>
 		</Unit>
-		<Unit filename="D:/techoatom_cpp/exercises/Stack/main.cpp">
-			<Option target="Stack"/>
-		</Unit>
-		<Unit filename="D:/techoatom_cpp/exercises/Stack/src.h">
-			<Option target="Stack"/>
-		</Unit>
-		<Unit filename="D:/techoatom_cpp/exercises/Stack/CMakeLists.txt">
+		<Unit filename="/home/maksim/git/techoatom_cpp/exercises/Stack/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/maksim/git/techoatom_cpp/exercises/Stack/ext/gtest/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\ext\gtest\"/>
+		</Unit>
+		<Unit filename="/home/maksim/git/techoatom_cpp/exercises/Stack/ext/gtest/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\ext\gtest\"/>
+		</Unit>
+		<Unit filename="/home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug/ext/gtest/tmp/googletest-cfgcmd.txt.in">
+			<Option virtualFolder="CMake Files\cmake-build-debug\ext\gtest\tmp\"/>
+		</Unit>
+		<Unit filename="/home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug/ext/gtest/tmp/googletest-cfgcmd.txt.in">
+			<Option virtualFolder="CMake Files\cmake-build-debug\ext\gtest\tmp\"/>
 		</Unit>
 	</Project>
 </CodeBlocks_project_file>
