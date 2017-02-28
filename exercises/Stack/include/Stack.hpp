@@ -51,8 +51,9 @@ public:
     bool dump();
 
 private:
-    static const size_type capacity_ = 50;
-    value_type data_ [capacity_];
+    const size_type capacity_ = 50;
+    // у вектора есть свой конструктор / или сделать через темплейты
+    std::vector<value_type> data_;
     size_type size_;
 
 };

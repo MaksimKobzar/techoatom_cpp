@@ -1,27 +1,10 @@
-/home/maksim/Soft/CLion/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/maksim/git/techoatom_cpp/exercises/Stack
--- The C compiler identification is GNU 4.9.4
--- The CXX compiler identification is GNU 4.9.4
--- Check for working C compiler: /usr/bin/cc
--- Check for working C compiler: /usr/bin/cc -- works
--- Detecting C compiler ABI info
--- Detecting C compiler ABI info - done
--- Detecting C compile features
--- Detecting C compile features - done
--- Check for working CXX compiler: /usr/bin/c++
--- Check for working CXX compiler: /usr/bin/c++ -- works
--- Detecting CXX compiler ABI info
--- Detecting CXX compiler ABI info - done
--- Detecting CXX compile features
--- Detecting CXX compile features - done
--- Looking for pthread.h
--- Looking for pthread.h - found
--- Looking for pthread_create
--- Looking for pthread_create - not found
--- Looking for pthread_create in pthreads
--- Looking for pthread_create in pthreads - not found
--- Looking for pthread_create in pthread
--- Looking for pthread_create in pthread - found
--- Found Threads: TRUE  
--- Configuring done
--- Generating done
--- Build files have been written to: /home/maksim/git/techoatom_cpp/exercises/Stack/cmake-build-debug
+C:\Users\kobzar\.CLion2016.3\system\cygwin_cmake\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /cygdrive/d/git/techoatom_cpp/exercises/Stack
+CMake Error at /cygdrive/c/Users/kobzar/.CLion2016.3/system/cygwin_cmake/share/cmake-3.6.3/Modules/ExternalProject.cmake:1745 (message):
+  error: could not find git for clone of googletest
+Call Stack (most recent call first):
+  /cygdrive/c/Users/kobzar/.CLion2016.3/system/cygwin_cmake/share/cmake-3.6.3/Modules/ExternalProject.cmake:2473 (_ep_add_download_command)
+  ext/gtest/CMakeLists.txt:12 (ExternalProject_Add)
+
+
+-- Configuring incomplete, errors occurred!
+See also "/cygdrive/d/git/techoatom_cpp/exercises/Stack/cmake-build-debug/CMakeFiles/CMakeOutput.log".

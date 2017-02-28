@@ -1,1 +1,0 @@
-/usr/bin/c++   -g   CMakeFiles/Stack_test.dir/test/gtestStack.cpp.o  -o Stack_test ext/gtest/src/googletest-build/googlemock/gtest/libgtest.a ext/gtest/src/googletest-build/googlemock/gtest/libgtest_main.a -lpthread 
