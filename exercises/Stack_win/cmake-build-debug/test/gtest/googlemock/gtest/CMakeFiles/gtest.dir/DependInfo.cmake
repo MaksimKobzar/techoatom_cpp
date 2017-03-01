@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/cygdrive/d/git/techoatom_cpp/exercises/Stack_win/test/gtest/googletest/src/gtest-all.cc" "/cygdrive/d/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/test/gtest/googlemock/gtest/CMakeFiles/gtest.dir/src/gtest-all.cc.o"
+  "/home/maksim/git/techoatom_cpp/exercises/Stack_win/test/gtest/googletest/src/gtest-all.cc" "/home/maksim/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/test/gtest/googlemock/gtest/CMakeFiles/gtest.dir/src/gtest-all.cc.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

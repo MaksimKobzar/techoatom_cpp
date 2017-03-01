@@ -1,4 +1,4 @@
-C:\Users\kobzar\.CLion2016.3\system\cygwin_cmake\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /cygdrive/d/git/techoatom_cpp/exercises/Stack_win
+/home/maksim/Soft/CLion/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/maksim/git/techoatom_cpp/exercises/Stack_win
 -- Configuring done
 -- Generating done
--- Build files have been written to: /cygdrive/d/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug
+-- Build files have been written to: /home/maksim/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug

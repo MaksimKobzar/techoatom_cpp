@@ -4,9 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/cygdrive/d/git/techoatom_cpp/exercises/Stack_win/test/gtest/googletest/src/gtest-all.cc" "/cygdrive/d/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/test/gtest/googlemock/CMakeFiles/gmock_main.dir/__/googletest/src/gtest-all.cc.o"
-  "/cygdrive/d/git/techoatom_cpp/exercises/Stack_win/test/gtest/googlemock/src/gmock-all.cc" "/cygdrive/d/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/test/gtest/googlemock/CMakeFiles/gmock_main.dir/src/gmock-all.cc.o"
-  "/cygdrive/d/git/techoatom_cpp/exercises/Stack_win/test/gtest/googlemock/src/gmock_main.cc" "/cygdrive/d/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/test/gtest/googlemock/CMakeFiles/gmock_main.dir/src/gmock_main.cc.o"
+  "/home/maksim/git/techoatom_cpp/exercises/Stack_win/test/gtest/googletest/src/gtest-all.cc" "/home/maksim/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/test/gtest/googlemock/CMakeFiles/gmock_main.dir/__/googletest/src/gtest-all.cc.o"
+  "/home/maksim/git/techoatom_cpp/exercises/Stack_win/test/gtest/googlemock/src/gmock-all.cc" "/home/maksim/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/test/gtest/googlemock/CMakeFiles/gmock_main.dir/src/gmock-all.cc.o"
+  "/home/maksim/git/techoatom_cpp/exercises/Stack_win/test/gtest/googlemock/src/gmock_main.cc" "/home/maksim/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/test/gtest/googlemock/CMakeFiles/gmock_main.dir/src/gmock_main.cc.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

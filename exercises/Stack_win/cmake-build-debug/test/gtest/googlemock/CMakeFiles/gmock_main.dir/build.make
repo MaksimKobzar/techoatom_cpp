@@ -34,19 +34,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /cygdrive/c/Users/kobzar/.CLion2016.3/system/cygwin_cmake/bin/cmake.exe
+CMAKE_COMMAND = /home/maksim/Soft/CLion/bin/cmake/bin/cmake
 
 # The command to remove a file.
-RM = /cygdrive/c/Users/kobzar/.CLion2016.3/system/cygwin_cmake/bin/cmake.exe -E remove -f
+RM = /home/maksim/Soft/CLion/bin/cmake/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /cygdrive/d/git/techoatom_cpp/exercises/Stack_win
+CMAKE_SOURCE_DIR = /home/maksim/git/techoatom_cpp/exercises/Stack_win
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /cygdrive/d/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug
+CMAKE_BINARY_DIR = /home/maksim/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include test/gtest/googlemock/CMakeFiles/gmock_main.dir/depend.make
@@ -59,16 +59,16 @@ include test/gtest/googlemock/CMakeFiles/gmock_main.dir/flags.make
 
 test/gtest/googlemock/CMakeFiles/gmock_main.dir/__/googletest/src/gtest-all.cc.o: test/gtest/googlemock/CMakeFiles/gmock_main.dir/flags.make
 test/gtest/googlemock/CMakeFiles/gmock_main.dir/__/googletest/src/gtest-all.cc.o: ../test/gtest/googletest/src/gtest-all.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/d/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object test/gtest/googlemock/CMakeFiles/gmock_main.dir/__/googletest/src/gtest-all.cc.o"
-	cd /cygdrive/d/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/test/gtest/googlemock && /usr/bin/c++.exe   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/gmock_main.dir/__/googletest/src/gtest-all.cc.o -c /cygdrive/d/git/techoatom_cpp/exercises/Stack_win/test/gtest/googletest/src/gtest-all.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/maksim/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object test/gtest/googlemock/CMakeFiles/gmock_main.dir/__/googletest/src/gtest-all.cc.o"
+	cd /home/maksim/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/test/gtest/googlemock && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/gmock_main.dir/__/googletest/src/gtest-all.cc.o -c /home/maksim/git/techoatom_cpp/exercises/Stack_win/test/gtest/googletest/src/gtest-all.cc
 
 test/gtest/googlemock/CMakeFiles/gmock_main.dir/__/googletest/src/gtest-all.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/gmock_main.dir/__/googletest/src/gtest-all.cc.i"
-	cd /cygdrive/d/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/test/gtest/googlemock && /usr/bin/c++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cygdrive/d/git/techoatom_cpp/exercises/Stack_win/test/gtest/googletest/src/gtest-all.cc > CMakeFiles/gmock_main.dir/__/googletest/src/gtest-all.cc.i
+	cd /home/maksim/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/test/gtest/googlemock && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/git/techoatom_cpp/exercises/Stack_win/test/gtest/googletest/src/gtest-all.cc > CMakeFiles/gmock_main.dir/__/googletest/src/gtest-all.cc.i
 
 test/gtest/googlemock/CMakeFiles/gmock_main.dir/__/googletest/src/gtest-all.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/gmock_main.dir/__/googletest/src/gtest-all.cc.s"
-	cd /cygdrive/d/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/test/gtest/googlemock && /usr/bin/c++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cygdrive/d/git/techoatom_cpp/exercises/Stack_win/test/gtest/googletest/src/gtest-all.cc -o CMakeFiles/gmock_main.dir/__/googletest/src/gtest-all.cc.s
+	cd /home/maksim/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/test/gtest/googlemock && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/git/techoatom_cpp/exercises/Stack_win/test/gtest/googletest/src/gtest-all.cc -o CMakeFiles/gmock_main.dir/__/googletest/src/gtest-all.cc.s
 
 test/gtest/googlemock/CMakeFiles/gmock_main.dir/__/googletest/src/gtest-all.cc.o.requires:
 
@@ -83,16 +83,16 @@ test/gtest/googlemock/CMakeFiles/gmock_main.dir/__/googletest/src/gtest-all.cc.o
 
 test/gtest/googlemock/CMakeFiles/gmock_main.dir/src/gmock-all.cc.o: test/gtest/googlemock/CMakeFiles/gmock_main.dir/flags.make
 test/gtest/googlemock/CMakeFiles/gmock_main.dir/src/gmock-all.cc.o: ../test/gtest/googlemock/src/gmock-all.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/d/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object test/gtest/googlemock/CMakeFiles/gmock_main.dir/src/gmock-all.cc.o"
-	cd /cygdrive/d/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/test/gtest/googlemock && /usr/bin/c++.exe   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/gmock_main.dir/src/gmock-all.cc.o -c /cygdrive/d/git/techoatom_cpp/exercises/Stack_win/test/gtest/googlemock/src/gmock-all.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/maksim/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object test/gtest/googlemock/CMakeFiles/gmock_main.dir/src/gmock-all.cc.o"
+	cd /home/maksim/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/test/gtest/googlemock && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/gmock_main.dir/src/gmock-all.cc.o -c /home/maksim/git/techoatom_cpp/exercises/Stack_win/test/gtest/googlemock/src/gmock-all.cc
 
 test/gtest/googlemock/CMakeFiles/gmock_main.dir/src/gmock-all.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/gmock_main.dir/src/gmock-all.cc.i"
-	cd /cygdrive/d/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/test/gtest/googlemock && /usr/bin/c++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cygdrive/d/git/techoatom_cpp/exercises/Stack_win/test/gtest/googlemock/src/gmock-all.cc > CMakeFiles/gmock_main.dir/src/gmock-all.cc.i
+	cd /home/maksim/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/test/gtest/googlemock && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/git/techoatom_cpp/exercises/Stack_win/test/gtest/googlemock/src/gmock-all.cc > CMakeFiles/gmock_main.dir/src/gmock-all.cc.i
 
 test/gtest/googlemock/CMakeFiles/gmock_main.dir/src/gmock-all.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/gmock_main.dir/src/gmock-all.cc.s"
-	cd /cygdrive/d/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/test/gtest/googlemock && /usr/bin/c++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cygdrive/d/git/techoatom_cpp/exercises/Stack_win/test/gtest/googlemock/src/gmock-all.cc -o CMakeFiles/gmock_main.dir/src/gmock-all.cc.s
+	cd /home/maksim/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/test/gtest/googlemock && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/git/techoatom_cpp/exercises/Stack_win/test/gtest/googlemock/src/gmock-all.cc -o CMakeFiles/gmock_main.dir/src/gmock-all.cc.s
 
 test/gtest/googlemock/CMakeFiles/gmock_main.dir/src/gmock-all.cc.o.requires:
 
@@ -107,16 +107,16 @@ test/gtest/googlemock/CMakeFiles/gmock_main.dir/src/gmock-all.cc.o.provides.buil
 
 test/gtest/googlemock/CMakeFiles/gmock_main.dir/src/gmock_main.cc.o: test/gtest/googlemock/CMakeFiles/gmock_main.dir/flags.make
 test/gtest/googlemock/CMakeFiles/gmock_main.dir/src/gmock_main.cc.o: ../test/gtest/googlemock/src/gmock_main.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/d/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object test/gtest/googlemock/CMakeFiles/gmock_main.dir/src/gmock_main.cc.o"
-	cd /cygdrive/d/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/test/gtest/googlemock && /usr/bin/c++.exe   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/gmock_main.dir/src/gmock_main.cc.o -c /cygdrive/d/git/techoatom_cpp/exercises/Stack_win/test/gtest/googlemock/src/gmock_main.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/maksim/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object test/gtest/googlemock/CMakeFiles/gmock_main.dir/src/gmock_main.cc.o"
+	cd /home/maksim/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/test/gtest/googlemock && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/gmock_main.dir/src/gmock_main.cc.o -c /home/maksim/git/techoatom_cpp/exercises/Stack_win/test/gtest/googlemock/src/gmock_main.cc
 
 test/gtest/googlemock/CMakeFiles/gmock_main.dir/src/gmock_main.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/gmock_main.dir/src/gmock_main.cc.i"
-	cd /cygdrive/d/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/test/gtest/googlemock && /usr/bin/c++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cygdrive/d/git/techoatom_cpp/exercises/Stack_win/test/gtest/googlemock/src/gmock_main.cc > CMakeFiles/gmock_main.dir/src/gmock_main.cc.i
+	cd /home/maksim/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/test/gtest/googlemock && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/git/techoatom_cpp/exercises/Stack_win/test/gtest/googlemock/src/gmock_main.cc > CMakeFiles/gmock_main.dir/src/gmock_main.cc.i
 
 test/gtest/googlemock/CMakeFiles/gmock_main.dir/src/gmock_main.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/gmock_main.dir/src/gmock_main.cc.s"
-	cd /cygdrive/d/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/test/gtest/googlemock && /usr/bin/c++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cygdrive/d/git/techoatom_cpp/exercises/Stack_win/test/gtest/googlemock/src/gmock_main.cc -o CMakeFiles/gmock_main.dir/src/gmock_main.cc.s
+	cd /home/maksim/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/test/gtest/googlemock && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/git/techoatom_cpp/exercises/Stack_win/test/gtest/googlemock/src/gmock_main.cc -o CMakeFiles/gmock_main.dir/src/gmock_main.cc.s
 
 test/gtest/googlemock/CMakeFiles/gmock_main.dir/src/gmock_main.cc.o.requires:
 
@@ -143,9 +143,9 @@ test/gtest/googlemock/libgmock_main.a: test/gtest/googlemock/CMakeFiles/gmock_ma
 test/gtest/googlemock/libgmock_main.a: test/gtest/googlemock/CMakeFiles/gmock_main.dir/src/gmock_main.cc.o
 test/gtest/googlemock/libgmock_main.a: test/gtest/googlemock/CMakeFiles/gmock_main.dir/build.make
 test/gtest/googlemock/libgmock_main.a: test/gtest/googlemock/CMakeFiles/gmock_main.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/cygdrive/d/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX static library libgmock_main.a"
-	cd /cygdrive/d/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/test/gtest/googlemock && $(CMAKE_COMMAND) -P CMakeFiles/gmock_main.dir/cmake_clean_target.cmake
-	cd /cygdrive/d/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/test/gtest/googlemock && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/gmock_main.dir/link.txt --verbose=$(VERBOSE)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/maksim/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX static library libgmock_main.a"
+	cd /home/maksim/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/test/gtest/googlemock && $(CMAKE_COMMAND) -P CMakeFiles/gmock_main.dir/cmake_clean_target.cmake
+	cd /home/maksim/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/test/gtest/googlemock && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/gmock_main.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 test/gtest/googlemock/CMakeFiles/gmock_main.dir/build: test/gtest/googlemock/libgmock_main.a
@@ -159,10 +159,10 @@ test/gtest/googlemock/CMakeFiles/gmock_main.dir/requires: test/gtest/googlemock/
 .PHONY : test/gtest/googlemock/CMakeFiles/gmock_main.dir/requires
 
 test/gtest/googlemock/CMakeFiles/gmock_main.dir/clean:
-	cd /cygdrive/d/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/test/gtest/googlemock && $(CMAKE_COMMAND) -P CMakeFiles/gmock_main.dir/cmake_clean.cmake
+	cd /home/maksim/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/test/gtest/googlemock && $(CMAKE_COMMAND) -P CMakeFiles/gmock_main.dir/cmake_clean.cmake
 .PHONY : test/gtest/googlemock/CMakeFiles/gmock_main.dir/clean
 
 test/gtest/googlemock/CMakeFiles/gmock_main.dir/depend:
-	cd /cygdrive/d/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /cygdrive/d/git/techoatom_cpp/exercises/Stack_win /cygdrive/d/git/techoatom_cpp/exercises/Stack_win/test/gtest/googlemock /cygdrive/d/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug /cygdrive/d/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/test/gtest/googlemock /cygdrive/d/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/test/gtest/googlemock/CMakeFiles/gmock_main.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/maksim/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/maksim/git/techoatom_cpp/exercises/Stack_win /home/maksim/git/techoatom_cpp/exercises/Stack_win/test/gtest/googlemock /home/maksim/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug /home/maksim/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/test/gtest/googlemock /home/maksim/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/test/gtest/googlemock/CMakeFiles/gmock_main.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : test/gtest/googlemock/CMakeFiles/gmock_main.dir/depend
 

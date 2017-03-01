@@ -1,8 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/runStackTestLib.dir/StackTestLib.cpp.o"
   "runStackTestLib.pdb"
-  "runStackTestLib.exe"
-  "librunStackTestLib.dll.a"
+  "runStackTestLib"
 )
 
 # Per-language clean rules from dependency scanning.

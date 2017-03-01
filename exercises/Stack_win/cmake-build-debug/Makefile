@@ -39,19 +39,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /cygdrive/c/Users/kobzar/.CLion2016.3/system/cygwin_cmake/bin/cmake.exe
+CMAKE_COMMAND = /home/maksim/Soft/CLion/bin/cmake/bin/cmake
 
 # The command to remove a file.
-RM = /cygdrive/c/Users/kobzar/.CLion2016.3/system/cygwin_cmake/bin/cmake.exe -E remove -f
+RM = /home/maksim/Soft/CLion/bin/cmake/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /cygdrive/d/git/techoatom_cpp/exercises/Stack_win
+CMAKE_SOURCE_DIR = /home/maksim/git/techoatom_cpp/exercises/Stack_win
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /cygdrive/d/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug
+CMAKE_BINARY_DIR = /home/maksim/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -59,46 +59,13 @@ CMAKE_BINARY_DIR = /cygdrive/d/git/techoatom_cpp/exercises/Stack_win/cmake-build
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/cygdrive/c/Users/kobzar/.CLion2016.3/system/cygwin_cmake/bin/cmake.exe -E echo No\ interactive\ CMake\ dialog\ available.
+	/home/maksim/Soft/CLion/bin/cmake/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
 edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
-
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/cygdrive/c/Users/kobzar/.CLion2016.3/system/cygwin_cmake/bin/cmake.exe -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
-
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
-
-.PHONY : rebuild_cache/fast
-
-# Special rule for the target install/local
-install/local: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/cygdrive/c/Users/kobzar/.CLion2016.3/system/cygwin_cmake/bin/cmake.exe -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-.PHONY : install/local
-
-# Special rule for the target install/local
-install/local/fast: install/local
-
-.PHONY : install/local/fast
-
-# Special rule for the target install/strip
-install/strip: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	/cygdrive/c/Users/kobzar/.CLion2016.3/system/cygwin_cmake/bin/cmake.exe -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip
-
-# Special rule for the target install/strip
-install/strip/fast: install/strip
-
-.PHONY : install/strip/fast
 
 # Special rule for the target list_install_components
 list_install_components:
@@ -113,20 +80,53 @@ list_install_components/fast: list_install_components
 # Special rule for the target install
 install: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/cygdrive/c/Users/kobzar/.CLion2016.3/system/cygwin_cmake/bin/cmake.exe -P cmake_install.cmake
+	/home/maksim/Soft/CLion/bin/cmake/bin/cmake -P cmake_install.cmake
 .PHONY : install
 
 # Special rule for the target install
 install/fast: preinstall/fast
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/cygdrive/c/Users/kobzar/.CLion2016.3/system/cygwin_cmake/bin/cmake.exe -P cmake_install.cmake
+	/home/maksim/Soft/CLion/bin/cmake/bin/cmake -P cmake_install.cmake
 .PHONY : install/fast
+
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	/home/maksim/Soft/CLion/bin/cmake/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: install/local
+
+.PHONY : install/local/fast
+
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/home/maksim/Soft/CLion/bin/cmake/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
+
+# Special rule for the target install/strip
+install/strip/fast: install/strip
+
+.PHONY : install/strip/fast
+
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	/home/maksim/Soft/CLion/bin/cmake/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
+
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
+
+.PHONY : rebuild_cache/fast
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /cygdrive/d/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/CMakeFiles /cygdrive/d/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/maksim/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/CMakeFiles /home/maksim/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /cygdrive/d/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/maksim/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -155,30 +155,30 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named Stack_win
+# Target rules for targets named Stack_test
 
 # Build rule for target.
-Stack_win: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 Stack_win
-.PHONY : Stack_win
+Stack_test: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Stack_test
+.PHONY : Stack_test
 
 # fast build rule for target.
-Stack_win/fast:
-	$(MAKE) -f CMakeFiles/Stack_win.dir/build.make CMakeFiles/Stack_win.dir/build
-.PHONY : Stack_win/fast
+Stack_test/fast:
+	$(MAKE) -f CMakeFiles/Stack_test.dir/build.make CMakeFiles/Stack_test.dir/build
+.PHONY : Stack_test/fast
 
 #=============================================================================
-# Target rules for targets named runStackTestLib
+# Target rules for targets named StackDraft
 
 # Build rule for target.
-runStackTestLib: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 runStackTestLib
-.PHONY : runStackTestLib
+StackDraft: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 StackDraft
+.PHONY : StackDraft
 
 # fast build rule for target.
-runStackTestLib/fast:
-	$(MAKE) -f test/CMakeFiles/runStackTestLib.dir/build.make test/CMakeFiles/runStackTestLib.dir/build
-.PHONY : runStackTestLib/fast
+StackDraft/fast:
+	$(MAKE) -f CMakeFiles/StackDraft.dir/build.make CMakeFiles/StackDraft.dir/build
+.PHONY : StackDraft/fast
 
 #=============================================================================
 # Target rules for targets named gmock_main
@@ -238,7 +238,7 @@ main.o: main.cpp.o
 
 # target to build an object file
 main.cpp.o:
-	$(MAKE) -f CMakeFiles/Stack_win.dir/build.make CMakeFiles/Stack_win.dir/main.cpp.o
+	$(MAKE) -f CMakeFiles/StackDraft.dir/build.make CMakeFiles/StackDraft.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -247,7 +247,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	$(MAKE) -f CMakeFiles/Stack_win.dir/build.make CMakeFiles/Stack_win.dir/main.cpp.i
+	$(MAKE) -f CMakeFiles/StackDraft.dir/build.make CMakeFiles/StackDraft.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -256,7 +256,7 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	$(MAKE) -f CMakeFiles/Stack_win.dir/build.make CMakeFiles/Stack_win.dir/main.cpp.s
+	$(MAKE) -f CMakeFiles/StackDraft.dir/build.make CMakeFiles/StackDraft.dir/main.cpp.s
 .PHONY : main.cpp.s
 
 src/Stack.o: src/Stack.cpp.o
@@ -265,7 +265,8 @@ src/Stack.o: src/Stack.cpp.o
 
 # target to build an object file
 src/Stack.cpp.o:
-	$(MAKE) -f CMakeFiles/Stack_win.dir/build.make CMakeFiles/Stack_win.dir/src/Stack.cpp.o
+	$(MAKE) -f CMakeFiles/Stack_test.dir/build.make CMakeFiles/Stack_test.dir/src/Stack.cpp.o
+	$(MAKE) -f CMakeFiles/StackDraft.dir/build.make CMakeFiles/StackDraft.dir/src/Stack.cpp.o
 .PHONY : src/Stack.cpp.o
 
 src/Stack.i: src/Stack.cpp.i
@@ -274,7 +275,8 @@ src/Stack.i: src/Stack.cpp.i
 
 # target to preprocess a source file
 src/Stack.cpp.i:
-	$(MAKE) -f CMakeFiles/Stack_win.dir/build.make CMakeFiles/Stack_win.dir/src/Stack.cpp.i
+	$(MAKE) -f CMakeFiles/Stack_test.dir/build.make CMakeFiles/Stack_test.dir/src/Stack.cpp.i
+	$(MAKE) -f CMakeFiles/StackDraft.dir/build.make CMakeFiles/StackDraft.dir/src/Stack.cpp.i
 .PHONY : src/Stack.cpp.i
 
 src/Stack.s: src/Stack.cpp.s
@@ -283,8 +285,36 @@ src/Stack.s: src/Stack.cpp.s
 
 # target to generate assembly for a file
 src/Stack.cpp.s:
-	$(MAKE) -f CMakeFiles/Stack_win.dir/build.make CMakeFiles/Stack_win.dir/src/Stack.cpp.s
+	$(MAKE) -f CMakeFiles/Stack_test.dir/build.make CMakeFiles/Stack_test.dir/src/Stack.cpp.s
+	$(MAKE) -f CMakeFiles/StackDraft.dir/build.make CMakeFiles/StackDraft.dir/src/Stack.cpp.s
 .PHONY : src/Stack.cpp.s
+
+test/StackTestLib.o: test/StackTestLib.cpp.o
+
+.PHONY : test/StackTestLib.o
+
+# target to build an object file
+test/StackTestLib.cpp.o:
+	$(MAKE) -f CMakeFiles/Stack_test.dir/build.make CMakeFiles/Stack_test.dir/test/StackTestLib.cpp.o
+.PHONY : test/StackTestLib.cpp.o
+
+test/StackTestLib.i: test/StackTestLib.cpp.i
+
+.PHONY : test/StackTestLib.i
+
+# target to preprocess a source file
+test/StackTestLib.cpp.i:
+	$(MAKE) -f CMakeFiles/Stack_test.dir/build.make CMakeFiles/Stack_test.dir/test/StackTestLib.cpp.i
+.PHONY : test/StackTestLib.cpp.i
+
+test/StackTestLib.s: test/StackTestLib.cpp.s
+
+.PHONY : test/StackTestLib.s
+
+# target to generate assembly for a file
+test/StackTestLib.cpp.s:
+	$(MAKE) -f CMakeFiles/Stack_test.dir/build.make CMakeFiles/Stack_test.dir/test/StackTestLib.cpp.s
+.PHONY : test/StackTestLib.cpp.s
 
 # Help Target
 help:
@@ -293,13 +323,13 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... edit_cache"
-	@echo "... rebuild_cache"
-	@echo "... install/local"
-	@echo "... install/strip"
 	@echo "... list_install_components"
 	@echo "... install"
-	@echo "... Stack_win"
-	@echo "... runStackTestLib"
+	@echo "... install/local"
+	@echo "... install/strip"
+	@echo "... Stack_test"
+	@echo "... rebuild_cache"
+	@echo "... StackDraft"
 	@echo "... gmock_main"
 	@echo "... gmock"
 	@echo "... gtest_main"
@@ -310,6 +340,9 @@ help:
 	@echo "... src/Stack.o"
 	@echo "... src/Stack.i"
 	@echo "... src/Stack.s"
+	@echo "... test/StackTestLib.o"
+	@echo "... test/StackTestLib.i"
+	@echo "... test/StackTestLib.s"
 .PHONY : help
 
 

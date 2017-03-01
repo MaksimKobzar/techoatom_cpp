@@ -280,11 +280,11 @@ cxxabi.h
 acxx_demangle.h
 -
 
-/cygdrive/d/git/techoatom_cpp/exercises/Stack_win/test/StackTestLib.cpp
+/home/maksim/git/techoatom_cpp/exercises/Stack_win/test/StackTestLib.cpp
 iostream
 -
 gtest/gtest.h
-/cygdrive/d/git/techoatom_cpp/exercises/Stack_win/test/gtest/gtest.h
+/home/maksim/git/techoatom_cpp/exercises/Stack_win/test/gtest/gtest.h
 Stack.hpp
-/cygdrive/d/git/techoatom_cpp/exercises/Stack_win/test/Stack.hpp
+/home/maksim/git/techoatom_cpp/exercises/Stack_win/test/Stack.hpp
 

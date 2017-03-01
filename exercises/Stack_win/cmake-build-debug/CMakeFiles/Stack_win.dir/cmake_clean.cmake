@@ -2,8 +2,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/Stack_win.dir/main.cpp.o"
   "CMakeFiles/Stack_win.dir/src/Stack.cpp.o"
   "Stack_win.pdb"
-  "Stack_win.exe"
-  "libStack_win.dll.a"
+  "Stack_win"
 )
 
 # Per-language clean rules from dependency scanning.

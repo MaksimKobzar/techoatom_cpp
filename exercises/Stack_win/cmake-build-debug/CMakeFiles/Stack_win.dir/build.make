@@ -34,19 +34,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /cygdrive/c/Users/kobzar/.CLion2016.3/system/cygwin_cmake/bin/cmake.exe
+CMAKE_COMMAND = /home/maksim/Soft/CLion/bin/cmake/bin/cmake
 
 # The command to remove a file.
-RM = /cygdrive/c/Users/kobzar/.CLion2016.3/system/cygwin_cmake/bin/cmake.exe -E remove -f
+RM = /home/maksim/Soft/CLion/bin/cmake/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /cygdrive/d/git/techoatom_cpp/exercises/Stack_win
+CMAKE_SOURCE_DIR = /home/maksim/git/techoatom_cpp/exercises/Stack_win
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /cygdrive/d/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug
+CMAKE_BINARY_DIR = /home/maksim/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/Stack_win.dir/depend.make
@@ -59,16 +59,16 @@ include CMakeFiles/Stack_win.dir/flags.make
 
 CMakeFiles/Stack_win.dir/main.cpp.o: CMakeFiles/Stack_win.dir/flags.make
 CMakeFiles/Stack_win.dir/main.cpp.o: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/d/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Stack_win.dir/main.cpp.o"
-	/usr/bin/c++.exe   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Stack_win.dir/main.cpp.o -c /cygdrive/d/git/techoatom_cpp/exercises/Stack_win/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/maksim/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Stack_win.dir/main.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Stack_win.dir/main.cpp.o -c /home/maksim/git/techoatom_cpp/exercises/Stack_win/main.cpp
 
 CMakeFiles/Stack_win.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Stack_win.dir/main.cpp.i"
-	/usr/bin/c++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cygdrive/d/git/techoatom_cpp/exercises/Stack_win/main.cpp > CMakeFiles/Stack_win.dir/main.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/git/techoatom_cpp/exercises/Stack_win/main.cpp > CMakeFiles/Stack_win.dir/main.cpp.i
 
 CMakeFiles/Stack_win.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Stack_win.dir/main.cpp.s"
-	/usr/bin/c++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cygdrive/d/git/techoatom_cpp/exercises/Stack_win/main.cpp -o CMakeFiles/Stack_win.dir/main.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/git/techoatom_cpp/exercises/Stack_win/main.cpp -o CMakeFiles/Stack_win.dir/main.cpp.s
 
 CMakeFiles/Stack_win.dir/main.cpp.o.requires:
 
@@ -83,16 +83,16 @@ CMakeFiles/Stack_win.dir/main.cpp.o.provides.build: CMakeFiles/Stack_win.dir/mai
 
 CMakeFiles/Stack_win.dir/src/Stack.cpp.o: CMakeFiles/Stack_win.dir/flags.make
 CMakeFiles/Stack_win.dir/src/Stack.cpp.o: ../src/Stack.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/cygdrive/d/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Stack_win.dir/src/Stack.cpp.o"
-	/usr/bin/c++.exe   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Stack_win.dir/src/Stack.cpp.o -c /cygdrive/d/git/techoatom_cpp/exercises/Stack_win/src/Stack.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/maksim/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Stack_win.dir/src/Stack.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Stack_win.dir/src/Stack.cpp.o -c /home/maksim/git/techoatom_cpp/exercises/Stack_win/src/Stack.cpp
 
 CMakeFiles/Stack_win.dir/src/Stack.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Stack_win.dir/src/Stack.cpp.i"
-	/usr/bin/c++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /cygdrive/d/git/techoatom_cpp/exercises/Stack_win/src/Stack.cpp > CMakeFiles/Stack_win.dir/src/Stack.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/maksim/git/techoatom_cpp/exercises/Stack_win/src/Stack.cpp > CMakeFiles/Stack_win.dir/src/Stack.cpp.i
 
 CMakeFiles/Stack_win.dir/src/Stack.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Stack_win.dir/src/Stack.cpp.s"
-	/usr/bin/c++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /cygdrive/d/git/techoatom_cpp/exercises/Stack_win/src/Stack.cpp -o CMakeFiles/Stack_win.dir/src/Stack.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/maksim/git/techoatom_cpp/exercises/Stack_win/src/Stack.cpp -o CMakeFiles/Stack_win.dir/src/Stack.cpp.s
 
 CMakeFiles/Stack_win.dir/src/Stack.cpp.o.requires:
 
@@ -113,15 +113,15 @@ Stack_win_OBJECTS = \
 # External object files for target Stack_win
 Stack_win_EXTERNAL_OBJECTS =
 
-Stack_win.exe: CMakeFiles/Stack_win.dir/main.cpp.o
-Stack_win.exe: CMakeFiles/Stack_win.dir/src/Stack.cpp.o
-Stack_win.exe: CMakeFiles/Stack_win.dir/build.make
-Stack_win.exe: CMakeFiles/Stack_win.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/cygdrive/d/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable Stack_win.exe"
+Stack_win: CMakeFiles/Stack_win.dir/main.cpp.o
+Stack_win: CMakeFiles/Stack_win.dir/src/Stack.cpp.o
+Stack_win: CMakeFiles/Stack_win.dir/build.make
+Stack_win: CMakeFiles/Stack_win.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/maksim/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable Stack_win"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Stack_win.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-CMakeFiles/Stack_win.dir/build: Stack_win.exe
+CMakeFiles/Stack_win.dir/build: Stack_win
 
 .PHONY : CMakeFiles/Stack_win.dir/build
 
@@ -135,6 +135,6 @@ CMakeFiles/Stack_win.dir/clean:
 .PHONY : CMakeFiles/Stack_win.dir/clean
 
 CMakeFiles/Stack_win.dir/depend:
-	cd /cygdrive/d/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /cygdrive/d/git/techoatom_cpp/exercises/Stack_win /cygdrive/d/git/techoatom_cpp/exercises/Stack_win /cygdrive/d/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug /cygdrive/d/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug /cygdrive/d/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/CMakeFiles/Stack_win.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/maksim/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/maksim/git/techoatom_cpp/exercises/Stack_win /home/maksim/git/techoatom_cpp/exercises/Stack_win /home/maksim/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug /home/maksim/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug /home/maksim/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/CMakeFiles/Stack_win.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/Stack_win.dir/depend
 

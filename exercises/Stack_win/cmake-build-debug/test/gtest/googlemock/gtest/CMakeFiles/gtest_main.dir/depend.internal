@@ -24,4 +24,4 @@ test/gtest/googlemock/gtest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o
  ../test/gtest/googletest/include/gtest/internal/gtest-string.h
  ../test/gtest/googletest/include/gtest/internal/gtest-tuple.h
  ../test/gtest/googletest/include/gtest/internal/gtest-type-util.h
- /cygdrive/d/git/techoatom_cpp/exercises/Stack_win/test/gtest/googletest/src/gtest_main.cc
+ /home/maksim/git/techoatom_cpp/exercises/Stack_win/test/gtest/googletest/src/gtest_main.cc

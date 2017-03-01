@@ -25,4 +25,4 @@ test/CMakeFiles/runStackTestLib.dir/StackTestLib.cpp.o
  ../test/gtest/googletest/include/gtest/internal/gtest-string.h
  ../test/gtest/googletest/include/gtest/internal/gtest-tuple.h
  ../test/gtest/googletest/include/gtest/internal/gtest-type-util.h
- /cygdrive/d/git/techoatom_cpp/exercises/Stack_win/test/StackTestLib.cpp
+ /home/maksim/git/techoatom_cpp/exercises/Stack_win/test/StackTestLib.cpp

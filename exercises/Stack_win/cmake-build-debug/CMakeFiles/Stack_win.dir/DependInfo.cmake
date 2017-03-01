@@ -4,8 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/cygdrive/d/git/techoatom_cpp/exercises/Stack_win/main.cpp" "/cygdrive/d/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/CMakeFiles/Stack_win.dir/main.cpp.o"
-  "/cygdrive/d/git/techoatom_cpp/exercises/Stack_win/src/Stack.cpp" "/cygdrive/d/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/CMakeFiles/Stack_win.dir/src/Stack.cpp.o"
+  "/home/maksim/git/techoatom_cpp/exercises/Stack_win/main.cpp" "/home/maksim/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/CMakeFiles/Stack_win.dir/main.cpp.o"
+  "/home/maksim/git/techoatom_cpp/exercises/Stack_win/src/Stack.cpp" "/home/maksim/git/techoatom_cpp/exercises/Stack_win/cmake-build-debug/CMakeFiles/Stack_win.dir/src/Stack.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
