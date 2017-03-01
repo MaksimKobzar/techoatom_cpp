@@ -30,7 +30,7 @@ Stack::~Stack() {
 }
 //------------------------------------------------
 Stack::value_type *Stack::top() {
-    ASSERT_OK();
+//    ASSERT_OK();
     if(size_ == 0)
         return nullptr;
     else {
@@ -39,14 +39,14 @@ Stack::value_type *Stack::top() {
 };
 //------------------------------------------------
 bool Stack::empty() {
-    ASSERT_OK();
+//    ASSERT_OK();
     if(size_ == 0)
         return 1;
     return 0;
 }
 //------------------------------------------------
 Stack::size_type Stack::size() {
-    ASSERT_OK();
+//    ASSERT_OK();
     return size_;
 }
 //------------------------------------------------
@@ -57,7 +57,7 @@ Stack::size_type Stack::size() {
 //}
 //------------------------------------------------
 bool Stack::push(value_type& value) {
-    ASSERT_OK();
+//    ASSERT_OK();
     if(size_ == capacity_)
         return 0;
     else {
@@ -67,7 +67,7 @@ bool Stack::push(value_type& value) {
 }
 //------------------------------------------------
 bool Stack::pop() {
-    ASSERT_OK();
+//    ASSERT_OK();
     if(size_ == 0)
         return 0;
     else {
@@ -77,36 +77,37 @@ bool Stack::pop() {
 }
 //------------------------------------------------
 bool Stack::ok() {
-    ASSERT_OK();
+//    ASSERT_OK();
     return size_ <= capacity_;
 }
 //------------------------------------------------
 bool Stack::dump() {
-    std::ofstream outputFile;
-    std::string outString;
-    outputFile.open("Dump.txt");
-    for (int i = 0; i < 6; ++i)
-    {
-        if      (i == 0) outString = "|---------------------------------------------|";
-        else if (i == 1) outString = "|                      Dump                   |" ;
-        else if (i == 2) outString = "|---------------------------------------------|" ;
-        else if (i == 3) outString = "  SIZE : ";
-        else if (i == 4) outString = "  CAPACITY : ";
-        else             outString = "|---------------------------------------------|" ;
-
-        if(i == 3) {
-            outputFile << outString << size_ << std::endl;
-            std::cout << outString << size_ << std::endl;
-        }
-        else if(i == 4) {
-            outputFile << outString << capacity_ << std::endl;
-            std::cout << outString << capacity_ << std::endl;
-        }
-        else {
-            outputFile  << outString << std::endl;
-            std::cout   << outString << std::endl;
-        }
-    }
-    outputFile.close();
+//    std::ofstream outputFile;
+//    std::string outString;
+//    outputFile.open("Dump.txt");
+//    for (int i = 0; i < 6; ++i)
+//    {
+//        if      (i == 0) outString = "|---------------------------------------------|";
+//        else if (i == 1) outString = "|                      Dump                   |" ;
+//        else if (i == 2) outString = "|---------------------------------------------|" ;
+//        else if (i == 3) outString = "  SIZE : ";
+//        else if (i == 4) outString = "  CAPACITY : ";
+//        else             outString = "|---------------------------------------------|" ;
+//
+//        if(i == 3) {
+//            outputFile << outString << size_ << std::endl;
+//            std::cout << outString << size_ << std::endl;
+//        }
+//        else if(i == 4) {
+//            outputFile << outString << capacity_ << std::endl;
+//            std::cout << outString << capacity_ << std::endl;
+//        }
+//        else {
+//            outputFile  << outString << std::endl;
+//            std::cout   << outString << std::endl;
+//        }
+//    }
+//    outputFile.close();
+    return 1;
 }
 //------------------------------------------------

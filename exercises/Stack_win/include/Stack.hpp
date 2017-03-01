@@ -52,7 +52,6 @@ public:
 
 private:
     static const size_type capacity_ = 50;
-//    const size_type capacity_ = 50;
     // у вектора есть свой конструктор / или сделать через темплейты
 //    std::vector<value_type> data_;
     value_type data_[capacity_];

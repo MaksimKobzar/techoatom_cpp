@@ -7,10 +7,14 @@
 //---------------------------------------------
 
 #include <iostream>
-#include "gtest/gtest.h"
 #include "Stack.hpp"
+//#include "gtest/gtest.h"
+#include "gtest/googletest/include/gtest/gtest.h"
+//#include "gtest/googletest/include/gtest/internal/gtest-internal.h"
+//#include "gtest/googletest/include/gtest/gtest-typed-test.h"
 
-    TEST(Stack, CannotPushMore) {
+TEST(Stack, CannotPushMore)
+{
     	int countSuccess = 0;
     	Stack::value_type someValue = 0;
     	Stack someStack1;
