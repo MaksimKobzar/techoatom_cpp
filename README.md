@@ -1,2 +1,6 @@
 # techoatom_cpp
-I used for exercises on the courses Mail.ru.
+Репозиторий для проектов и заданий курсов ТехноАтом Mail.ru.
+Используется:
+- Герасимчук Алексей 	(GerasimchukAleksey),
+- Батурин Александр 	(Alexmifi),
+- Кобзарь Максим 	(MaksimKobzar).

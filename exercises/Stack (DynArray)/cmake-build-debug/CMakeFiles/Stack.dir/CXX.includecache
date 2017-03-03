@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/cygdrive/d/git/techoatom_cpp/Stack/main.cpp
+iostream
+-
+Array.hpp
+/cygdrive/d/git/techoatom_cpp/Stack/Array.hpp
+Stack.hpp
+/cygdrive/d/git/techoatom_cpp/Stack/Stack.hpp
+
