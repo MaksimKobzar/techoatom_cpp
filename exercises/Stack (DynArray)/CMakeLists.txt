@@ -14,6 +14,7 @@ if(MSVC)
     #vc 2012 fix for vararg templates
     set(MSVC_COMPILER_DEFS "-D_VARIADIC_MAX=10")
 endif()
+
 #-------------------
 # set common include folder for module
 #-------------------
@@ -21,14 +22,14 @@ set(COMMON_INCLUDES ${PROJECT_SOURCE_DIR}/include)
 
 set(CMAKE_CXX_STANDARD 11)
 set(PROJECT_TEST_NAME ${PROJECT_NAME_STR}_test)
-#add_definitions(-std=gnu++0x)
+add_definitions(-std=gnu++0x)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-#file(GLOB TEST_SRC_FILES ${PROJECT_SOURCE_DIR}/test/*.cpp)
+file(GLOB TEST_SRC_FILES ${PROJECT_SOURCE_DIR}/test/*.cpp)
 add_executable(StackDraft main.cpp)
-#add_executable(${PROJECT_TEST_NAME} ${TEST_SRC_FILES})
-#add_dependencies(${PROJECT_TEST_NAME} googletest)
+add_executable(${PROJECT_TEST_NAME} ${TEST_SRC_FILES})
+add_dependencies(${PROJECT_TEST_NAME} googletest)
 
 #add_executable(runStackTestLib test/StackTestLib.cpp ${SOURCE_FILES})
 

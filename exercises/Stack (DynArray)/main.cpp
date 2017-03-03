@@ -8,16 +8,15 @@
 
 #include "Stack.hpp"
 
-//int main(int argc, char** argv)
-//{
-//     ::testing::InitGoogleTest(&argc, argv);
-//     return RUN_ALL_TESTS();
-//}
 using namespace sns;
 
 int main() {
     Stack<double> stack1(10);
     Stack<double> stack2(10);
 
-    std::cout << "All right!" << std::endl;
+    stack1.push(2.5);
+    stack2 = stack1;
+    if(stack2.top() == 2.5) {
+        std::cout << "All right!" << std::endl;
+    }
 }

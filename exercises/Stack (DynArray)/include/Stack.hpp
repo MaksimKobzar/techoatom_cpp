@@ -46,7 +46,7 @@ namespace sns
         value_type *top() const;
 
         //---------------------------------------------
-        //! @Capacity functions
+        //! @Access functions
         //---------------------------------------------
         bool   empty()     const;
         bool   full()      const;
