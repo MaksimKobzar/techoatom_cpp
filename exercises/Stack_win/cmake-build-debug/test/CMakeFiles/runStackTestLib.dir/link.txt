@@ -1,1 +1,0 @@
-/usr/bin/c++   -g   CMakeFiles/runStackTestLib.dir/StackTestLib.cpp.o  -o runStackTestLib gtest/googlemock/gtest/libgtest.a gtest/googlemock/gtest/libgtest_main.a gtest/googlemock/gtest/libgtest.a -lpthread 

@@ -1,1 +1,0 @@
-/usr/bin/c++   -g   CMakeFiles/Stack_win.dir/main.cpp.o CMakeFiles/Stack_win.dir/src/Stack.cpp.o  -o Stack_win 
