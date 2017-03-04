@@ -20,10 +20,10 @@ namespace sns
 {
 
     template<
-        typename Tvalue = int
+        typename T = int
     >class Array
     {
-        typedef Tvalue value_type;
+        typedef T value_type;
     public:
         //---------------------------------------------
         //! @Constructor
@@ -45,22 +45,24 @@ namespace sns
         //---------------------------------------------
         //! @Operators:
         //! 1) operator =
+        Array &operator=(Array const &other);
         //! 2) operator []
+        value_type &operator[](int const index);
+        value_type const &operator[](int const index) const;
         //! 3) operator ==
+        bool operator==(Array const &other) const;
         //---------------------------------------------
-        Array &operator=  (Array const &other);
-        value_type &operator[] (int const index);
-        value_type const &operator[] (int const index) const;
-        // &Array operator== (Array const &other);
 
         //---------------------------------------------
-        //! @Swap
+        //! @Modifiers
+        //! Swaps the contents
         //! Swaps the contents
         //---------------------------------------------
         void swap(Array &other);
+        //---------------------------------------------
 
         //---------------------------------------------
-        //! @Size
+        //! @Access functions
         //! Return size of Array
         //---------------------------------------------
         size_t size() const;
@@ -118,6 +120,19 @@ namespace sns
     value_type const &Array<value_type>::operator[](int const index) const {
 //        assert()
         return data_[index];
+    }
+
+    template<typename value_type>
+    bool Array<value_type>::operator==(Array<value_type> const &other) const {
+        if(this.size_ == other.size_) {
+            for (size_t i = 0; i != size_; ++i) {
+                if(data_[i] != other.data_[i]) {
+                    return 0;
+                }
+            }
+            return 1;
+        } 
+        return 0;
     }
 
     template<typename value_type>

@@ -23,7 +23,7 @@ namespace sns
         typename Tvalue = int
     >class Array
     {
-        typedef value_type = Tvalue;
+        typedef Tvalue value_type;
     public:
         //---------------------------------------------
         //! @Constructor
@@ -77,7 +77,7 @@ namespace sns
     Array<value_type>::Array(size_t size)
             : size_(size), data_(new value_type[size_]) {
         std::cout << "Default constructor" << std::endl;
-        for (int i = 0; i != size_; ++i) {
+        for (size_t i = 0; i != size_; ++i) {
             data_[i] = 0;
         }
     }
@@ -86,7 +86,7 @@ namespace sns
     Array<value_type>::Array(Array<value_type> const &other)
             : size_(other.size_), data_(new value_type[size_]) {
         std::cout << "Copy constructor" << std::endl;
-        for (int i = 0; i != size_; ++i) {
+        for (size_t i = 0; i != size_; ++i) {
             data_[i] = other.data_[i];
         }
     }
@@ -109,14 +109,14 @@ namespace sns
     // What if func would get index out of valid range?
     template<typename value_type>
     value_type &Array<value_type>::operator[](int const index) {
-        assert()
+//        assert()
         return data_[index];
     }
 
     // Compilation error with const Array a;
     template<typename value_type>
     value_type const &Array<value_type>::operator[](int const index) const {
-        assert()
+//        assert()
         return data_[index];
     }
 
