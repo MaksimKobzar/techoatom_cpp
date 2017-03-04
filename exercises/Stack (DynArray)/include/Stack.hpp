@@ -24,8 +24,6 @@ namespace sns
     {
         using value_type =  T;
         using container = Array<value_type>;
-        using value_type = *reference;
-        using const value_type = *const_reference;
     public:
         //---------------------------------------------
         //! @Constructor
@@ -45,8 +43,8 @@ namespace sns
         //---------------------------------------------
         //! @Element_access
         //---------------------------------------------
-        reference top();
-        const_reference top() const;
+        value_type top();
+        const value_type *top() const;
 
         //---------------------------------------------
         //! @Access functions
@@ -70,6 +68,7 @@ namespace sns
         //---------------------------------------------
         Stack &operator=(Stack const &other);
         bool operator==(Stack const &other) const;
+        // bool operator==(value_type const &rhs) const;
 
         //---------------------------------------------
         //! @Debug
@@ -96,7 +95,7 @@ namespace sns
     Stack<value_type>::~Stack() { }
 
     template <typename value_type>
-    reference Stack<value_type>::top() {
+    value_type Stack<value_type>::top() {
 //        if(size_ == 0) {
 //            return nullptr;
 //        }
@@ -106,7 +105,7 @@ namespace sns
     }
 
     template <typename value_type>
-    const_reference Stack<value_type>::top() const {
+    value_type const *Stack<value_type>::top() const {
 //        if(size_ == 0) {
 //            return nullptr;
 //        }
@@ -177,6 +176,14 @@ namespace sns
                 this.capacity_   == other.capacity_ && // Do we need to check capacity?
                 this.data_       == other.data_);
     }
+
+
+    // template <typename value_type>
+    // bool Stack<value_type>::operator==(value_type const &rhs) const {
+    //     return( this.size_       == other.size_ &&
+    //             this.capacity_   == other.capacity_ && // Do we need to check capacity?
+    //             this.data_       == other.data_);
+    // }
 
 } // end sns
 

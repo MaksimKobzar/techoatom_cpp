@@ -16,9 +16,9 @@ int main() {
 
     if(stack1.push(2)) {
         stack2 = stack1;
-        if(stack2.top() == 2) {
-            std::cout << "All right!" << std::endl;
-        }
+//        if(stack2.top() == 2) {
+//            std::cout << "All right!" << std::endl;
+//        }
     }
     std::cout << "Damn!" << std::endl;
 
