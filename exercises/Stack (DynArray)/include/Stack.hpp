@@ -24,6 +24,7 @@ namespace sns
     {
         using value_type =  T;
         using container = Array<value_type>;
+//        using size_t POISON_INT = 1322;
     public:
         //---------------------------------------------
         //! @Constructor
@@ -43,7 +44,6 @@ namespace sns
         //---------------------------------------------
         //! @Element_access
         //---------------------------------------------
-        value_type top();
         const value_type *top() const;
 
         //---------------------------------------------
@@ -73,55 +73,74 @@ namespace sns
         //---------------------------------------------
         //! @Debug
         //---------------------------------------------
-        // bool ok();
+        // bool is_valid();
         // bool dump();
 
     private:
-        value_type capacity_;
-        size_t     size_;
-        container *data_;
+        size_t      size_;
+        container   data_;
     };
 
 
     template <typename value_type>
     Stack<value_type>::Stack(size_t capacity)
-    : capacity_(capacity), size_(0), data_(new container(capacity)) { }
+    : size_(0) {
+        container data_(capacity);
+    }
 
     template <typename value_type>
     Stack<value_type>::Stack(Stack<value_type> const &other)
-    : capacity_(other.capacity_), size_(other.size_), data_(new container(other.capacity_)) { }
-
-    template <typename value_type>
-    Stack<value_type>::~Stack() { }
-
-    template <typename value_type>
-    value_type Stack<value_type>::top() {
-//        if(size_ == 0) {
-//            return nullptr;
-//        }
-//        else {
-            return data_[size_];
-//        }
+        : size_(other.size()) {
+        container data_(other.capacity());
+        for (size_t i = 0; i != data_.size(); ++i) {
+            ASSERT_TRUE(other.pop());
+            data_.push(other.top());
+        }
     }
 
     template <typename value_type>
-    value_type const *Stack<value_type>::top() const {
-//        if(size_ == 0) {
-//            return nullptr;
-//        }
-//        else {
-            return data_[size_];
-//        }
+    Stack<value_type>::~Stack() {
+        size_ = 1322;
     }
+
+    template <typename value_type>
+    const value_type *Stack<value_type>::top() const {
+       if(size_ == 0) {
+           return nullptr;
+       }
+       else {
+            return &data_[size_];
+       }
+    }
+
+//     template <typename value_type>
+//     value_type const Stack<value_type>::top() const {
+// //        if(size_ == 0) {
+// //            return nullptr;
+// //        }
+// //        else {
+//             return data_[size_];
+// //        }
+//     }
 
     template <typename value_type>
     bool Stack<value_type>::empty() const {
-        return size_ == 0;
+        if(size_ == 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     template <typename value_type>
     bool Stack<value_type>::full() const {
-        return size_ == capacity_;
+        if(size_ == data_.size()) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     template <typename value_type>
@@ -131,35 +150,34 @@ namespace sns
 
     template <typename value_type>
     size_t Stack<value_type>::capacity() const {
-        return capacity_;
+        return data_.size();
     }
 
     template <typename value_type>
     bool Stack<value_type>::push(value_type &value) {
-        if(size_ == capacity_) {
-            return 0;
+        if(size_ == data_.size()) {
+            return false;
         }
         else {
             data_[size_++] = value;
-            return 1;
+            return true;
         }
     }
 
     template <typename value_type>
     bool Stack<value_type>::pop() {
         if(size_ == 0)
-            return 0;
+            return false;
         else {
             size_--;
-            return 1;
+            return true;
         }
     }
 
     template <typename value_type>
     void Stack<value_type>::swap(Stack<value_type> &other) {
-        std::swap(capacity_, other.capacity_);
         std::swap(size_,     other.size_);
-        std::swap(data_,   other.data_);
+        std::swap(data_,     other.data_);
     }
 
     template <typename value_type>
@@ -176,15 +194,7 @@ namespace sns
                 this.capacity_   == other.capacity_ && // Do we need to check capacity?
                 this.data_       == other.data_);
     }
-
-
-    // template <typename value_type>
-    // bool Stack<value_type>::operator==(value_type const &rhs) const {
-    //     return( this.size_       == other.size_ &&
-    //             this.capacity_   == other.capacity_ && // Do we need to check capacity?
-    //             this.data_       == other.data_);
-    // }
-
+    
 } // end sns
 
 #endif //_STACK_HPP_

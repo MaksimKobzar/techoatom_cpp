@@ -29,7 +29,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 file(GLOB TEST_SRC_FILES ${PROJECT_SOURCE_DIR}/test/*.cpp)
 add_executable(StackDraft main.cpp)
 add_executable(${PROJECT_TEST_NAME} ${TEST_SRC_FILES})
-add_dependencies(${PROJECT_TEST_NAME} googletest)
+#add_dependencies(${PROJECT_TEST_NAME} googletest)
 
 #add_executable(runStackTestLib test/StackTestLib.cpp ${SOURCE_FILES})
 
