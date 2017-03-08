@@ -9,7 +9,6 @@
 #ifndef _STACK_HPP_
 #define _STACK_HPP_
 
-#define NDEBUG
 #include "Vector.hpp"
 #include <iostream>
 #include <cassert>
@@ -77,8 +76,8 @@ namespace sns
         //---------------------------------------------
         //! @Debug
         //---------------------------------------------
-        // bool is_valid();
-        // bool dump();
+        bool is_valid() const;
+        bool dump() const;
 
     private:
         int         size_;
@@ -94,8 +93,6 @@ namespace sns
     Stack<value_type>::Stack(const Stack<value_type> &other)
         : size_(other.size()), data_(container(other.capacity())) {
         for (int i = 0; i != data_.size(); ++i) {
-            // ASSERT_TRUE(other.pop())
-            // other.data_[i];
             data_[i] = other.data_[i];
         }
     }
@@ -114,16 +111,6 @@ namespace sns
             return &data_[size_-1];
        }
     }
-
-//     template <typename value_type>
-//     value_type const Stack<value_type>::top() const {
-// //        if(size_ == 0) {
-// //            return nullptr;
-// //        }
-// //        else {
-//             return data_[size_];
-// //        }
-//     }
 
     template <typename value_type>
     bool Stack<value_type>::empty() const {
@@ -198,6 +185,14 @@ namespace sns
             return true;
         }
         return false ;
+    }
+
+    template <typename value_type>
+    bool Stack<value_type>::is_valid() const {
+        if(size() <= capacity()) {
+            return true;
+        }
+        return false;
     }
 
 } // end sns
