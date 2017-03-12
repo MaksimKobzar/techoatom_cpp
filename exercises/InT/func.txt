@@ -1,0 +1,86 @@
+#include "header.h"
+void inT::show()
+{
+	cout << number << "\ ";
+}
+
+ inT::~ inT()
+{
+	 //delete ;
+}
+
+ inT inT::operator=( inT value)
+ {
+	  number = value.number;
+	 return inT (number);
+ }
+
+  inT inT::operator+(inT value) 
+  {
+	  return inT (number + value.number);
+  }
+
+  inT inT::operator+( value_type value)
+  {
+	  return inT  (number + value);
+  }
+  //???
+  inT inT::operator+(value_type value)
+  {
+	  return inT(value + number);
+  }
+
+  inT inT::operator-(inT value)
+  {
+	  return inT(number - value.number);
+  }
+
+  inT inT::operator-(value_type value)
+  {
+	  return inT(number - value);
+  }
+
+  inT inT::operator*(inT value)
+  {
+	  return inT(number * value.number);
+  }
+
+  inT inT::operator*(value_type value)
+  {
+	  return inT(number * value);
+  }
+
+  inT inT::operator/(inT value)
+  {
+	  return inT(number / value.number);
+  }
+
+  inT inT::operator/(value_type value)
+  {
+	  return inT(number / value);
+  }
+
+  inT inT::operator/(value_type value)
+  {
+	  return inT(value/number);
+  }
+
+  inT inT::operator++(int )
+  {
+	  return inT (number++);
+  }
+
+  inT inT::operator++()
+  {
+	  return inT(++number);
+  }
+
+  inT inT::operator--(int)
+  {
+	  return inT(number--);
+  }
+
+  inT inT::operator--()
+  {
+	  return inT(--number);
+  }
