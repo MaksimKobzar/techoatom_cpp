@@ -71,7 +71,6 @@ namespace sns
         //---------------------------------------------
         Stack &operator=(Stack const &other);
         bool operator==(Stack const &other) const;
-        // bool operator==(value_type const &rhs) const;
 
         //---------------------------------------------
         //! @Debug
@@ -193,6 +192,15 @@ namespace sns
             return true;
         }
         return false;
+    }
+
+    template <typename value_type>
+    bool Stack<value_type>::dump() const {
+        std::ostringstream oss;
+// TODO-right concatenation of the string
+//        oss << "DUMP. Crash in "<< fileName << ", line " << lineNumber << ", function "
+//                    << funcName << ".Internal vars: size = " << size() << ", capacity = " << capacity() << ".";
+        return(oss.str());
     }
 
 } // end sns

@@ -37,12 +37,11 @@ namespace sns
 //! Debug macros
 //----------------------------------------------------------------------
 # ifdef DEBUG123
-    #define DEBUG_INFO( message ) {\
-        while(1) {\
-            std::cout << "DEBUG_INFO: " << message << "(file "<< __FILE__ <<" ,line " << __LINE__ << ")."<< std::endl;\
-            break;\
+    do {\
+        #define DEBUG_INFO( message ) {\
+        std::cout << "DEBUG_INFO: " << message << "(file "<< __FILE__ <<" ,line " << __LINE__ << ")."<< std::endl;\
         }\
-    }
+    } while(0)
 # endif
 
 
