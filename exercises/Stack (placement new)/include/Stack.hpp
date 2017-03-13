@@ -4,6 +4,10 @@
 //! Header file with Stack class
 //!
 //! @author Maksim_Kobzar, 2017
+// TODO
+// - operator new
+// - copy constructor
+// - operator ==
 //---------------------------------------------
 
 #ifndef _STACK_HPP_
@@ -46,6 +50,7 @@ namespace sns
         //---------------------------------------------
         ~Stack();
 
+
         //---------------------------------------------
         //! @Element_access
         //---------------------------------------------
@@ -71,6 +76,7 @@ namespace sns
         //! 1) operator=
         //! 2) operator==
         //---------------------------------------------
+        void  *operator new(int size, void *where_to_create);
         Stack &operator=(Stack const &other);
         bool   operator==(Stack const &other) const;
 
