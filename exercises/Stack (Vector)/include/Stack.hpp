@@ -14,6 +14,8 @@
 #include <cassert>
 #include <string>
 
+//#define NDEBUG
+
 //------------------------------------------------------------
 //! @namespace
 //! Stack name space
@@ -27,7 +29,7 @@ namespace sns
     {
         using container = Vector<T>;
         using value_type =  T;
-//        using int POISON_INT = 1322;
+        const int POISON_VALUE = 1322;
     public:
         //---------------------------------------------
         //! @Constructor
@@ -70,13 +72,13 @@ namespace sns
         //! 2) operator==
         //---------------------------------------------
         Stack &operator=(Stack const &other);
-        bool operator==(Stack const &other) const;
+        bool   operator==(Stack const &other) const;
 
         //---------------------------------------------
         //! @Debug
         //---------------------------------------------
         bool is_valid() const;
-        bool dump() const;
+        bool dump(std::string fileName, std::string funcName, int lineNumber) const;
 
     private:
         int         size_;
@@ -98,7 +100,9 @@ namespace sns
 
     template <typename value_type>
     Stack<value_type>::~Stack() {
-        size_ = 1322;
+    # ifdef NDEBUG
+        size_ = POISON_VALUE;
+    # endif
     }
 
     template <typename value_type>
@@ -179,7 +183,7 @@ namespace sns
     template <typename value_type>
     bool Stack<value_type>::operator==(const Stack<value_type> &other) const {
         if( this->size()       == other.size()       &&
-            this->capacity()   == other.capacity()   && // Do we need to check capacity?
+            this->capacity()   == other.capacity()   &&
             this->data_        == other.data_        ) {
             return true;
         }
@@ -195,11 +199,10 @@ namespace sns
     }
 
     template <typename value_type>
-    bool Stack<value_type>::dump() const {
+    bool Stack<value_type>::dump(std::string fileName, std::string funcName, int lineNumber) const {
         std::ostringstream oss;
-// TODO-right concatenation of the string
-//        oss << "DUMP. Crash in "<< fileName << ", line " << lineNumber << ", function "
-//                    << funcName << ".Internal vars: size = " << size() << ", capacity = " << capacity() << ".";
+        oss << "DUMP. Crash in "<< fileName << ", line " << lineNumber << ", function "
+            << funcName << ".Internal vars: size = " << this->size() << ", capacity = " << this->capacity() << ".";
         return(oss.str());
     }
 
