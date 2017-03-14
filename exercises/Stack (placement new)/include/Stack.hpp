@@ -76,9 +76,11 @@ namespace sns
         //! 1) operator=
         //! 2) operator==
         //---------------------------------------------
-        void  *operator new(int size, void *where_to_create);
         Stack &operator=(Stack const &other);
         bool   operator==(Stack const &other) const;
+        
+        void  *operator new(size_t size, void *pdst);
+        void operator delete(void*);
 
         //---------------------------------------------
         //! @Debug
@@ -97,11 +99,10 @@ namespace sns
         : size_(0), data_(container(capacity)) { }
 
     template <typename value_type>
-    Stack<value_type>::Stack(const Stack<value_type> &other)
-        : size_(other.size()), data_(container(other.capacity())) {
-        for (int i = 0; i != data_.size(); ++i) {
-            data_[i] = other.data_[i];
-        }
+    Stack<value_type>::Stack(const Stack &other)
+    {
+      void * p = static_cast<void*>(data_);
+      new (p) Vector(*reinterpret_cast<const Vector *>(other.data_));
     }
 
     template <typename value_type>
@@ -194,6 +195,11 @@ namespace sns
             return true;
         }
         return false ;
+    }
+
+    template <typename value_type>
+    void  *operator new(int size, void *placement) {
+
     }
 
     template <typename value_type>
