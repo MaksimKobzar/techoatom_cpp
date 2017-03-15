@@ -4,6 +4,9 @@
 //! Header file with Vector class
 //!
 //! @author Maksim_Kobzar, 2017
+// TODO
+// - is valid
+// - dump
 //---------------------------------------------
 
 #ifndef _VECTOR_HPP_
@@ -37,7 +40,7 @@ namespace sns
 //----------------------------------------------------------------------
 //! Print debug macros
 //----------------------------------------------------------------------
-# define DEBUG_INFO(message)\
+#define DEBUG_INFO( message )\
 do {\
     std::cout << "DEBUG_INFO: " << message << "(file "<< __FILE__ <<" ,line " << __LINE__ << ")."<< std::endl;\
 } while (0)
@@ -61,6 +64,11 @@ do {\
         Vector(const Vector &other);
 
         //---------------------------------------------
+        //! Move constructor
+        //---------------------------------------------
+        Vector(const Vector &other);
+
+        //---------------------------------------------
         //! @Destructor
         // Free memory
         //---------------------------------------------
@@ -73,8 +81,8 @@ do {\
         //! 3) operator ==
         //---------------------------------------------
         Vector &operator=(Vector const &other);
-        value_type &operator[](int const index);
-        value_type const &operator[](int const index) const;
+        value_type &operator[](size_t const index);
+        value_type const &operator[](size_t const index) const;
         bool operator==(Vector const &other) const;
 
         //---------------------------------------------
@@ -88,92 +96,91 @@ do {\
         //! @Access functions
         //! Return size of Vector
         //---------------------------------------------
-        int size() const;
+        size_t size() const;
 
         //---------------------------------------------
         //! @Debug
         //! Return pointer to dumped text
         //---------------------------------------------
-        std::string dump(std::string fileName, std::string funcName, int lineNumber) const;
+        std::string dump(std::string fileName, std::string funcName, size_t lineNumber) const;
 
     private:
-        int      size_;
+        size_t      size_;
         value_type *data_;
     };
+
 
     //----------------------------------------------------------
     // Definitions
     //----------------------------------------------------------
     template<typename value_type>
-    Vector<value_type>::Vector(int size)
-            : size_(size) {
-    # ifdef NDEBUG
-        DEBUG_INFO("Vector - start default constructor");
-    #endif
+    Vector<value_type>::Vector(int size) :
+        size_(size) {
+        #ifdef NDEBUG
+            DEBUG_INFO("Vector -- constructor: create empty object");
+        #endif // NDEBUG
 
         data_ = new value_type[size_];
-        # ifdef NDEBUG
-        for (int i = 0; i != size_; ++i) {\
-            data_[i] = 0;\
-        }
-        # endif
 
-# ifdef NDEBUG    
-    DEBUG_INFO("Vector - end default constructor");
-# endif
+        #ifdef NDEBUG
+            for (int i = 0; i != size_; ++i) {
+                data_[i] = 0;
+            }
+            DEBUG_INFO("Vector - end default constructor");
+        #endif // NDEBUG
     }
 
     template<typename value_type>
-    Vector<value_type>::Vector(const Vector<value_type> &other)
-            : size_(other.size_) {
-    # ifdef NDEBUG 
-        DEBUG_INFO("Vector - start constructor of copy");
-    # endif
+    Vector<value_type>::Vector(const Vector<value_type> &other) :
+        size_(other.size_) {
+        #ifdef NDEBUG 
+            DEBUG_INFO("Vector - start constructor of copy");
+        #endif // NDEBUG
 
         data_ = new value_type[size_];
         for (int i = 0; i != size_; ++i) {
             data_[i] = other.data_[i];
         }
 
-    # ifdef NDEBUG 
-        DEBUG_INFO("Vector - end constructor of copy");
-    # endif
+        #ifdef NDEBUG 
+            DEBUG_INFO("Vector - end constructor of copy");
+        #endif // NDEBUG
     }
 
     template<typename value_type>
     Vector<value_type>::~Vector() {
-    # ifdef NDEBUG 
-        DEBUG_INFO("Vector - start destructor");
-    # endif
+        #ifdef NDEBUG 
+            DEBUG_INFO("Vector - start destructor");
+        #endif // NDEBUG
 
         delete [] data_;
 
-    # ifdef NDEBUG 
-        DEBUG_INFO("Vector - end destructor");
-    # endif
+        #ifdef NDEBUG 
+            DEBUG_INFO("Vector - end destructor");
+        #endif // NDEBUG
     }
 
     template<typename value_type>
     Vector<value_type> &Vector<value_type>::operator=(Vector<value_type> const &other) {
-    # ifdef NDEBUG 
-        DEBUG_INFO("Vector - start operator=");
-    # endif
+        #ifdef NDEBUG 
+            DEBUG_INFO("Vector - start operator=");
+        #endif // NDEBUG
 
         if(this != &other) {
             Vector(other).swap(*this);
         }
 
-    # ifdef NDEBUG 
-        DEBUG_INFO("Vector - end operator=");
-    # endif
+        #ifdef NDEBUG 
+            DEBUG_INFO("Vector - end operator=");
+        #endif // NDEBUG
         return *this;
     }
 
     template<typename value_type>
     value_type &Vector<value_type>::operator[](int index) {
-    # ifdef NDEBUG 
-        DEBUG_INFO("Vector - operator[]");
-    # endif
+        #ifdef NDEBUG 
+            DEBUG_INFO("Vector - operator[]");
+        #endif // NDEBUG
 
         CHECK_RANGE(index, size_);
         return data_[index];
@@ -181,9 +188,9 @@ do {\
 
     template<typename value_type>
     value_type const &Vector<value_type>::operator[](int index) const {
-    # ifdef NDEBUG 
-        DEBUG_INFO("Vector - const operator[]");
-    # endif
+        #ifdef NDEBUG 
+            DEBUG_INFO("Vector - const operator[]");
+        #endif // NDEBUG
 
         CHECK_RANGE(index, size_);
         return data_[index];
@@ -191,9 +198,9 @@ do {\
 
     template<typename value_type>
     bool Vector<value_type>::operator==(Vector<value_type> const &other) const {
-    # ifdef NDEBUG 
-        DEBUG_INFO("Vector - operator==");
-    # endif
+        #ifdef NDEBUG 
+            DEBUG_INFO("Vector - operator==");
+        #endif // NDEBUG
 
         if(this == &other) {
             return true;
@@ -211,23 +218,23 @@ do {\
 
     template<typename value_type>
     void Vector<value_type>::swap(Vector<value_type> &other) {
-    # ifdef NDEBUG 
-        DEBUG_INFO("Vector - start swap");
-    # endif
+        #ifdef NDEBUG 
+            DEBUG_INFO("Vector - start swap");
+        #endif // NDEBUG
 
         std::swap(size_, other.size_);
         std::swap(data_, other.data_);
 
-    # ifdef NDEBUG 
-        DEBUG_INFO("Vector - end swap");
-    # endif
+        #ifdef NDEBUG 
+            DEBUG_INFO("Vector - end swap");
+        #endif // NDEBUG
     }
 
     template<typename value_type>
     int Vector<value_type>::size() const {
-    # ifdef NDEBUG 
-        DEBUG_INFO("Vector - size");
-    # endif
+        #ifdef NDEBUG 
+            DEBUG_INFO("Vector - size");
+        #endif // NDEBUG
 
         return size_;
     }
