@@ -5,7 +5,6 @@
 //!
 //! @author Maksim_Kobzar, 2017
 // TODO
-// - is valid
 // - dump
 //---------------------------------------------
 
@@ -97,11 +96,14 @@ do {\
         //! Return size of Vector
         //---------------------------------------------
         size_t size() const;
+        value_type *begin() const;
+        value_type *end() const;
 
         //---------------------------------------------
         //! @Debug
         //! Return pointer to dumped text
         //---------------------------------------------
+        bool is_valid();
         std::string dump(std::string fileName, std::string funcName, size_t lineNumber) const;
 
     private:
@@ -148,7 +150,8 @@ do {\
     }
 
     template<typename value_type>
-    Vector<value_type>::~Vector() {
+    Vector<value_type>::~Vector()
+    {
         #ifdef NDEBUG 
             DEBUG_INFO("Vector - start destructor");
         #endif // NDEBUG
@@ -161,7 +164,8 @@ do {\
     }
 
     template<typename value_type>
-    Vector<value_type> &Vector<value_type>::operator=(Vector<value_type> const &other) {
+    Vector<value_type> &Vector<value_type>::operator=(Vector<value_type> const &other)
+    {
         #ifdef NDEBUG 
             DEBUG_INFO("Vector - start operator=");
         #endif // NDEBUG
@@ -177,7 +181,8 @@ do {\
     }
 
     template<typename value_type>
-    value_type &Vector<value_type>::operator[](int index) {
+    value_type &Vector<value_type>::operator[](int index)
+    {
         #ifdef NDEBUG 
             DEBUG_INFO("Vector - operator[]");
         #endif // NDEBUG
@@ -187,7 +192,8 @@ do {\
     }
 
     template<typename value_type>
-    value_type const &Vector<value_type>::operator[](int index) const {
+    value_type const &Vector<value_type>::operator[](int index) const
+    {
         #ifdef NDEBUG 
             DEBUG_INFO("Vector - const operator[]");
         #endif // NDEBUG
@@ -197,7 +203,8 @@ do {\
     }
 
     template<typename value_type>
-    bool Vector<value_type>::operator==(Vector<value_type> const &other) const {
+    bool Vector<value_type>::operator==(Vector<value_type> const &other) const
+    {
         #ifdef NDEBUG 
             DEBUG_INFO("Vector - operator==");
         #endif // NDEBUG
@@ -217,7 +224,8 @@ do {\
     }
 
     template<typename value_type>
-    void Vector<value_type>::swap(Vector<value_type> &other) {
+    void Vector<value_type>::swap(Vector<value_type> &other)
+    {
         #ifdef NDEBUG 
             DEBUG_INFO("Vector - start swap");
         #endif // NDEBUG
@@ -231,12 +239,48 @@ do {\
     }
 
     template<typename value_type>
-    int Vector<value_type>::size() const {
+    int Vector<value_type>::size() const
+    {
         #ifdef NDEBUG 
             DEBUG_INFO("Vector - size");
         #endif // NDEBUG
 
         return size_;
+    }
+
+    template<typename value_type>
+    value_type *Vector<value_type>::begin() const
+    {   
+        #ifdef NDEBUG 
+            DEBUG_INFO("Vector - start");
+        #endif // NDEBUG
+        return &data_[0];
+    }
+
+    template<typename value_type>
+    value_type *Vector<value_type>::end() const
+    {   
+        #ifdef NDEBUG 
+            DEBUG_INFO("Vector - end");
+        #endif // NDEBUG
+        return &data_[size_];
+    }
+
+    template<typename value_type>
+    bool Vector<value_type>::is_valid()
+    {   
+        #ifdef NDEBUG 
+            DEBUG_INFO("Vector - is_valid");
+            std::cout << "Vector - " << size() << " " << sizeof(data_);
+        #endif // NDEBUG
+        if(size() <= sizeof(data_))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     template<typename value_type>
