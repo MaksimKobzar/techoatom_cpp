@@ -61,6 +61,7 @@ do {\
         //! Constructor of copy
         //---------------------------------------------
         Vector(const Vector &other);
+        void *operator new(size_t size, void *where_to_create);
 
         //---------------------------------------------
         //! Move constructor
@@ -135,7 +136,7 @@ do {\
     template<typename value_type>
     Vector<value_type>::Vector(const Vector<value_type> &other) :
         size_(other.size_) {
-        #ifdef NDEBUG 
+        #ifdef NDEBUG
             DEBUG_INFO("Vector - start constructor of copy");
         #endif // NDEBUG
 
@@ -144,21 +145,49 @@ do {\
             data_[i] = other.data_[i];
         }
 
-        #ifdef NDEBUG 
+        #ifdef NDEBUG
             DEBUG_INFO("Vector - end constructor of copy");
         #endif // NDEBUG
     }
 
+
+
+
+
+
+
+
+    template<typename value_type>
+    void *Vector<value_type>::Vector(const Vector<value_type> &other)
+    {
+        char buf[sizeof(other)]; // выделяю на стеке память под вектор
+        new (buf) Vector;        // вызываю переопрделенный указатель ниже 
+        Vector *v = (Vector *)buf;
+    }
+
+    template<typename value_type>
+    void *Vector<value_type>::operator new(void *where_to_create)
+    {
+        return where_to_create;
+    }
+
+
+
+
+
+
+
+
     template<typename value_type>
     Vector<value_type>::~Vector()
     {
-        #ifdef NDEBUG 
+        #ifdef NDEBUG
             DEBUG_INFO("Vector - start destructor");
         #endif // NDEBUG
 
         delete [] data_;
 
-        #ifdef NDEBUG 
+        #ifdef NDEBUG
             DEBUG_INFO("Vector - end destructor");
         #endif // NDEBUG
     }
@@ -166,7 +195,7 @@ do {\
     template<typename value_type>
     Vector<value_type> &Vector<value_type>::operator=(Vector<value_type> const &other)
     {
-        #ifdef NDEBUG 
+        #ifdef NDEBUG
             DEBUG_INFO("Vector - start operator=");
         #endif // NDEBUG
 
@@ -174,7 +203,7 @@ do {\
             Vector(other).swap(*this);
         }
 
-        #ifdef NDEBUG 
+        #ifdef NDEBUG
             DEBUG_INFO("Vector - end operator=");
         #endif // NDEBUG
         return *this;
@@ -183,7 +212,7 @@ do {\
     template<typename value_type>
     value_type &Vector<value_type>::operator[](int index)
     {
-        #ifdef NDEBUG 
+        #ifdef NDEBUG
             DEBUG_INFO("Vector - operator[]");
         #endif // NDEBUG
 
@@ -194,7 +223,7 @@ do {\
     template<typename value_type>
     value_type const &Vector<value_type>::operator[](int index) const
     {
-        #ifdef NDEBUG 
+        #ifdef NDEBUG
             DEBUG_INFO("Vector - const operator[]");
         #endif // NDEBUG
 
@@ -205,7 +234,7 @@ do {\
     template<typename value_type>
     bool Vector<value_type>::operator==(Vector<value_type> const &other) const
     {
-        #ifdef NDEBUG 
+        #ifdef NDEBUG
             DEBUG_INFO("Vector - operator==");
         #endif // NDEBUG
 
@@ -226,14 +255,14 @@ do {\
     template<typename value_type>
     void Vector<value_type>::swap(Vector<value_type> &other)
     {
-        #ifdef NDEBUG 
+        #ifdef NDEBUG
             DEBUG_INFO("Vector - start swap");
         #endif // NDEBUG
 
         std::swap(size_, other.size_);
         std::swap(data_, other.data_);
 
-        #ifdef NDEBUG 
+        #ifdef NDEBUG
             DEBUG_INFO("Vector - end swap");
         #endif // NDEBUG
     }
@@ -241,7 +270,7 @@ do {\
     template<typename value_type>
     int Vector<value_type>::size() const
     {
-        #ifdef NDEBUG 
+        #ifdef NDEBUG
             DEBUG_INFO("Vector - size");
         #endif // NDEBUG
 
@@ -250,8 +279,8 @@ do {\
 
     template<typename value_type>
     value_type *Vector<value_type>::begin() const
-    {   
-        #ifdef NDEBUG 
+    {
+        #ifdef NDEBUG
             DEBUG_INFO("Vector - start");
         #endif // NDEBUG
         return &data_[0];
@@ -259,8 +288,8 @@ do {\
 
     template<typename value_type>
     value_type *Vector<value_type>::end() const
-    {   
-        #ifdef NDEBUG 
+    {
+        #ifdef NDEBUG
             DEBUG_INFO("Vector - end");
         #endif // NDEBUG
         return &data_[size_];
@@ -268,8 +297,8 @@ do {\
 
     template<typename value_type>
     bool Vector<value_type>::is_valid()
-    {   
-        #ifdef NDEBUG 
+    {
+        #ifdef NDEBUG
             DEBUG_INFO("Vector - is_valid");
             std::cout << "Vector - " << size() << " " << sizeof(data_);
         #endif // NDEBUG
