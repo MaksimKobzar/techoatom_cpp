@@ -1,19 +1,31 @@
+//---------------------------------------------
+//! @IDE CLion
+//! @file BoolOperation.hpp
+//! Header file BoolOperation structure
+//!
+//! @author Maksim_Kobzar, 2017
+//---------------------------------------------
 
-    struct BoolOperation
-    {
-        //---------------------------------------------
-        //! @Constructor
-        //! Create class BoolOperation
-        //---------------------------------------------
-        explicit BoolOperation(size_t index, Vector<bool> &vec);
+#ifndef _BOOL_OPERATION_HPP_
+#define _BOOL_OPERATION_HPP_
 
-        //---------------------------------------------
-        //! @Operators:
-        //! operator =
-        //---------------------------------------------
-        bool BoolOperation::operator=(bool value)
+struct BoolOperation
+{
+    //---------------------------------------------
+    //! @Constructor
+    //! Create class BoolOperation
+    //---------------------------------------------
+    explicit BoolOperation(size_t index, unsigned &vec);
 
-    private:
-        size_t        index_;
-        Vector<bool>  &vec_;
-    };
+    //---------------------------------------------
+    //! @Operators:
+    //! operator =
+    //---------------------------------------------
+    bool BoolOperation::operator=(bool value);
+
+private:
+    size_t        index_;
+    unsigned      &vec_;
+};
+
+#endif // _BOOL_OPERATION_HPP_

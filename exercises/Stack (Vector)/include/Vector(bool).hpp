@@ -195,7 +195,7 @@ do {\
             #endif
 
             CHECK_RANGE(index, size_);
-            return BoolOperation(index, *this);
+            return BoolOperation(index%UNSIGNED_WIDTH, data_[index/UNSIGNED_WIDTH]);
         }
 
 

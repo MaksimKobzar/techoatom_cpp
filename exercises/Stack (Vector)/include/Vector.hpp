@@ -104,7 +104,6 @@ do {\
     template<>
     class Vector<bool>
     {
-        typedef T value_type;
     public:
         //---------------------------------------------
         //! @Constructor
