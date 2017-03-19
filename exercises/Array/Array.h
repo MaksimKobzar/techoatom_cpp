@@ -12,12 +12,12 @@
 #include<iostream>
 #include<assert.h>
 
-#define ASSERT_OK()					\
-	if (!ok())						\
-		{							\
-		/*dump(); TODO:dump*/		\
-		assert(!"Object is OK");	\
-		}
+//#define ASSERT_OK()					\
+//	if (!ok())						\
+//		{							\
+//		/*dump(); TODO:dump*/		\
+//		assert(!"Object is OK");	\
+//		}
 
 template <typename T, const size_t capacity>
 class Array
@@ -42,18 +42,67 @@ public:
 	Array(const size_type size);
 
 	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
+	//! Copy constructor
+	//! @param other Array
+	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
+	Array(const Array &other);
+
+	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
 	//! Destructor
 	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
 	~Array();
 
-	//TODO: description
+	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
+	//! Fill the Array with specified value
+	//! @param value is the value to assign to the elements
+	//! @return void
+	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
 	void fill(const value_type& value);
+
+	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
+	//! Returns a reference to the element
+	//! @param n is position of the element to return
+	//! @return reference to the requested element
+	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
 	value_type &operator[](size_type const n);
+
+	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
+	//! Assignment operator
+	//! @param other Array
+	//! @return other Array
+	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
 	Array &operator=(Array const &other);
+
+	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
+	//! Equal operator
+	//! @param other Array
+	//! @return true if the contents of the Arrays are equal, false otherwise
+	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
+	bool operator==(Array const &other) const;
+
+	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
+	//! Exchanges Array with the given Array
+	//! @param other Array
+	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
 	void swap(Array &other);
+
+	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
+	//! Check if the Array valid
+	//! @param valid of the Arary
+	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
 	bool ok() const;
-	size_type size();
-	size_type max_size();
+
+	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
+	//! Size getter
+	//! @param size of the Arary
+	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
+	size_type size() const;
+
+	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
+	//! Max size getter
+	//! @param max size of the Arary
+	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
+	size_type max_size() const;
 
 private:
 	size_t size_;
@@ -66,6 +115,8 @@ const size_t POISON_SIZE = 100500; //???
 
 template <typename value_type, const size_t capacity>
 Array<value_type, capacity>::Array()
+	:size_(capacity),
+	valid_(true)
 {
 	for (size_type i = 0; i < capacity; ++i)
 		data_[i] = 0;
@@ -73,7 +124,8 @@ Array<value_type, capacity>::Array()
 
 template <typename value_type, const size_t capacity>
 Array<value_type, capacity>::Array(const size_type size)
-	:size_(size)
+	:size_(size),
+	valid_(true)
 {
 	if (size > capacity)
 		valid_ = false;
@@ -84,6 +136,15 @@ Array<value_type, capacity>::Array(const size_type size)
 		data_[i] = 0;
 	for (size_type i = size; i < capacity; ++i)
 		data_[i] = POISON_INT;
+}
+
+template <typename value_type, const size_t capacity>
+Array<value_type, capacity>::Array(const Array<value_type, capacity> &other)
+	:size_(other.size_),
+	valid_(other.valid_)
+{
+	for (int i = 0; i != size_; ++i)
+		data_[i] = other.data_[i];
 }
 
 template <typename value_type, const size_t capacity>
@@ -117,8 +178,8 @@ value_type &Array<value_type, capacity>::operator[](size_type const n)
 }
 
 template<typename value_type, const size_t capacity>
-Array<value_type, capacity> &Array<value_type, capacity>::operator=(Array<value_type, capacity> const &other) {
-
+Array<value_type, capacity> &Array<value_type, capacity>::operator=(Array<value_type, capacity> const &other)
+{
 	if (this != &other) {
 		Array(other).swap(*this);
 	}
@@ -126,20 +187,34 @@ Array<value_type, capacity> &Array<value_type, capacity>::operator=(Array<value_
 }
 
 template<typename value_type, const size_t capacity>
-void Array<value_type, capacity>::swap(Array<value_type, capacity> &other) {
-	std::swap(size_, other.size_);
-	std::swap(data_, other.data_);
-	std::swap(data_, other.valid_);
+bool Array<value_type, capacity>::operator==(Array const &other) const
+{
+	if (this -> size_ != other.size_)
+		return false;
+
+	for (int i = 0; i != size_; ++i)
+		if (this->data_[i] != other.data_[i])
+			return false;
+
+	return true;
 }
 
 template<typename value_type, const size_t capacity>
-Array<value_type, capacity>::size_type Array<value_type, capacity>::size()
+void Array<value_type, capacity>::swap(Array<value_type, capacity> &other)
+{
+	std::swap(size_, other.size_);
+	std::swap(data_, other.data_);
+	std::swap(valid_, other.valid_);
+}
+
+template<typename value_type, const size_t capacity>
+size_t Array<value_type, capacity>::size() const
 {
 	return size_;
 }
-
+//
 template<typename value_type, const size_t capacity>
-Array<value_type, capacity>::size_type Array<value_type, capacity>::max_size()
+size_t Array<value_type, capacity>::max_size() const
 {
 	return capacity;
 }
