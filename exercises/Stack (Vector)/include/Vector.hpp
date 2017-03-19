@@ -16,7 +16,7 @@
 #include <sstream>
 #include <string>
 
-//#define NDEBUG
+#define NDEBUG
 
 //------------------------------------------------------------
 //! @namespace
@@ -61,12 +61,12 @@ do {\
         //! Constructor of copy
         //---------------------------------------------
         Vector(const Vector &other);
-        void *operator new(size_t size, void *where_to_create);
+        // void *operator new(size_t size, void *where_to_create);
 
         //---------------------------------------------
         //! Move constructor
         //---------------------------------------------
-        Vector(const Vector &other);
+        Vector(const Vector &&other);
 
         //---------------------------------------------
         //! @Destructor
@@ -81,8 +81,8 @@ do {\
         //! 3) operator ==
         //---------------------------------------------
         Vector &operator=(Vector const &other);
-        value_type &operator[](size_t const index);
-        value_type const &operator[](size_t const index) const;
+        value_type &operator[](const size_t index);
+        value_type const &operator[](const size_t index) const;
         bool operator==(Vector const &other) const;
 
         //---------------------------------------------
@@ -150,11 +150,28 @@ do {\
         #endif // NDEBUG
     }
 
+    template<typename value_type>
+    Vector<value_type>::Vector(const Vector<value_type> &&other) :
+        size_(other.size_) {
+        #ifdef NDEBUG
+            DEBUG_INFO("Vector - start move constructor");
+        #endif // NDEBUG
+
+        data_ = new value_type[size_];
+        for (int i = 0; i != size_; ++i) {
+            data_[i] = other.data_[i];
+        }
+
+        #ifdef NDEBUG
+            DEBUG_INFO("Vector - end move constructor");
+        #endif // NDEBUG
+    }
 
 
 
 
 
+/*
 
 
     template<typename value_type>
@@ -169,7 +186,7 @@ do {\
     void *Vector<value_type>::operator new(void *where_to_create)
     {
         return where_to_create;
-    }
+    }*/
 
 
 
@@ -210,10 +227,12 @@ do {\
     }
 
     template<typename value_type>
-    value_type &Vector<value_type>::operator[](int index)
+    value_type &Vector<value_type>::operator[](const size_t index)
     {
         #ifdef NDEBUG
             DEBUG_INFO("Vector - operator[]");
+            std::cout << index << std::endl;
+            std::cout << "---------------------------------------" << std::endl;
         #endif // NDEBUG
 
         CHECK_RANGE(index, size_);
@@ -221,7 +240,7 @@ do {\
     }
 
     template<typename value_type>
-    value_type const &Vector<value_type>::operator[](int index) const
+    value_type const &Vector<value_type>::operator[](const size_t index) const
     {
         #ifdef NDEBUG
             DEBUG_INFO("Vector - const operator[]");
@@ -268,7 +287,7 @@ do {\
     }
 
     template<typename value_type>
-    int Vector<value_type>::size() const
+    size_t Vector<value_type>::size() const
     {
         #ifdef NDEBUG
             DEBUG_INFO("Vector - size");
@@ -313,7 +332,7 @@ do {\
     }
 
     template<typename value_type>
-    std::string Vector<value_type>::dump(std::string fileName, std::string funcName, int lineNumber) const {
+    std::string Vector<value_type>::dump(std::string fileName, std::string funcName, size_t lineNumber) const {
         std::ostringstream oss;
         oss << "DUMP. Crash in "<< fileName << ", line " << lineNumber << ", function "
             << funcName << ".Internal vars: size = " << this->size() << ".";
