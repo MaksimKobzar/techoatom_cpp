@@ -6,13 +6,14 @@
 //! @author Maksim_Kobzar, 2017
 //---------------------------------------------
 
-#ifndef _VECTOR_HPP_
-#define _VECTOR_HPP_
+#ifndef _VECTOR_BOOL_HPP_
+#define _VECTOR_BOOL_HPP_
 
 #include <iostream>
 #include <cassert>
 #include <sstream>
 #include <string>
+#include "BoolOperation.hpp"
 
 //#define NDEBUG
 
@@ -72,11 +73,8 @@ do {\
         //! 3) operator ==
         //---------------------------------------------
         Vector &operator=(Vector const &other);
-        Vector &operator=(const BitOperation op);
-
-        BitOperation operator[](int const index);                   // lvalue
-        BitOperation const &operator[](const size_t index) const;   // rvalue
-
+        BoolOperation operator[](int const index);
+        BoolOperation const &operator[](const size_t index) const;
         bool operator==(Vector const &other) const;
 
         //---------------------------------------------
@@ -103,37 +101,9 @@ do {\
         char    *data_;
     };
 
-    struct BitOperation
-    {
-        explicit BitOperation(size_t index, char value = 0);
-
-        size_t  get_index() const;
-        bool    get_value() const;
-
-    private:
-        size_t      index_;
-        bool        value_;
-    };
-
-    explicit BitOperation(size_t index, bool value = 0) :
-        index_(index), value_(value) { }
-
-    size_t get_index() const
-    {
-        return index_;
-    }
-
-    bool get_value() const
-    {
-        return value_;
-    }
-
-
-
     //----------------------------------------------------------
     // Definitions for Vector<bool>
     //----------------------------------------------------------
-        template<>
         Vector<bool>::Vector(size_t size)
                 : size_(size/UNSIGNED_WIDTH + 1) {
             #ifdef NDEBUG
@@ -153,7 +123,6 @@ do {\
             #endif
         }
 
-        template<>
         Vector<bool>::Vector(const Vector<bool> &other)
                 : size_(other.size_) {
             #ifdef NDEBUG
@@ -170,7 +139,6 @@ do {\
             #endif
         }
 
-        template<>
         Vector<bool>::~Vector() {
             #ifdef NDEBUG
                 DEBUG_INFO("Vector - start destructor");
@@ -183,7 +151,6 @@ do {\
             #endif
         }
 
-        template<>
         Vector<bool> &Vector<bool>::operator=(const Vector<bool> &other)
         {
             #ifdef NDEBUG
@@ -200,29 +167,11 @@ do {\
             return *this;
         }
 
-        template<>
-        Vector<bool> Vector<bool>::operator=(const BitOperation op)
-        {
-            #ifdef NDEBUG
-                DEBUG_INFO("Vector<bool> - operator=");
-            #endif
-
-            if(op.get_value())
-            {
-                data_[op.get_index()/sizeof(unsigned)] = data_[op.get_index()/sizeof(unsigned)] |
-                                                            (1 << op.get_index()%sizeof(unsigned));
-            }
-            else {
-                data_[op.get_index()/sizeof(unsigned)] = data_[op.get_index()/sizeof(unsigned)] &
-                                                            (0 << op.get_index()%sizeof(unsigned));
-            }
-            return *this;
-        }
-
-
-
-
-        template<typename value_type> // rvalue bool a = b[10]
+        // rvalue
+        // Vector b(20);
+        // Vector c(20);
+        // bool a = b[10]
+        // b[7] = c[10]
         bool &Vector<bool>::operator[](const size_t index) const
         {
             #ifdef NDEBUG
@@ -233,34 +182,23 @@ do {\
             return !!(data_[index/sizeof(unsigned)] & (1 << index%sizeof(unsigned)) );
         }
 
-        template<typename value_type> // rvalue Vetor a[10] = b[6]
-        const BitOperation Vector<bool>::operator[](const size_t index) const
+        // lvalue
+        // Vetor a(20);
+        // Vetor b(20);
+        // bool c;
+        // a[10] = b[6];
+        // a[10] = c;
+        BoolOperation Vector<bool>::operator[](const size_t index) const
         {
             #ifdef NDEBUG
                 DEBUG_INFO("Vector - operator[]");
             #endif
 
             CHECK_RANGE(index, size_);
-            return BitOperation(index, this->operator[index]);
-        }
-
-        template<typename value_type> // lvalue a[10] = b[6]
-        bool &Vector<bool>::operator[](const size_t index) const
-        {
-            #ifdef NDEBUG
-                DEBUG_INFO("Vector - const operator[]");
-            #endif
-
-            CHECK_RANGE(index, size_);
-            return !!(data_[index/sizeof(unsigned)] & (1 << index%sizeof(unsigned)) );
+            return BoolOperation(index, *this);
         }
 
 
-
-
-
-
-        template<>
         bool Vector<bool>::operator==(Vector<bool> const &other) const {
             #ifdef NDEBUG
                 DEBUG_INFO("Vector - operator==");
@@ -280,7 +218,6 @@ do {\
             return true;
         }
 
-        template<>
         void Vector<bool>::swap(Vector<bool> &other) {
             #ifdef NDEBUG
                 DEBUG_INFO("Vector - start swap");
@@ -294,7 +231,6 @@ do {\
             #endif
         }
 
-        template<>
         int Vector<bool>::size() const {
         #ifdef NDEBUG
             DEBUG_INFO("Vector - size");
@@ -303,16 +239,14 @@ do {\
             return size_;
         }
 
-        template<>
         std::string Vector<bool>::dump(std::string fileName, std::string funcName, int lineNumber) const {
             std::ostringstream oss;
             oss << "DUMP. Crash in "<< fileName << ", line " << lineNumber << ", function "
                 << funcName << ".Internal vars: size = " << this->size() << ".";
             return(oss.str());
         }
-    // ---------------------------------------------------------
 
 
 } // end sns
 
-#endif // _VECTOR_HPP_
+#endif // _VECTOR_BOOL_HPP_
