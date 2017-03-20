@@ -1,7 +1,6 @@
 //---------------------------------------------
-//! @IDE CLion
-//! @file Vector.hpp
-//! Header file with Vector class
+//! @file Vector(bool).hpp
+//! Header file with Vector<bool> class
 //!
 //! @author Maksim_Kobzar, 2017
 //---------------------------------------------
@@ -15,11 +14,6 @@
 #include <string>
 #include "BoolOperation.hpp"
 
-//#define NDEBUG
-//#ifndef DATA_WIDTH
-//#define DATA_WIDTH 32
-//#endif // DATA_WIDTH
-const size_t DATA_WIDTH = 32;
 
 //------------------------------------------------------------
 //! @namespace
@@ -28,19 +22,10 @@ const size_t DATA_WIDTH = 32;
 namespace sns
 {
 
-
-//----------------------------------------------------------------------
-//! Print debug macros
-//----------------------------------------------------------------------
-# define DEBUG_INFO(message)\
-do {\
-    std::cout << "DEBUG_INFO: " << message << "(file "<< __FILE__ <<" ,line " << __LINE__ << ")."<< std::endl;\
-} while (0)
-
-
     template<>
     class Vector<bool>
     {
+        const size_t UNS_BIT_NUM = 8*sizeof(unsigned);
     public:
         //---------------------------------------------
         //! @Constructor
@@ -66,7 +51,6 @@ do {\
         //! 3) operator ==
         //---------------------------------------------
         Vector         &operator=(Vector const &other);
-        bool            operator[](const size_t index) const;
         BoolOperation   operator[](const size_t index);
         bool            operator==(Vector const &other) const;
 
@@ -98,18 +82,17 @@ do {\
     // Definitions for Vector<bool>
     //----------------------------------------------------------
         Vector<bool>::Vector(size_t size)
-                : size_(size/DATA_WIDTH + 1) {
+                : size_(size/UNS_BIT_NUM + 1)
+        {
             #ifdef NDEBUG
                 DEBUG_INFO("Vector - start default constructor");
             #endif
 
             data_ = new unsigned[size_];
-            #ifdef NDEBUG
-                for (size_t i = 0; i != size_; ++i)
-                {
-                    data_[i] = 0;
-                }
-            #endif
+            for (size_t i = 0; i != size_; ++i)
+            {
+                data_[i] = 0;
+            }
 
             #ifdef NDEBUG
                 DEBUG_INFO("Vector - end default constructor");
@@ -117,7 +100,8 @@ do {\
         }
 
         Vector<bool>::Vector(const Vector<bool> &other)
-                : size_(other.size_) {
+                : size_(other.size_)
+        {
             #ifdef NDEBUG
                 DEBUG_INFO("Vector - start constructor of copy");
             #endif
@@ -160,39 +144,18 @@ do {\
             return *this;
         }
 
-        // rvalue
-        // Vector b(20);
-        // Vector c(20);
-        // bool a = b[10]
-        // b[7] = c[10]
-        bool Vector<bool>::operator[](const size_t index) const
-        {
-            #ifdef NDEBUG
-                DEBUG_INFO("Vector - const operator[]");
-            #endif
-
-            CHECK_RANGE(index/DATA_WIDTH, size_);
-            return !!(data_[index/DATA_WIDTH] & (1 << index%DATA_WIDTH) );
-        }
-
-        // lvalue
-        // Vetor a(20);
-        // Vetor b(20);
-        // bool c;
-        // a[10] = b[6];
-        // a[10] = c;
         BoolOperation Vector<bool>::operator[](const size_t index)
         {
             #ifdef NDEBUG
                 DEBUG_INFO("Vector - operator[]");
             #endif
 
-            CHECK_RANGE(index/DATA_WIDTH, size_);
-            return BoolOperation(index%DATA_WIDTH, & data_[index/DATA_WIDTH]);
+            CHECK_RANGE(index/UNS_BIT_NUM, size_);
+            return BoolOperation(index%UNS_BIT_NUM, & data_[index/UNS_BIT_NUM]);
         }
 
-
-        bool Vector<bool>::operator==(Vector<bool> const &other) const {
+        bool Vector<bool>::operator==(Vector<bool> const &other) const
+        {
             #ifdef NDEBUG
                 DEBUG_INFO("Vector - operator==");
             #endif
@@ -211,7 +174,8 @@ do {\
             return true;
         }
 
-        void Vector<bool>::swap(Vector<bool> &other) {
+        void Vector<bool>::swap(Vector<bool> &other)
+        {
             #ifdef NDEBUG
                 DEBUG_INFO("Vector - start swap");
             #endif
@@ -224,23 +188,22 @@ do {\
             #endif
         }
 
-        size_t Vector<bool>::size() const {
-        #ifdef NDEBUG
-            DEBUG_INFO("Vector - size");
-        #endif
+        size_t Vector<bool>::size() const
+        {
+            #ifdef NDEBUG
+                DEBUG_INFO("Vector - size");
+            #endif
 
             return size_;
         }
 
-        std::string Vector<bool>::dump(std::string fileName, std::string funcName, int lineNumber) const {
+        std::string Vector<bool>::dump(std::string fileName, std::string funcName, int lineNumber) const
+        {
             std::ostringstream oss;
-            DEBUG_INFO("Vector - dump function");
             oss << "DUMP. Crash in "<< fileName << ", line " << lineNumber << ", function "
                 << funcName << ".Internal vars: size = " << this->size() << ".";
             return(oss.str());
         }
 
-
-} // end sns
-
+}
 #endif // _VECTOR_BOOL_HPP_
