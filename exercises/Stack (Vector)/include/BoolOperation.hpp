@@ -1,5 +1,4 @@
 //---------------------------------------------
-//! @IDE CLion
 //! @file BoolOperation.hpp
 //! Header file BoolOperation structure
 //!
@@ -9,23 +8,31 @@
 #ifndef _BOOL_OPERATION_HPP_
 #define _BOOL_OPERATION_HPP_
 
-struct BoolOperation
-{
-    //---------------------------------------------
-    //! @Constructor
-    //! Create class BoolOperation
-    //---------------------------------------------
-    explicit BoolOperation(size_t index, unsigned &vec);
+#include <iostream>
+#include <cassert>
+#include <sstream>
+#include <string>
 
-    //---------------------------------------------
-    //! @Operators:
-    //! operator =
-    //---------------------------------------------
-    bool BoolOperation::operator=(bool value);
+    struct BoolOperation
+    {
+        //---------------------------------------------
+        //! @Constructor
+        //! Create class BoolOperation
+        //---------------------------------------------
+        explicit BoolOperation(size_t index, unsigned *word);
 
-private:
-    size_t        index_;
-    unsigned      &vec_;
-};
+        //---------------------------------------------
+        //! @Operators:
+        //! operator =
+        //! operator<<
+        //---------------------------------------------
+        const BoolOperation &operator=(const BoolOperation &other);
+        const BoolOperation &operator=(bool value) const;
+        friend std::ostream &operator<<(std::ostream &os, const BoolOperation &op);
 
+    private:
+        size_t      index_;
+        unsigned   *word_;
+        bool        value_;
+    };
 #endif // _BOOL_OPERATION_HPP_

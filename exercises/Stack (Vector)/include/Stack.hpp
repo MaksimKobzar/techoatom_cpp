@@ -4,6 +4,7 @@
 //! Header file with Stack class
 //!
 //! @author Maksim_Kobzar, 2017
+// TODO: Move constructors
 //---------------------------------------------
 
 #ifndef _STACK_HPP_
@@ -107,8 +108,13 @@ namespace sns
         }
     }
 
-    explicit Stack(Vector&& container);
-    Stack(Stack&& other);
+    explicit Stack(Vector&& container) {
+        /* TODO */
+    }
+
+    Stack(Stack&& other){
+        /* TODO */
+    }
 
     template <typename value_type>
     Stack<value_type>::~Stack() {

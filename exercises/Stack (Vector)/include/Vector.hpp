@@ -18,13 +18,6 @@
 
 #define NDEBUG
 
-//------------------------------------------------------------
-//! @namespace
-//! Stack name space
-//------------------------------------------------------------
-namespace sns
-{
-
 
 //----------------------------------------------------------------------
 //! Macros to check validity of index ranges
@@ -43,6 +36,14 @@ namespace sns
 do {\
     std::cout << "DEBUG_INFO: " << message << "(file "<< __FILE__ <<" ,line " << __LINE__ << ")."<< std::endl;\
 } while (0)
+
+
+//------------------------------------------------------------
+//! @namespace
+//! Stack name space
+//------------------------------------------------------------
+namespace sns
+{
 
 
     template<
@@ -172,13 +173,11 @@ do {\
 
 
 /*
-
-
     template<typename value_type>
     void *Vector<value_type>::Vector(const Vector<value_type> &other)
     {
         char buf[sizeof(other)]; // выделяю на стеке память под вектор
-        new (buf) Vector;        // вызываю переопрделенный указатель ниже 
+        new (buf) Vector;        // вызываю переопрделенный указатель ниже
         Vector *v = (Vector *)buf;
     }
 
@@ -231,8 +230,6 @@ do {\
     {
         #ifdef NDEBUG
             DEBUG_INFO("Vector - operator[]");
-            std::cout << index << std::endl;
-            std::cout << "---------------------------------------" << std::endl;
         #endif // NDEBUG
 
         CHECK_RANGE(index, size_);
@@ -260,11 +257,14 @@ do {\
         if(this == &other) {
             return true;
         }
-        if(this->size_ != other.size_) {
+        if(size_ != other.size_)
+        {
             return false;
         }
-        for (int i = 0; i != size_; ++i) {
-            if(data_[i] != other.data_[i]) {
+        for (int i = 0; i != size_; ++i)
+        {
+            if(data_[i] != other.data_[i])
+            {
                 return false;
             }
         }
@@ -319,20 +319,13 @@ do {\
     {
         #ifdef NDEBUG
             DEBUG_INFO("Vector - is_valid");
-            std::cout << "Vector - " << size() << " " << sizeof(data_);
         #endif // NDEBUG
-        if(size() <= sizeof(data_))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return true;
     }
 
     template<typename value_type>
-    std::string Vector<value_type>::dump(std::string fileName, std::string funcName, size_t lineNumber) const {
+    std::string Vector<value_type>::dump(std::string fileName, std::string funcName, size_t lineNumber) const
+    {
         std::ostringstream oss;
         oss << "DUMP. Crash in "<< fileName << ", line " << lineNumber << ", function "
             << funcName << ".Internal vars: size = " << this->size() << ".";
@@ -341,5 +334,7 @@ do {\
 
 
 } // end sns
+
+#include "Vector(bool).hpp"
 
 #endif // _VECTOR_HPP_
