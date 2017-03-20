@@ -7,12 +7,11 @@
 //---------------------------------------------
 
 #include "Stack.hpp"
-#include "Vector(bool).hpp"
 
 using namespace sns;
 
 int main() {
-   /* Stack<double> stack1(10);
+    Stack<double> stack1(10);
     Stack<double> stack2(10);
 
     std::cout << "Is stack1 is empty -  " << stack1.empty() << "." << std::endl;
@@ -35,13 +34,6 @@ int main() {
     stack2.push(3.1);
     stack2.push(8.9);
     stack2.swap(stack1);
-    std::cout << "Top element of stack1: " << *stack1.top() << "." << std::endl;*/
-
-
-
-    // for Bool
-    Vector<bool> someVector(100);
-    someVector[0] = 1;
-    someVector[1] = someVector[0];
+    std::cout << "Top element of stack1: " << *stack1.top() << "." << std::endl;
 
 }

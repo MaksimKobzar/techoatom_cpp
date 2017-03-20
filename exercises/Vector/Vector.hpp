@@ -4,26 +4,17 @@
 //! Header file with Vector class
 //!
 //! @author Maksim_Kobzar, 2017
-// TODO
-// - dump
 //---------------------------------------------
 
 #ifndef _VECTOR_HPP_
 #define _VECTOR_HPP_
+// #define NDEBUG
 
 #include <iostream>
 #include <cassert>
 #include <sstream>
 #include <string>
-
-#define NDEBUG
-
-//------------------------------------------------------------
-//! @namespace
-//! Stack name space
-//------------------------------------------------------------
-namespace sns
-{
+#include "BoolOperation.hpp"
 
 
 //----------------------------------------------------------------------
@@ -44,6 +35,15 @@ do {\
     std::cout << "DEBUG_INFO: " << message << "(file "<< __FILE__ <<" ,line " << __LINE__ << ")."<< std::endl;\
 } while (0)
 
+
+
+
+//------------------------------------------------------------
+//! @namespace
+//! Stack name space
+//------------------------------------------------------------
+namespace sns
+{
 
     template<
         typename T = int
@@ -112,7 +112,6 @@ do {\
         value_type *data_;
     };
 
-
     //----------------------------------------------------------
     // Definitions
     //----------------------------------------------------------
@@ -166,34 +165,6 @@ do {\
             DEBUG_INFO("Vector - end move constructor");
         #endif // NDEBUG
     }
-
-
-
-
-
-/*
-
-
-    template<typename value_type>
-    void *Vector<value_type>::Vector(const Vector<value_type> &other)
-    {
-        char buf[sizeof(other)]; // выделяю на стеке память под вектор
-        new (buf) Vector;        // вызываю переопрделенный указатель ниже 
-        Vector *v = (Vector *)buf;
-    }
-
-    template<typename value_type>
-    void *Vector<value_type>::operator new(void *where_to_create)
-    {
-        return where_to_create;
-    }*/
-
-
-
-
-
-
-
 
     template<typename value_type>
     Vector<value_type>::~Vector()
@@ -341,5 +312,6 @@ do {\
 
 
 } // end sns
+#include "Vector(bool).hpp"
 
 #endif // _VECTOR_HPP_

@@ -3,5 +3,5 @@ project(Array)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCE_FILES main.cpp)
+set(SOURCE_FILES BoolOperation.cpp main.cpp)
 add_executable(Vector ${SOURCE_FILES})
