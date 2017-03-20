@@ -20,7 +20,6 @@
 #define ASSERT_OK()					\
 	if (!ok())						\
 		{							\
-		dump();						\
 		assert(!"Object is OK");	\
 		}
 
@@ -91,18 +90,18 @@ public:
 	//! Shows the current state of the stack
 	//! @return Write in console size, capacity and all elements of the stack
 	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
-	void dump() const;
+	//void dump() const;
 
 private:
 	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
 	//! Capacity of the stack
 	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
-	static const size_type capacity_ = 6;
+	//static const size_type capacity_ = 6;
 
 	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
 	//! Stack array
 	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
-	value_type data_[capacity_];
+	Container data_;
 
 	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
 	//! Size of the stack
@@ -127,7 +126,7 @@ template<typename value_type, const size_t capacity>
 bool Stack<value_type, capacity>::push(const_reference value)
 {
 	ASSERT_OK();
-	if (size_ >= capacity_)
+	if (size_ >= data_.max_size())
 		return false;
 
 	data_[size_++] = value;
@@ -183,21 +182,21 @@ template<typename value_type, const size_t capacity>
 typename Stack<value_type, capacity>::size_type Stack<value_type, capacity>::capacity()
 {
 	ASSERT_OK();
-	return capacity_;
+	return data_.max_size();
 }
 
 template<typename value_type, const size_t capacity>
 bool Stack<value_type, capacity>::ok() const
 {
-	return size_ <= capacity_;
+	return size_ <= data_.max_size();
 }
 
-template<typename value_type, const size_t capacity>
-void Stack<value_type, capacity>::dump() const
-{
-	std::cout << "size_ = " << size_ << std::endl;
-	std::cout << "capacity_ = " << capacity_ << std::endl;
-	std::cout << "data [" << capacity_ << "]:" << std::endl;
-	for (int i = 0; i < capacity_; i++)
-		std::cout << "[" << i << "] = " << data_[i] << std::endl;
-}
+//template<typename value_type, const size_t capacity>
+//void Stack<value_type, capacity>::dump() const
+//{
+//	std::cout << "size_ = " << size_ << std::endl;
+//	std::cout << "capacity_ = " << capacity_ << std::endl;
+//	std::cout << "data [" << capacity_ << "]:" << std::endl;
+//	for (int i = 0; i < capacity_; i++)
+//		std::cout << "[" << i << "] = " << data_[i] << std::endl;
+//}
