@@ -13,7 +13,7 @@
 #include<assert.h>
 #include"Iterator.h"
 
-#define ASSERT_OK_ARR()					\
+#define ASSERT_OK_ARR()				\
 	if (!ok())						\
 		{							\
 		/*dump(); TODO:dump*/		\
@@ -25,16 +25,12 @@ class Array
 {
 public:
 	using iterator = T*;
-	//using iterator = Iterator<T>;
 	
 	typedef T value_type;
 	typedef size_t size_type;
 	typedef std::ptrdiff_t difference_type;
 	typedef value_type& reference;
 	typedef const value_type& const_reference;
-
-	//typedef T* pointer;
-	//typedef const T* const_pointer;
 
 	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
 	//! Constructor which set size of the array to max_size and fill it with zeroes
@@ -98,10 +94,16 @@ public:
 	bool ok() const;
 
 	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
+	//! Size setter
+	//! @param size of the Arary
+	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
+	void set_size(size_type s);
+
+	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
 	//! Size getter
 	//! @param size of the Arary
 	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
-	size_type size() const;
+	size_type get_size() const;
 
 	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
 	//! Max size getter
@@ -126,7 +128,7 @@ Array<value_type, capacity>::Array()
 	:size_(capacity),
 	valid_(true)
 {
-	for (size_type i = 0; i < capacity; ++i)
+	for (size_type i = 0; i != capacity; ++i)
 		data_[i] = 0;
 }
 
@@ -140,9 +142,9 @@ Array<value_type, capacity>::Array(const size_type size)
 
 	ASSERT_OK_ARR();
 
-	for (size_type i = 0; i < size; ++i)
+	for (size_type i = 0; i != size; ++i)
 		data_[i] = 0;
-	for (size_type i = size; i < capacity; ++i)
+	for (size_type i = size; i != capacity; ++i)
 		data_[i] = POISON_INT;
 }
 
@@ -158,7 +160,7 @@ Array<value_type, capacity>::Array(const Array<value_type, capacity> &other)
 template <typename value_type, const size_t capacity>
 Array<value_type, capacity>::~Array()
 {
-	for (size_type i = 0; i < capacity; ++i)
+	for (size_type i = 0; i != capacity; ++i)
 		data_[i] = POISON_INT;
 	
 	size_ = POISON_SIZE;
@@ -170,12 +172,12 @@ void Array<value_type, capacity>::fill(const value_type& value)
 {
 	ASSERT_OK_ARR();
 
-	for (int i = 0; i < capacity; ++i)
+	for (int i = 0; i != capacity; ++i)
 		data_[i] = value;
 }
 
 template<typename value_type, const size_t capacity>
-value_type &Array<value_type, capacity>::operator[](size_type const n)
+typename  Array<value_type, capacity>::value_type &Array<value_type, capacity>::operator[](size_type const n)
 {
 	if (n >= size_)
 		valid_ = false;
@@ -216,13 +218,22 @@ void Array<value_type, capacity>::swap(Array<value_type, capacity> &other)
 }
 
 template<typename value_type, const size_t capacity>
-size_t Array<value_type, capacity>::size() const
+void Array<value_type, capacity>::set_size(size_type s)
+{
+	if (s > capacity)
+		valid_ = false;
+
+	size_ = s;
+}
+
+template<typename value_type, const size_t capacity>
+typename Array<value_type, capacity>::size_type Array<value_type, capacity>::get_size() const
 {
 	return size_;
 }
-//
+
 template<typename value_type, const size_t capacity>
-size_t Array<value_type, capacity>::max_size() const
+typename Array<value_type, capacity>::size_type Array<value_type, capacity>::max_size() const
 {
 	return capacity;
 }
@@ -232,13 +243,6 @@ bool Array<value_type, capacity>::ok() const
 {
 	return valid_;
 }
-
-//template<typename value_type, const size_t capacity>
-//typename Array<value_type, capacity>::value_Type *Array<value_type, capacity>::begin()
-//{
-//	iterator a = Iterator(&data_[0]);
-//	return a.getter_cur();
-//}
 
 template<typename value_type, const size_t capacity>
 typename Array<value_type, capacity>::iterator Array<value_type, capacity>::begin()
