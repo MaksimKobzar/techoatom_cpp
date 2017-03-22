@@ -17,21 +17,22 @@
 //‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
 //! Macro to test object integrity
 //‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
-#define ASSERT_OK()					\
-	if (!ok())						\
-		{							\
-		assert(!"Object is OK");	\
+#define ASSERT_OK()							\
+	if (!ok())								\
+		{									\
+		dump();								\
+		assert(!"Object is OK (Stack)");	\
 		}
 
 template<typename T, const size_t capacity>
 class Stack
 {
 public:
-	typedef T value_type;					//!< Element type
+	typedef T value_type;							//!< Element type
 	using Container = Array<value_type, capacity>;
-	typedef size_t size_type;					//!< Size type
-	typedef value_type& reference;				//!< Reference element type
-	typedef const value_type& const_reference;	//!< Const reference element type
+	typedef size_t size_type;						//!< Size type
+	typedef value_type& reference;					//!< Reference element type
+	typedef const value_type& const_reference;		//!< Const reference element type
 
 	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
 	//! Constructor
@@ -72,13 +73,13 @@ public:
 	//! Return the size of the stack
 	//! @return Return the size of the stack
 	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
-	size_type size();
+	size_type size() const;
 
 	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
 	//! Return the capacity of the stack
 	//! @return Return the capacity of the stack
 	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
-	size_type capacity();
+	size_type capacity() const;
 
 	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
 	//! Check if size <= capacity
@@ -87,17 +88,12 @@ public:
 	bool ok() const;
 
 	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
-	//! Shows the current state of the stack
-	//! @return Write in console size, capacity and all elements of the stack
+	//! Shows the current state of the Stack
+	//! @return in console size, capacity and all elements of the stack
 	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
 	void dump() const;
 
 private:
-	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
-	//! Capacity of the stack
-	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
-	//static const size_type capacity_ = 6;
-
 	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
 	//! Stack array
 	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
@@ -106,37 +102,30 @@ private:
 	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
 	//! Size of the stack
 	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
-	//size_type size_;
+	size_type size_;
 };
 
 //const Stack::size_type POISON_INT = 100500;
-//template<typename value_type, const size_t capacity>
-//Stack<value_type, capacity>::Stack() : size_(0)
-//{
-//
-//}
-
 template<typename value_type, const size_t capacity>
-Stack<value_type, capacity>::Stack()
+Stack<value_type, capacity>::Stack() : size_(0)
 {
-	data_.set_size(0);
+
 }
 
 template<typename value_type, const size_t capacity>
 Stack<value_type, capacity>::~Stack()
 {
-	data_.set_size(POISON_INT);
+	size_ = POISON_INT;
 }
 
 template<typename value_type, const size_t capacity>
 bool Stack<value_type, capacity>::push(const_reference value)
 {
 	ASSERT_OK();
-	if (data_.get_size() >= data_.max_size())
+	if (size_ >= data_.max_size())
 		return false;
 
-	data_.set_size(data_.get_size() + 1);
-	data_[data_.get_size() - 1] = value;
+	data_[size_++] = value;
 	ASSERT_OK();
 	return true;
 }
@@ -152,10 +141,7 @@ value_type Stack<value_type, capacity>::pop()
 	}
 
 	ASSERT_OK();
-
-	value_type d = data_[data_.get_size() - 1];
-	data_.set_size(data_.get_size() - 1);
-	return d;
+	return data_[--size_];
 }
 
 template<typename value_type, const size_t capacity>
@@ -168,28 +154,28 @@ typename Stack<value_type, capacity>::value_type Stack<value_type, capacity>::to
 		return 0;
 	}
 
-	return data_[data_.get_size() - 1];
+	return data_[size_ - 1];
 }
 
 template<typename value_type, const size_t capacity>
 bool Stack<value_type, capacity>::empty()
 {
 	ASSERT_OK();
-	if (data_.get_size() == 0)
+	if (size_ == 0)
 		return true;
 	else
 		return false;
 }
 
 template<typename value_type, const size_t capacity>
-typename Stack<value_type, capacity>::size_type Stack<value_type, capacity>::size()
+typename Stack<value_type, capacity>::size_type Stack<value_type, capacity>::size() const
 {
 	ASSERT_OK();
-	return data_.get_size();
+	return size_;
 }
 
 template<typename value_type, const size_t capacity>
-typename Stack<value_type, capacity>::size_type Stack<value_type, capacity>::capacity()
+typename Stack<value_type, capacity>::size_type Stack<value_type, capacity>::capacity() const
 {
 	ASSERT_OK();
 	return data_.max_size();
@@ -198,13 +184,13 @@ typename Stack<value_type, capacity>::size_type Stack<value_type, capacity>::cap
 template<typename value_type, const size_t capacity>
 bool Stack<value_type, capacity>::ok() const
 {
-	return data_.get_size() <= data_.max_size();
+	return size_ <= data_.max_size();
 }
 
 template<typename value_type, const size_t capacity>
 void Stack<value_type, capacity>::dump() const
 {
-	std::cout << "size_ = " << data_.get_size() << std::endl;
+	std::cout << "size_ = " << size_ << std::endl;
 	std::cout << "capacity_ = " << data_.max_size() << std::endl;
 	std::cout << "data [" << data_.max_size() << "]:" << std::endl;
 	for (int i = 0; i != data_.max_size(); i++)
