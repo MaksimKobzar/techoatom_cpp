@@ -16,8 +16,8 @@
 #define ASSERT_OK_ARR()				\
 	if (!ok())						\
 		{							\
-		/*dump(); TODO:dump*/		\
-		assert(!"Object is OK");	\
+		dump();						\
+		assert(!"Object is OK (Array)");	\
 		}
 
 template <typename T, const size_t capacity>
@@ -65,7 +65,14 @@ public:
 	//! @param n is position of the element to return
 	//! @return reference to the requested element
 	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
-	value_type &operator[](size_type const n);
+	value_type &operator[](const size_type n);
+
+	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
+	//! Returns a reference to the element
+	//! @param n is position of the element to return
+	//! @return reference to the requested element
+	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
+	const value_type &operator[](const size_type n) const;
 
 	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
 	//! Assignment operator
@@ -94,12 +101,6 @@ public:
 	bool ok() const;
 
 	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
-	//! Size setter
-	//! @param size of the Arary
-	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
-	void set_size(size_type s);
-
-	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
 	//! Size getter
 	//! @param size of the Arary
 	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
@@ -111,8 +112,23 @@ public:
 	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
 	size_type max_size() const;
 
+	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
+	//! Returns an iterator to the beginning
+	//! @return iterator
+	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
 	iterator begin();
+
+	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
+	//! Returns an iterator to the end
+	//! @return iterator
+	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
 	iterator end();
+
+	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
+	//! Shows the current state of the Array
+	//! @return in console size, capacity and all elements of the Array
+	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
+	void dump() const;
 
 private:
 	size_t size_;
@@ -120,8 +136,8 @@ private:
 	bool valid_;
 };
 
-const int POISON_INT = 100500; //???
-const size_t POISON_SIZE = 100500; //???
+const int POISON_INT = 100500;
+const size_t POISON_SIZE = 100500;
 
 template <typename value_type, const size_t capacity>
 Array<value_type, capacity>::Array()
@@ -177,11 +193,19 @@ void Array<value_type, capacity>::fill(const value_type& value)
 }
 
 template<typename value_type, const size_t capacity>
-typename  Array<value_type, capacity>::value_type &Array<value_type, capacity>::operator[](size_type const n)
+typename  Array<value_type, capacity>::value_type &Array<value_type, capacity>::operator[](const size_type n)
 {
 	if (n >= size_)
 		valid_ = false;
 
+	ASSERT_OK_ARR();
+
+	return data_[n];
+}
+
+template<typename value_type, const size_t capacity>
+typename const  Array<value_type, capacity>::value_type &Array<value_type, capacity>::operator[](const size_type n) const
+{
 	ASSERT_OK_ARR();
 
 	return data_[n];
@@ -218,15 +242,6 @@ void Array<value_type, capacity>::swap(Array<value_type, capacity> &other)
 }
 
 template<typename value_type, const size_t capacity>
-void Array<value_type, capacity>::set_size(size_type s)
-{
-	if (s > capacity)
-		valid_ = false;
-
-	size_ = s;
-}
-
-template<typename value_type, const size_t capacity>
 typename Array<value_type, capacity>::size_type Array<value_type, capacity>::get_size() const
 {
 	return size_;
@@ -254,4 +269,16 @@ template<typename value_type, const size_t capacity>
 typename Array<value_type, capacity>::iterator Array<value_type, capacity>::end()
 {
 	return data_+size_;
+}
+
+template<typename value_type, const size_t capacity>
+void Array<value_type, capacity>::dump() const
+{
+	std::cout << "size_ = " << size_ << std::endl;
+	std::cout << "capacity_ = " << capacity << std::endl;
+	std::cout << "data [" << capacity << "]:" << std::endl;
+	for (int i = 0; i != size_; i++)
+	{
+		std::cout << "[" << i << "] = " << data_[i] << std::endl;
+	}
 }
