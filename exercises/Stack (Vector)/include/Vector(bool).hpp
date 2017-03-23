@@ -153,7 +153,7 @@ namespace sns
             #endif
 
             CHECK_RANGE(index, size_);
-            return BoolOperation(index%UNS_BIT_NUM, & data_[index/UNS_BIT_NUM]);
+            return BoolOperation(index%UNS_BIT_NUM, &data_[index/UNS_BIT_NUM]);
         }
 
         bool Vector<bool>::operator==(Vector<bool> const &other) const

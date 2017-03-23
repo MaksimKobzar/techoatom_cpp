@@ -23,7 +23,7 @@
 //! Macros to check validity of index ranges
 //----------------------------------------------------------------------
 #define CHECK_RANGE( index_value, size_value ) \
-    if (0 > index_value || index_value >= size_value) {\
+    if (0 >= index_value || index_value > size_value) {\
         Vector::dump(__FILE__, __func__, __LINE__);\
         assert(!"Invalid index");\
         throw std::exception();\

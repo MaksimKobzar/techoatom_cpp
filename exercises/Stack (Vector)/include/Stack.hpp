@@ -80,9 +80,11 @@ namespace sns
         //! @Operators
         //! 1) operator=
         //! 2) operator==
+        //! 3) placement new
         //---------------------------------------------
         const Stack &operator=(const Stack &other);
         bool         operator==(const Stack &other) const;
+        void* operator new(size_t, void* where);
 
         //---------------------------------------------
         //! @Debug
@@ -233,9 +235,17 @@ namespace sns
     {
         if(this != &other)
         {
-            Stack<value_type>(other).swap(*this);
+        //     Stack<value_type>(other).swap(*this);
+            ~Stack();
+            new (this) Stack(other);
         }
         return *this;
+    }
+
+    template <typename value_type>
+    void* Stack<value_type>::operator new(size_t, void* where)
+    {
+       return where;
     }
 
     template <typename value_type>
