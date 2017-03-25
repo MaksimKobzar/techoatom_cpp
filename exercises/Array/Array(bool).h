@@ -13,12 +13,16 @@
 #include<assert.h>
 #include"Iterator.h"
 
-#define ASSERT_OK_ARR()				\
-	if (!ok())						\
-		{							\
-		dump();						\
-		assert(!"Object is OK (Array)");	\
-		}
+//----------------------------------------------------------------------
+//! Macros to check validity of index ranges
+//----------------------------------------------------------------------
+#define CHECK_RANGE( index_value, size_value ) \
+  if (0 > index_value || index_value >= size_value) {\
+      Vector::dump(__FILE__, __func__, __LINE__);\
+      assert(!"Invalid index");\
+      valid_ = false;\
+      throw std::exception();\
+  }
 
 template <const size_t capacity>
 class Array<bool, capacity>
@@ -26,7 +30,8 @@ class Array<bool, capacity>
 	const size_t UNS_BIT_NUM = 8*sizeof(unsigned);
 	using wordNum_ = size_/UNS_BIT_NUM;
 public:
-	using iterator = T*;
+	using iterator = T *;
+	using const_iterator = T const *;
 
 	typedef size_t size_type;
 	typedef std::ptrdiff_t difference_type;
@@ -37,11 +42,6 @@ public:
 	//! Constructor which set size of the array to max_size and fill it with zeroes
 	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
 	Array();
-
-	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
-	//! Constructor which set size of the array
-	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
-	Array(const size_type size);
 
 	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
 	//! Copy constructor
@@ -95,12 +95,6 @@ public:
 	bool ok() const;
 
 	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
-	//! Size getter
-	//! @param size of the Arary
-	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
-	size_type get_size() const;
-
-	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
 	//! Returns an iterator to the beginning
 	//! @return iterator
 	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
@@ -111,6 +105,18 @@ public:
 	//! @return iterator
 	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
 	iterator end();
+
+	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
+	//! Returns an iterator to the beginning
+	//! @return const iterator
+	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
+	const_iterator cbegin();
+
+	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
+	//! Returns an iterator to the end
+	//! @return const iterator
+	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
+	const_iterator cend();
 
 	//‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
 	//! Shows the current state of the Array
@@ -130,47 +136,39 @@ template <typename value_type, const size_t capacity>
 Array<bool, capacity>::Array()
 	valid_(true)
 {
-	for (size_type i = 0; i != capacity; ++i)
-		data_[i] = 0;
-}
-
-template <typename value_type, const size_t capacity>
-Array<bool, capacity>::Array(const size_type size)
-	valid_(true)
-{
-	if (size > capacity)
-		valid_ = false;
-
-	ASSERT_OK_ARR();
-
-	for (size_type i = 0; i != size; ++i)
-		data_[i] = 0;
-	for (size_type i = size; i != capacity; ++i)
-		data_[i] = POISON_INT;
+	#ifdef NDEBUG
+		for (size_type i = 0; i != capacity; ++i)
+		{
+			data_[i] = 0;
+		}
+	#endif
 }
 
 template <typename value_type, const size_t capacity>
 Array<bool, capacity>::Array(const Array<bool, capacity> &other)
-	valid_(other.valid_)
+	: valid_(other.valid_)
 {
-	for (int i = 0; i != size_; ++i)
+	for (size_t i = 0; i != size_; ++i)
+	{
 		data_[i] = other.data_[i];
+	}
 }
 
 template <typename value_type, const size_t capacity>
 Array<bool, capacity>::~Array()
 {
-	for (size_type i = 0; i != capacity; ++i)
-	{
-		data_[i] = POISON_INT;
-	}
 	valid_ = false;
+	#ifdef NDEBUG
+		for (size_type i = 0; i != capacity; ++i)
+		{
+			data_[i] = POISON_VALUE;
+		}
+	#endif
 }
 
 template <typename value_type, const size_t capacity>
 void Array<bool, capacity>::fill(const bool& value)
 {
-	ASSERT_OK_ARR();
 
 	for (size_t i = 0; i != capacity; ++i)
 	{
@@ -188,13 +186,9 @@ void Array<bool, capacity>::fill(const bool& value)
 template<typename value_type, const size_t capacity>
 BoolOperation Array<bool, capacity>::operator[](const size_t index)
 {
-	ASSERT_OK_ARR();
-
 	#ifdef NDEBUG
 	    DEBUG_INFO("Vector - operator[]");
 	#endif
-
-	valid_ = false;
   CHECK_RANGE(index, size_);
   return BoolOperation(index%UNS_BIT_NUM, &data_[index/UNS_BIT_NUM]);
 }
@@ -218,7 +212,7 @@ bool Array<bool, capacity>::operator==(Array const &other) const
 
 	for (int i = 0; i != wordNum_; ++i)
 	{
-		if (this->data_[i] != other.data_[i])
+		if (data_[i] != other.data_[i])
 		{
 			return false;
 		}
@@ -240,13 +234,25 @@ bool Array<bool, capacity>::ok() const
 }
 
 template<typename value_type, const size_t capacity>
-typename Array<bool, capacity>::iterator Array<bool, capacity>::begin()
+iterator Array<bool, capacity>::begin()
 {
 	return data_;
 }
 
 template<typename value_type, const size_t capacity>
-typename Array<bool, capacity>::iterator Array<bool, capacity>::end()
+iterator Array<bool, capacity>::iterator Array<bool, capacity>::end()
+{
+	return data_ + capacity;
+}
+
+template<typename value_type, const size_t capacity>
+const_iterator Array<bool, capacity>::cbegin()
+{
+	return data_;
+}
+
+template<typename value_type, const size_t capacity>
+const_iterator Array<bool, capacity>::cend()
 {
 	return data_ + capacity;
 }
