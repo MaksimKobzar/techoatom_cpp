@@ -1,12 +1,12 @@
 //---------------------------------------------
-//! @file BoolOperation.hpp
+//! @file BoolOperation.h
 //! Header file BoolOperation structure
 //!
 //! @author Maksim_Kobzar, 2017
 //---------------------------------------------
 
-#ifndef _BOOL_OPERATION_HPP_
-#define _BOOL_OPERATION_HPP_
+#ifndef _BOOL_OPERATION_H_
+#define _BOOL_OPERATION_H_
 
 #include <iostream>
 #include <cassert>
@@ -27,7 +27,7 @@
         //! operator<<
         //---------------------------------------------
         const BoolOperation &operator=(const BoolOperation &other);
-        const BoolOperation &operator=(bool value) const;
+        const BoolOperation &operator=(bool value);
         friend std::ostream &operator<<(std::ostream &os, const BoolOperation &op);
 
     private:
@@ -35,4 +35,4 @@
         unsigned   *word_;
         bool        value_;
     };
-#endif // _BOOL_OPERATION_HPP_
+#endif // _BOOL_OPERATION_H_

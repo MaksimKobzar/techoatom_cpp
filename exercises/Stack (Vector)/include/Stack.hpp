@@ -37,7 +37,7 @@ namespace sns
         //---------------------------------------------
         //! @Constructor
         //---------------------------------------------
-        explicit Stack(int capacity);
+        explicit Stack(size_t capacity);
 
         //---------------------------------------------
         //! Constructor of copy
@@ -47,7 +47,7 @@ namespace sns
         //---------------------------------------------
         //! Move constructor
         //---------------------------------------------
-        explicit Stack(Vector&& container);
+        explicit Stack(container&& otherContainer);
         Stack(Stack&& other);
 
         //---------------------------------------------
@@ -65,8 +65,8 @@ namespace sns
         //---------------------------------------------
         bool    empty()     const;
         bool    full()      const;
-        int     size()      const;
-        int     capacity()  const;
+        size_t  size()      const;
+        size_t  capacity()  const;
 
         //---------------------------------------------
         //! @Modifiers
@@ -104,17 +104,23 @@ namespace sns
 
     template <typename value_type>
     Stack<value_type>::Stack(const Stack<value_type> &other)
-        : size_(other.size()), data_(container(other.capacity())) {
-        for (size_t i = 0; i != data_.size(); ++i) {
+        : size_(other.size_), data_(container(other.capacity()))
+    {
+        for (size_t i = 0; i != size_; ++i)
+        {
             data_[i] = other.data_[i];
         }
     }
 
-    explicit Stack(Vector&& container) {
+    template <typename value_type>
+    Stack<value_type>::Stack(Stack&& other)
+    {
         /* TODO */
     }
 
-    Stack(Stack&& other){
+    template <typename value_type>
+    Stack<value_type>::Stack(container&& otherContainer)
+    {
         /* TODO */
     }
 
@@ -126,7 +132,8 @@ namespace sns
     }
 
     template <typename value_type>
-    const value_type *Stack<value_type>::top() const {
+    const value_type *Stack<value_type>::top() const
+    {
        if(size_ == 0)
        {
            return nullptr;
@@ -213,11 +220,11 @@ namespace sns
     template <typename value_type>
     bool Stack<value_type>::resize(size_t size)
     {
-        if(size > size())
+        if(size > size_)
         {
             return false;
         }
-        else if(size == size())
+        else if(size == size_)
         {
             return true;
         }
@@ -262,7 +269,7 @@ namespace sns
 
     template <typename value_type>
     bool Stack<value_type>::is_valid() const {
-        if(0 <= size() && size() <= capacity() && container.is_valid())
+        if(0 <= size_ && size_ <= capacity() && data_.is_valid())
         {
             return true;
         }

@@ -1,18 +1,18 @@
 //---------------------------------------------
-//! @file Vector(bool).hpp
+//! @file Vector(bool).h
 //! Header file with Vector<bool> class
 //!
 //! @author Maksim_Kobzar, 2017
 //---------------------------------------------
 
-#ifndef _VECTOR_BOOL_HPP_
-#define _VECTOR_BOOL_HPP_
+#ifndef _VECTOR_BOOL_H_
+#define _VECTOR_BOOL_H_
 
 #include <iostream>
 #include <cassert>
 #include <sstream>
 #include <string>
-#include "BoolOperation.hpp"
+#include "BoolOperation.h"
 
 
 //------------------------------------------------------------
@@ -26,7 +26,7 @@ namespace sns
     class Vector<bool>
     {
         const size_t UNS_BIT_NUM = 8*sizeof(unsigned);
-        using wordNum_ = size_/UNS_BIT_NUM;
+        // using wordNum_ = size_/UNS_BIT_NUM;
     public:
         //---------------------------------------------
         //! @Constructor
@@ -72,11 +72,11 @@ namespace sns
         //! @Debug
         //! Return pointer to dumped text
         //---------------------------------------------
-        bool is_valid();
+        bool is_valid() const;
         std::string dump(std::string fileName, std::string funcName, int lineNumber) const;
 
     private:
-        int          size_;
+        size_t      size_;
         unsigned    *data_;
     };
 
@@ -84,14 +84,14 @@ namespace sns
     // Definitions for Vector<bool>
     //----------------------------------------------------------
         Vector<bool>::Vector(size_t size)
-                : size_(size)
+            : size_(size)
         {
             #ifdef NDEBUG
                 DEBUG_INFO("Vector - start default constructor");
             #endif
 
-            data_ = new unsigned[wordNum_ + 1];
-            for (size_t i = 0; i != wordNum_; ++i)
+            data_ = new unsigned[size_/UNS_BIT_NUM + 1];
+            for (size_t i = 0; i != size_/UNS_BIT_NUM; ++i)
             {
                 data_[i] = 0;
             }
@@ -102,14 +102,15 @@ namespace sns
         }
 
         Vector<bool>::Vector(const Vector<bool> &other)
-                : size_(other.size_)
+            : size_(other.size_)
         {
             #ifdef NDEBUG
                 DEBUG_INFO("Vector - start constructor of copy");
             #endif
 
-            data_ = new unsigned[wordNum_];
-            for (int i = 0; i != wordNum_; ++i) {
+            data_ = new unsigned[size_/UNS_BIT_NUM];
+            for (size_t i = 0; i != size_/UNS_BIT_NUM; ++i)
+            {
                 data_[i] = other.data_[i];
             }
 
@@ -168,7 +169,7 @@ namespace sns
             if(size_ != other.size_) {
                 return false;
             }
-            for (int i = 0; i != wordNum_; ++i) {
+            for (size_t i = 0; i != size_/UNS_BIT_NUM; ++i) {
                 if(data_[i] != other.data_[i]) {
                     return false;
                 }
@@ -199,10 +200,14 @@ namespace sns
             return size_;
         }
 
-        bool Vector<bool>::is_valid()
-        {
+        bool Vector<bool>::is_valid() const
+        {   
+            #ifdef NDEBUG
+                DEBUG_INFO("Vector - is_valid");
+            #endif // NDEBUG
             return true;
         }
+
 
         std::string Vector<bool>::dump(std::string fileName, std::string funcName, int lineNumber) const
         {
@@ -213,4 +218,4 @@ namespace sns
         }
 
 }
-#endif // _VECTOR_BOOL_HPP_
+#endif // _VECTOR_BOOL_H_

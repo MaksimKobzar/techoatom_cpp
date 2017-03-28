@@ -1,6 +1,6 @@
 //---------------------------------------------
 //! @IDE CLion
-//! @file Vector.hpp
+//! @file Vector.h
 //! Header file with Vector class
 //!
 //! @author Maksim_Kobzar, 2017
@@ -8,35 +8,13 @@
 // - dump
 //---------------------------------------------
 
-#ifndef _VECTOR_HPP_
-#define _VECTOR_HPP_
+#ifndef _VECTOR_H_
+#define _VECTOR_H_
 
 #include <iostream>
 #include <cassert>
 #include <sstream>
 #include <string>
-
-#define NDEBUG
-
-
-//----------------------------------------------------------------------
-//! Macros to check validity of index ranges
-//----------------------------------------------------------------------
-#define CHECK_RANGE( index_value, size_value ) \
-    if (0 > index_value || index_value >= size_value) {\
-        Vector::dump(__FILE__, __func__, __LINE__);\
-        assert(!"Invalid index");\
-        throw std::exception();\
-    }
-
-//----------------------------------------------------------------------
-//! Print debug macros
-//----------------------------------------------------------------------
-#define DEBUG_INFO( message )\
-do {\
-    std::cout << "DEBUG_INFO: " << message << "(file "<< __FILE__ <<" ,line " << __LINE__ << ")."<< std::endl;\
-} while (0)
-
 
 //------------------------------------------------------------
 //! @namespace
@@ -56,7 +34,7 @@ namespace sns
         //! @Constructor
         //! Create class Vector with dynamic allocation of memory
         //---------------------------------------------
-        explicit Vector(int size);
+        explicit Vector(size_t size);
 
         //---------------------------------------------
         //! Constructor of copy
@@ -82,6 +60,7 @@ namespace sns
         //! 3) operator ==
         //---------------------------------------------
         Vector &operator=(Vector const &other);
+        Vector &operator=(Vector&& other);
         value_type &operator[](const size_t index);
         value_type const &operator[](const size_t index) const;
         bool operator==(Vector const &other) const;
@@ -105,7 +84,7 @@ namespace sns
         //! @Debug
         //! Return pointer to dumped text
         //---------------------------------------------
-        bool is_valid();
+        bool is_valid() const;
         std::string dump(std::string fileName, std::string funcName, size_t lineNumber) const;
 
     private:
@@ -118,8 +97,8 @@ namespace sns
     // Definitions
     //----------------------------------------------------------
     template<typename value_type>
-    Vector<value_type>::Vector(int size) :
-        size_(size) {
+    Vector<value_type>::Vector(size_t size)
+        : size_(size) {
         #ifdef NDEBUG
             DEBUG_INFO("Vector -- constructor: create empty object");
         #endif // NDEBUG
@@ -127,7 +106,8 @@ namespace sns
         data_ = new value_type[size_];
 
         #ifdef NDEBUG
-            for (int i = 0; i != size_; ++i) {
+            for (size_t i = 0; i != size_; ++i)
+            {
                 data_[i] = 0;
             }
             DEBUG_INFO("Vector - end default constructor");
@@ -135,14 +115,15 @@ namespace sns
     }
 
     template<typename value_type>
-    Vector<value_type>::Vector(const Vector<value_type> &other) :
-        size_(other.size_) {
+    Vector<value_type>::Vector(const Vector<value_type> &other)
+        : size_(other.size_) {
         #ifdef NDEBUG
             DEBUG_INFO("Vector - start constructor of copy");
         #endif // NDEBUG
 
         data_ = new value_type[size_];
-        for (int i = 0; i != size_; ++i) {
+        for (size_t i = 0; i != size_; ++i)
+        {
             data_[i] = other.data_[i];
         }
 
@@ -152,14 +133,15 @@ namespace sns
     }
 
     template<typename value_type>
-    Vector<value_type>::Vector(const Vector<value_type> &&other) :
-        size_(other.size_) {
+    Vector<value_type>::Vector(const Vector<value_type> &&other)
+        : size_(other.size_) {
         #ifdef NDEBUG
             DEBUG_INFO("Vector - start move constructor");
         #endif // NDEBUG
 
         data_ = new value_type[size_];
-        for (int i = 0; i != size_; ++i) {
+        for (size_t i = 0; i != size_; ++i)
+        {
             data_[i] = other.data_[i];
         }
 
@@ -167,32 +149,6 @@ namespace sns
             DEBUG_INFO("Vector - end move constructor");
         #endif // NDEBUG
     }
-
-
-
-
-
-/*
-    template<typename value_type>
-    void *Vector<value_type>::Vector(const Vector<value_type> &other)
-    {
-        char buf[sizeof(other)]; // выделяю на стеке память под вектор
-        new (buf) Vector;        // вызываю переопрделенный указатель ниже
-        Vector *v = (Vector *)buf;
-    }
-
-    template<typename value_type>
-    void *Vector<value_type>::operator new(void *where_to_create)
-    {
-        return where_to_create;
-    }*/
-
-
-
-
-
-
-
 
     template<typename value_type>
     Vector<value_type>::~Vector()
@@ -212,18 +168,40 @@ namespace sns
     Vector<value_type> &Vector<value_type>::operator=(Vector<value_type> const &other)
     {
         #ifdef NDEBUG
-            DEBUG_INFO("Vector - start operator=");
+            DEBUG_INFO("Vector - start assignment");
         #endif // NDEBUG
 
-        if(this != &other) {
+        if(this != &other)
+        {
             Vector(other).swap(*this);
         }
 
         #ifdef NDEBUG
-            DEBUG_INFO("Vector - end operator=");
+            DEBUG_INFO("Vector - end assignment");
         #endif // NDEBUG
         return *this;
     }
+
+
+    template<typename value_type>
+    Vector<value_type> &Vector<value_type>::operator=(Vector<value_type>&& other)
+    {
+        #ifdef NDEBUG
+            DEBUG_INFO("Vector - start move assignment");
+        #endif // NDEBUG
+
+        if(this != &other)
+        {
+            other.swap(*this);
+        }
+
+        #ifdef NDEBUG
+            DEBUG_INFO("Vector - end move assignment");
+        #endif // NDEBUG
+        return *this;
+    }
+
+
 
     template<typename value_type>
     value_type &Vector<value_type>::operator[](const size_t index)
@@ -254,16 +232,17 @@ namespace sns
             DEBUG_INFO("Vector - operator==");
         #endif // NDEBUG
 
-        if(this == &other) {
+        if(this == &other)
+        {
             return true;
         }
-        if(size_ != other.size_)
+        if(size() != other.size())
         {
             return false;
         }
-        for (int i = 0; i != size_; ++i)
+        for (size_t i = 0; i != size(); ++i)
         {
-            if(data_[i] != other.data_[i])
+            if(this->[i] != other[i])
             {
                 return false;
             }
@@ -315,7 +294,7 @@ namespace sns
     }
 
     template<typename value_type>
-    bool Vector<value_type>::is_valid()
+    bool Vector<value_type>::is_valid() const
     {
         #ifdef NDEBUG
             DEBUG_INFO("Vector - is_valid");
@@ -335,6 +314,6 @@ namespace sns
 
 } // end sns
 
-#include "Vector(bool).hpp"
+#include "Vector(bool).h"
 
-#endif // _VECTOR_HPP_
+#endif // _VECTOR_H_

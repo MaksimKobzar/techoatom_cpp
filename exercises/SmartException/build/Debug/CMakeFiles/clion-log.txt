@@ -1,0 +1,1 @@
+CMakeLists.txt not found in /home/maksim/git/techoatom_cpp/exercises/SmartException
