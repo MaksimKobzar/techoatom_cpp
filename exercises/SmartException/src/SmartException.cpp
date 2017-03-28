@@ -7,15 +7,21 @@
 
 #include "SmartException.h"
 #include <iostream>
+#include <cstring>
 
+using namespace sens;
 
 SmartException::SmartException(std::string errorMess)
-	: errorMess_(error) {	}
+	: errorMess_(errorMess) {	}
 
-SmartException::SmartException(std::string errorMess, const exception &exc)
-	: errorMess_(error), exc_(exc) {	}
+SmartException::SmartException(std::string errorMess, const std::exception &exc)
+	: errorMess_(errorMess), std::exception(exc) {	}
 
-virtual const char* SmartException::what()
+const char* SmartException::what()
 {
- 	return strcat(errorMess_.c_str(), exc_.what());
+	std::string result;
+	result.append(errorMess_);
+	result.append(std::exception::what());
+	return  result.c_str();
+	/* TODO what doesnt return what i need*/
 }

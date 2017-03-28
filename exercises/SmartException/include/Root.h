@@ -1,6 +1,6 @@
 //---------------------------------------------
 //! @IDE CLion
-//! @file SmartException.hpp
+//! @file Root.h
 //! Header file with Stack class
 //!
 //! @author Maksim_Kobzar, 2017
@@ -18,8 +18,9 @@
 namespace rns
 {
 
-	struct Root
+	class Root
 	{
+	public:
 		explicit Root(double x1, double x2);
 		void print() const;
 	private:

@@ -5,23 +5,25 @@
 //! @author Maksim_Kobzar, 2017
 //---------------------------------------------
 
+#include <cmath>
 #include "Root.h"
 #include "SmartException.h"
 
-using std namespace;
-using sens namespace;
-using rns namespace;
+using namespace std;
+using namespace sens;
+using namespace rns;
+
 
 double countDiscriminant(double const &a, double const &b, double const &c)
 {
 	double dscrm = b*b - 4*a*c;
 	if(dscrm < 0)
 	{
-		throw SmartException("Cant get square root of a negative number!");
+		throw SmartException("countDiscriminant: Cant get square root of a negative number!");
 	}
 	else
 	{
-		dscrm = sqrt(dscrm);
+		dscrm = std::sqrt(dscrm);
 	}
 }
 
@@ -35,7 +37,8 @@ Root countEquation(double const &a, double const &b, double const &c)
 	}
 	catch(SmartException &exc)
 	{
-		throw SmartException("Cant count roots. ", exc.clone());
+		std::cout << "Catch exc" << std::endl;
+		throw SmartException("countEquation: Cant count roots. ", exc); /* TODO clone() */
 	}
 }
 
@@ -47,6 +50,7 @@ int main()
 	while(1)
 	{
 		try{
+			std::cout << "Enter the coefficients of the quadratic equation: a , b , c." << std::endl;
 			std::cin >> a >> b >> c;
 			if(a == 0)
 			{
@@ -54,10 +58,11 @@ int main()
 			}
 			Root X = countEquation(a, b, c);
 			X.print();
+			break;
 		}
 		catch(SmartException &exc)
 		{
-			std::cot << exc.what() << std::endl;
+			std::cout << exc.what() << std::endl;
 		}
 		catch(...)
 		{
