@@ -1,0 +1,6 @@
+[submodule "exercises/SmartException/build/Release/ext/gtest/src/googletest"]
+	path = exercises/SmartException/build/Release/ext/gtest/src/googletest
+	url = ../../google/googletest.git
+[submodule "exercises/SmartException/build/Debug/ext/gtest/src/googletest"]
+	path = exercises/SmartException/build/Debug/ext/gtest/src/googletest
+	url = ../../google/googletest.git
