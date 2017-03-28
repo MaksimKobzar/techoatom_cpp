@@ -153,7 +153,7 @@ namespace sns
                 DEBUG_INFO("Vector - operator[]");
             #endif
 
-            CHECK_RANGE(index, size_);
+            CHECK_RANGE(index, size_, Vector<bool>);
             return BoolOperation(index%UNS_BIT_NUM, &data_[index/UNS_BIT_NUM]);
         }
 

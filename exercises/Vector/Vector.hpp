@@ -1,41 +1,20 @@
 //---------------------------------------------
 //! @IDE CLion
-//! @file Vector.hpp
+//! @file Vector.h
 //! Header file with Vector class
 //!
 //! @author Maksim_Kobzar, 2017
 //---------------------------------------------
 
-#ifndef _VECTOR_HPP_
-#define _VECTOR_HPP_
+#ifndef _VECTOR_H_
+#define _VECTOR_H_
 // #define NDEBUG
 
 #include <iostream>
 #include <cassert>
 #include <sstream>
 #include <string>
-#include "BoolOperation.hpp"
-
-
-//----------------------------------------------------------------------
-//! Macros to check validity of index ranges
-//----------------------------------------------------------------------
-#define CHECK_RANGE( index_value, size_value ) \
-    if (0 > index_value || index_value >= size_value) {\
-        Vector::dump(__FILE__, __func__, __LINE__);\
-        assert(!"Invalid index");\
-        throw std::exception();\
-    }
-
-//----------------------------------------------------------------------
-//! Print debug macros
-//----------------------------------------------------------------------
-#define DEBUG_INFO( message )\
-do {\
-    std::cout << "DEBUG_INFO: " << message << "(file "<< __FILE__ <<" ,line " << __LINE__ << ")."<< std::endl;\
-} while (0)
-
-
+#include "BoolOperation.h"
 
 
 //------------------------------------------------------------
@@ -206,7 +185,7 @@ namespace sns
             std::cout << "---------------------------------------" << std::endl;
         #endif // NDEBUG
 
-        CHECK_RANGE(index, size_);
+        CHECK_RANGE(index, size_, Vector);
         return data_[index];
     }
 
@@ -217,7 +196,7 @@ namespace sns
             DEBUG_INFO("Vector - const operator[]");
         #endif // NDEBUG
 
-        CHECK_RANGE(index, size_);
+        CHECK_RANGE(index, size_, Vector);
         return data_[index];
     }
 
@@ -312,6 +291,6 @@ namespace sns
 
 
 } // end sns
-#include "Vector(bool).hpp"
+#include "Vector(bool).h"
 
-#endif // _VECTOR_HPP_
+#endif // _VECTOR_H_

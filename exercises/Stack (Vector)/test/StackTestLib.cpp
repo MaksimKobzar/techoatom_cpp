@@ -10,7 +10,7 @@
 
 #include <iostream>
 #include "debug_macros.h"
-#include "Stack.hpp"
+#include "Stack.h"
 #include "gtest/gtest.h"
 
 
@@ -180,9 +180,9 @@ TEST(Stack, FailedCommonFuntionsForVectorBool) {
 	ASSERT_EQ(someStack2.size(), 4);
 }
 
-TEST(Stack, FailedPlacementOperator=) {
+/*TEST(Stack, FailedPlacementOperator=) {
 
-}
+}*/
 
 
 

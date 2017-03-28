@@ -58,13 +58,14 @@ namespace sns
         //! 1) operator =
         //! 2) operator []
         //! 3) operator ==
+        //! 4) operator new
         //---------------------------------------------
         Vector &operator=(Vector const &other);
         Vector &operator=(Vector&& other);
         value_type &operator[](const size_t index);
         value_type const &operator[](const size_t index) const;
         bool operator==(Vector const &other) const;
-
+        
         //---------------------------------------------
         //! @Modifiers
         //! Swaps the contents
@@ -182,7 +183,6 @@ namespace sns
         return *this;
     }
 
-
     template<typename value_type>
     Vector<value_type> &Vector<value_type>::operator=(Vector<value_type>&& other)
     {
@@ -210,7 +210,7 @@ namespace sns
             DEBUG_INFO("Vector - operator[]");
         #endif // NDEBUG
 
-        CHECK_RANGE(index, size_);
+        CHECK_RANGE(index, size_, Vector<value_type>);
         return data_[index];
     }
 
@@ -221,7 +221,7 @@ namespace sns
             DEBUG_INFO("Vector - const operator[]");
         #endif // NDEBUG
 
-        CHECK_RANGE(index, size_);
+        CHECK_RANGE(index, size_, Vector<value_type>);
         return data_[index];
     }
 
@@ -242,7 +242,7 @@ namespace sns
         }
         for (size_t i = 0; i != size(); ++i)
         {
-            if(this->[i] != other[i])
+            if((*this).[i] != other[i])
             {
                 return false;
             }

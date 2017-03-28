@@ -1,16 +1,16 @@
 //---------------------------------------------
 //! @IDE CLion
-//! @file Stack.hpp
+//! @file Stack.h
 //! Header file with Stack class
 //!
 //! @author Maksim_Kobzar, 2017
 // TODO: Move constructors
 //---------------------------------------------
 
-#ifndef _STACK_HPP_
-#define _STACK_HPP_
+#ifndef _STACK_H_
+#define _STACK_H_
 
-#include "Vector.hpp"
+#include "Vector.h"
 #include <iostream>
 #include <cassert>
 #include <string>
@@ -106,7 +106,7 @@ namespace sns
     Stack<value_type>::Stack(const Stack<value_type> &other)
         : size_(other.size_), data_(container(other.capacity()))
     {
-        for (size_t i = 0; i != size_; ++i)
+        for (size_t i = 0; i != size(); ++i)
         {
             data_[i] = other.data_[i];
         }
@@ -287,4 +287,4 @@ namespace sns
 
 } // end sns
 
-#endif //_STACK_HPP_
+#endif //_STACK_H_
