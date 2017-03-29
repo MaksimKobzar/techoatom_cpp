@@ -6,8 +6,12 @@
 //! @author Maksim_Kobzar, 2017
 //---------------------------------------------
 
-#include "Stack.hpp"
-#include "Vector(bool).hpp"
+
+#define NDEBUG
+
+#include "debug_macros.h"
+#include "Stack.h"
+#include "Vector(bool).h"
 
 using namespace sns;
 

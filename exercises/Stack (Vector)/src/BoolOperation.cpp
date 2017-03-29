@@ -6,18 +6,23 @@
 //---------------------------------------------
 
 #include <iostream>
-#include "BoolOperation.hpp"
+#include "BoolOperation.h"
 
 // ---------------------------------------------------------
 // Definitions for BoolOperation
 //----------------------------------------------------------
-BoolOperation::BoolOperation(size_t index, unsigned *word) :
-    index_(index), word_(word), value_ (!!(*word_ & (1 << index_))) { }
+BoolOperation::BoolOperation(size_t index, unsigned *word)
+    : index_(index), word_(word), value_ (!!(*word_ & (1 << index_))) { }
+
+~BoolOperation::BoolOperation()
+  : {
+    
+}
 
 const BoolOperation &BoolOperation::operator=(bool value)
 {
     #ifdef NDEBUG
-        DEBUG_INFO("BoolOperation - start operator=");
+        DEBUG_INFO("BoolOperation - start bool assignment");
     #endif
 
     if(value)
@@ -30,15 +35,15 @@ const BoolOperation &BoolOperation::operator=(bool value)
     }
 
     #ifdef NDEBUG
-        DEBUG_INFO("BoolOperation - end operator=");
+        DEBUG_INFO("BoolOperation - end bool assignment");
     #endif
     return *this;
 }
 
-const BoolOperation &BoolOperation::operator=(const BoolOperation &other) const
+const BoolOperation &BoolOperation::operator=(const BoolOperation &other)
 {
     #ifdef NDEBUG
-        DEBUG_INFO("BoolOperation - start operator=");
+        DEBUG_INFO("BoolOperation - start BoolOperation assignment");
     #endif
 
     value_ = other.value_;
@@ -52,7 +57,7 @@ const BoolOperation &BoolOperation::operator=(const BoolOperation &other) const
     }
 
     #ifdef NDEBUG
-        DEBUG_INFO("BoolOperation - end operator=");
+        DEBUG_INFO("BoolOperation - end BoolOperation assignment");
     #endif
     return *this;
 }

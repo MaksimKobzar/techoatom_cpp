@@ -6,9 +6,13 @@
 //! @author Maksim_Kobzar, 2017
 //---------------------------------------------
 
+#define NDEBUG
+
 #include <iostream>
-#include "Stack.hpp"
+#include "debug_macros.h"
+#include "Stack.h"
 #include "gtest/gtest.h"
+
 
 using namespace sns;
 
@@ -142,8 +146,8 @@ TEST(Stack, WrongResizeWorking) {
 
 TEST(Stack, FailedCopyConstructor) {
 	Stack<int> 	someStack1(3);
-	someStack1.push_back(12);
-	Stack<double> 	someStack2(someStack1);
+	someStack1.push(12);
+	Stack<int> 	someStack2(someStack1);
 	ASSERT_EQ(someStack2.size(), 3);
 	ASSERT_EQ(*someStack2.top(), 12);
 }
@@ -152,13 +156,13 @@ TEST(Stack, FailedMoveConstructors) {
 
 }
 
-TEST(Stack, FailedCommonFUntionsForVectorBool) {
+TEST(Stack, FailedCommonFuntionsForVectorBool) {
 	Stack<bool> someStack1(100);
 	ASSERT_EQ(someStack1.capacity(), 100);
-	someStack1.push_back(0);
-	someStack1.push_back(1);
-	someStack1.push_back(0);
-	someStack1.push_back(1);
+	someStack1.push(0);
+	someStack1.push(1);
+	someStack1.push(0);
+	someStack1.push(1);
 	ASSERT_EQ(someStack1.size(), 4);
 
 	Stack<bool> someStack2(someStack1);
@@ -176,9 +180,9 @@ TEST(Stack, FailedCommonFUntionsForVectorBool) {
 	ASSERT_EQ(someStack2.size(), 4);
 }
 
-TEST(Stack, FailedPlacementNewCopy) {
+/*TEST(Stack, FailedPlacementOperator=) {
 
-}
+}*/
 
 
 
