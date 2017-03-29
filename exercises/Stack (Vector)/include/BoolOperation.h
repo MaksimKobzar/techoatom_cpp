@@ -22,9 +22,15 @@
         explicit BoolOperation(size_t index, unsigned *word);
 
         //---------------------------------------------
+        //! @Constructor
+        //! Destruct class BoolOperation
+        //---------------------------------------------
+        ~BoolOperation();
+
+        //---------------------------------------------
         //! @Operators:
-        //! operator =
-        //! operator<<
+        //! 1) operator =
+        //! 2) operator<<
         //---------------------------------------------
         const BoolOperation &operator=(const BoolOperation &other);
         const BoolOperation &operator=(bool value);

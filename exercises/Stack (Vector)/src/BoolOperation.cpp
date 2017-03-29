@@ -11,8 +11,13 @@
 // ---------------------------------------------------------
 // Definitions for BoolOperation
 //----------------------------------------------------------
-BoolOperation::BoolOperation(size_t index, unsigned *word) :
-    index_(index), word_(word), value_ (!!(*word_ & (1 << index_))) { }
+BoolOperation::BoolOperation(size_t index, unsigned *word)
+    : index_(index), word_(word), value_ (!!(*word_ & (1 << index_))) { }
+
+~BoolOperation::BoolOperation()
+  : {
+    
+}
 
 const BoolOperation &BoolOperation::operator=(bool value)
 {
