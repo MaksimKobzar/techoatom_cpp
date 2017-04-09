@@ -168,7 +168,7 @@
         {
             switch(cmdWord >> HALF_CMD)
             {
-                case PUSH_CMD :
+                case PS_CMD :
                 {
                     stack_->push_back(getFieldData(cmdWord));
                 }
