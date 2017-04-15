@@ -36,3 +36,8 @@
 `define BLEZ_CMD 	0x1E
 `define BLTZ_CMD 	0x1F
 `define BNE_CMD 	0x20
+// move
+`define SW_CMD 		0x21
+`define LW_CMD 		0x22
+`define PS_CMD 		0x23
+`define PSI_CMD 	0x24

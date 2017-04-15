@@ -26,9 +26,10 @@ namespace cpuns
     	class StackType = std::stack<T>
     >class Processor
 		{
-			using REG_NUM = 32;
-			using value_type = T;
-			using MEM_WIDTH = 256;
+			using REG_NUM 		= 32;
+			using value_type 	= T;
+			using MEM_WIDTH 	= 256;
+			using STACK_DEPTH 	= 32;
 		public:
 			explicit Processor();
 			Processor &Processor(const Processor &other);
@@ -36,7 +37,6 @@ namespace cpuns
 
 			bool fillMemory();
 			bool run();
-
 
 		private:
 			std::array<type_value, REG_NUM> 	*regs_;
@@ -48,12 +48,12 @@ namespace cpuns
 } // end cpuns
 
 template <typename value_type, class StackType>
-Processor<value_type, StackType>::Processor()
+Processor<value_type, StackType>::Processor(size_t memWidth, size_t stackDepth)
 {
 	regs_ 		= new std::array<type_value, REG_NUM>;
-	cmdMemory_ 	= new std::deque<type_value>(MEM_WIDTH);
-	stack_ 		= new StackType(10);
-	switcher_ 	= new StaSwitcher<type_value>(cmdMemory_, stack_, regs_);
+	cmdMemory_ 	= new std::deque<type_value>(memWidth);
+	stack_ 		= new StackType(stackDepth);
+	switcher_ 	= new StaSwitcher<type_value>(*cmdMemory_, *stack_, *regs_);
 }
 
 template <typename value_type, class StackType>
@@ -66,15 +66,21 @@ Processor<value_type, StackType>::~Processor()
 }
 
 template <typename value_type, class StackType>
-bool Processor<value_type, StackType>::fillMemory()
+bool Processor<value_type, StackType>::fillMemory(std::string filePath)
 {
-	switcher_->run();
+	#ifdef NDEBUG
+		cmdMemory_->push_back(‭0x‭‭9000000A‬); // PSI_CMD 10
+		cmdMemory_->push_back(0x‭‭90000003); // PSI_CMD 3
+		cmdMemory_->push_back(‭0x0‭4400000‬); // ADD summ of 2 num to $r2
+	#else
+	// load from Text/Bin file
+	#endif
 }
 
 template <typename value_type, class StackType>
 bool Processor<value_type, StackType>::run()
 {
-	switcher_->run();
+	while(!switcher_->run());
 }
 
 #endif //_PROCESSOR_H_

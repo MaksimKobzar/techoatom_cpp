@@ -21,12 +21,12 @@
         using HALF_CMD = 16;
         using REG_NUM_WIDTH = 5;
         using INSTR_WIDTH = 6;
-        using value_type =  T;
+        using value_type =  T; /*TODO ограниченное разнообразие возможных T*/
         //---------------------------------------------
         //! @Constructor
         //! Create class Switcher
         //---------------------------------------------
-        Switcher(const std::deque<value_type> &otherMemory, std::array<value_type> &otherRegs);
+        Switcher(const std::deque<value_type> &otherMemory, StackType &stack_, std::array<value_type> &otherRegs);
         Switcher(Switcher &other) = delete;
         ~Switcher();
 
@@ -34,29 +34,29 @@
         //! @Constructor
         //! Get different fields of comand word
         //---------------------------------------------
-        type_value getFieldInstr(value_type word);
-        type_value getFieldR0(value_type word);
-        type_value getFieldR1(value_type word);
-        type_value getFieldData(value_type word);
+        type_value getFieldInstr(value_type word) const;
+        type_value getFieldR0(value_type word) const;
+        type_value getFieldR1(value_type word) const;
+        type_value getFieldData(value_type word) const;
 
         //---------------------------------------------
         //! @Operators:
         //! operator =
         //! operator<<
         //---------------------------------------------
-        bool setMemory(const std::deque<value_type> *other);
         bool run();
 
     private:
-        const std::deque<value_type>         *cmdMemoryPtr_;
-        std::array<value_type>               *regs_;
-        size_t                                cmdCounter_;
+        const std::deque<value_type>    &cmdMemoryPtr_;
+        StackType                       &stack_;
+        std::array<value_type>          &regs_;
+        size_t                          cmdCounter_;
         std::array<size_t, LABEL_TABLE_WIDTH> labelTable_;
     };
 #endif // _SWITCHER_H_
 
     template <typename value_type>
-    Switcher::Switcher(const std::deque<value_type> *otherMemory, std::array<value_type> *otherRegs)
+    Switcher::Switcher(const std::deque<value_type> &otherMemory, const std::array<value_type> &otherRegs)
         : cmdMemoryPtr_ (otherMemory), regs_ (otherRegs), cmdCounter_(0)
     {
         #ifdef NDEBUG
@@ -74,25 +74,25 @@
     }
 
     template <typename value_type>
-    value_type Switcher<value_type>::getFieldInstr(value_type word)
+    value_type Switcher<value_type>::getFieldInstr(value_type word) const
     {
         return(word >> (HALF_CMD + 2*REG_NUM_WIDTH));
     }
 
     template <typename value_type>
-    value_type Switcher::getFieldR0(value_type word)
+    value_type Switcher::getFieldR0(value_type word) const
     {
         return((word << INSTR_WIDTH) >> (HALF_CMD + REG_NUM_WIDTH + INSTR_WIDTH));
     }
 
     template <typename value_type>
-    value_type Switcher::getFieldR1(value_type word)
+    value_type Switcher::getFieldR1(value_type word) const
     {
         return((word << REG_NUM_WIDTH + INSTR_WIDTH) >> (HALF_CMD + REG_NUM_WIDTH + INSTR_WIDTH));
     }
 
     template <typename value_type>
-    value_type Switcher::getFieldData(value_type word)
+    value_type Switcher::getFieldData(value_type word) const
     {
         value_type instr = getFieldInstr(word);
         if( instr == J    ||
@@ -129,7 +129,7 @@
             return false;
         }
         fillLabelTable();
-        if(processCmds())
+        if(switchCmds())
         {
             return false;
         }
@@ -153,7 +153,7 @@
         {
             if(cmdMemoryPtr_[cmdCounter_] & ((1 << HALF_CMD) - 1) == ':')
             {
-                labelTable_[cmdMemoryPtr_[cmdCounter_] >> HALF_CMD] = cmdCounter_;
+                labelTable_[cmdMemoryPtr_[cmdCounter_] >> HALF_CMD] = cmdCounter_ + 1;
             }
             ++cmdCounter_;
         }
@@ -161,61 +161,156 @@
     }
 
     template <typename value_type>
-    char Switcher::processCmds()
+    char Switcher::switchCmds()
     {
         T cmdWord = 0;
         while((cmdWord = *(cmdMemoryPtr_ + cmdCounter_)) != '\0')
         {
-            switch(cmdWord >> HALF_CMD)
+            switch(getFieldInstr(cmdWord))
             {
-                case PS_CMD :
-                {
-                    stack_->push_back(getFieldData(cmdWord));
-                }
+                case NOOP_CMD :
+                { }
                 break;
-                case POP_CMD :
-                {
-                    reg_[getFieldR0(cmdWord)] = stack_->front();
-                    stack_->pop_front();
-                }
-                break;
-                case ADD_CMD :
-                {
-                    if(stack_->size() < 2)
+            // --------------------------------- Ariphm -----------------------------------------------------
+               /* #define func(name, op) \
+                    case name :
                     {
-                        return 1; // return Error Code
+                        T op1 = stack_->front();
+                        stack_->pop_front();
+                        T op2 = stack_->front();
+                        stack_->pop_front();
+                        regs_[getFieldR0(cmdWord)] = op1 op op2;
                     }
-                    T op1 = stack_->front();
-                    stack_->pop_front();
-                    T op2 = stack_->front();
-                    stack_->pop_front();
-                    stack_->push_back(op1 + op2);
-                }
-                break;
-                case ADDI_CMD :
-                {
-                    if(stack_->size() < 1)
+                    break;
+                    #include "binaryOperators.h"
+                #undef func
+            // --------------------------------- Logic ------------------------------------------------------
+                #define func(name, op, regNum) \
+                    case name :
                     {
-                        return 1; // return Error Code
+                        T op1 = stack_->front();
+                        stack_->pop_front();
+                        T op2 = getFieldData(cmdWord);
+                        regs_[getFieldR0(cmdWord)] = op1 op op2;
                     }
-                    T op1 = stack_->front();
-                    stack_->pop_front();
-                    stack_->push_back(op1 + (cmdWord & ((1 << HALF_CMD) - 1)));
-                }
-                break;
-                case AND_CMD :
+                    break;
+                    #include "unaryOperators.h"
+                #undef func*/
+            // --------------------------------- Jumps ------------------------------------------------------
+                case J_CMD :
                 {
-                    if(stack_->size() < 2)
+                    if(0 <= getFieldData(cmdWord) && getFieldData(cmdWord) < cmdMemoryPtr_.capacity())
                     {
-                        return 1; // return Error Code
+                        cmdCounter_ = getFieldData(cmdWord);
+                        continue;
                     }
-                    T op1 = stack_->front();
-                    stack_->pop_front();
-                    T op2 = stack_->front();
-                    stack_->pop_front();
-                    stack_->push_back(op1 & op2);
+                    else
+                    {
+                        return OUT_OF_MEM_RANGE; // return Error Code
+                    }
                 }
                 break;
+                case JAL_CMD :
+                {
+                    if(0 <= getFieldData(cmdWord) && getFieldData(cmdWord) < cmdMemoryPtr_.capacity())
+                    {
+                        cmdCounter_ = getFieldData(cmdWord);
+                        stackRet_.push_back(cmdWord);
+                        continue;
+                    }
+                    else
+                    {
+                        return OUT_OF_MEM_RANGE; // return Error Code
+                    }
+                }
+                break;
+                case JR_CMD :
+                {
+                    if(0 <= regs_[getFieldR0(cmdWord)] && regs_[getFieldR0(cmdWord)] < cmdMemoryPtr_.capacity())
+                    {
+                        cmdCounter_ = regs_[getFieldR0(cmdWord)];
+                        continue;
+                    }
+                    else
+                    {
+                        return OUT_OF_MEM_RANGE; // return Error Code
+                    }
+                }
+                break;
+                case JR_CMD :
+                {
+                    if(0 <= labelTable_[getFieldR0(cmdWord)] && labelTable_[getFieldR0(cmdWord)] < cmdMemoryPtr_.capacity())
+                    {
+                        cmdCounter_ = labelTable_[getFieldR0(cmdWord)];
+                        continue;
+                    }
+                    else
+                    {
+                        return OUT_OF_MEM_RANGE; // return Error Code
+                    }
+                }
+                break;
+
+                    /*
+                    *    case J_CMD :
+                    *    {
+                    *        if(0 <= getFieldData(cmdWord) && getFieldData(cmdWord) < 32)
+                    *        {
+                    *            cmdCounter_ = labelTable_[getFieldData()];
+                    *        }
+                    *        else
+                    *        {
+                    *            return 2; // return Error Code
+                    *        }
+                    *    }
+                    *    break;
+                    */
+            // --------------------------------- Shifts -----------------------------------------------------
+                case SLL_CMD :
+                {
+                    if(stack_.size() == 0) {
+                        return STACK_UNDERFLOW;
+                    }
+                    else {
+                        regs_[getFieldR0(cmdWord)] = stack_->front() << getFieldData(cmdWord);
+                        stack_->pop_front();
+                    }
+                }
+                break;
+                case SLLV_CMD :
+                {
+                    if(stack_.size() == 0) {
+                        return STACK_UNDERFLOW;
+                    }
+                    else {
+                        regs_[getFieldR0(cmdWord)] = stack_->front() << regs_[getFieldR1(cmdWord)];
+                        stack_->pop_front();
+                    }
+                }
+                break;
+                case RLL_CMD :
+                {
+                    if(stack_.size() == 0) {
+                        return STACK_UNDERFLOW;
+                    }
+                    else {
+                        regs_[getFieldR0(cmdWord)] = stack_->front() >> getFieldData(cmdWord);
+                        stack_->pop_front();
+                    }
+                }
+                break;
+                case SRA_CMD :
+                {
+                    if(stack_.size() == 0) {
+                        return STACK_UNDERFLOW;
+                    }
+                    else {
+                        regs_[getFieldR0(cmdWord)] = stack_->front() >> getFieldData(cmdWord);
+                        stack_->pop_front();
+                    }
+                }
+                break;
+            // --------------------------------- Branches ---------------------------------------------------
                 case BEQ_CMD :
                 {
                     if(getFieldR0(cmdWord) == getFieldR1(cmdWord))
@@ -240,62 +335,18 @@
                     }
                 }
                 break;
-                case J_CMD :
+            // --------------------------------- Move data --------------------------------------------------
+                case PS_CMD :
                 {
-                    if(0 <= getFieldData(cmdWord) && getFieldData(cmdWord) < 32)
-                    {
-                        cmdCounter_ = labelTable_[getFieldData()];
-                    }
-                    else
-                    {
-                        return 2; // return Error Code
-                    }
+                    stack_->push_back(getFieldData(cmdWord));
                 }
                 break;
-                case JAL_CMD :
+                case POP_CMD :
                 {
-                    cmdCounter_ = getFieldData();
-                }
-                break;
-                case JR_CMD :
-                {
-                    cmdCounter_ = reg_[getFieldR0(cmdWord)];
-                }
-                break;
-                case MULT_CMD :
-                {
-                    if(stack_->size() < 2)
-                    {
-                        return 1; // return Error Code
-                    }
-                    T op1 = stack_->front();
+                    reg_[getFieldR0(cmdWord)] = stack_->front();
                     stack_->pop_front();
-                    T op2 = stack_->front();
-                    stack_->pop_front();
-                    stack_->push_back(op1 * op2);
                 }
                 break;
-                case NOOP_CMD :
-                {
-                }
-                break;
-
-        /*
-        *    case J_CMD :
-        *    {
-        *        if(0 <= getFieldData(cmdWord) && getFieldData(cmdWord) < 32)
-        *        {
-        *            cmdCounter_ = labelTable_[getFieldData()];
-        *        }
-        *        else
-        *        {
-        *            return 2; // return Error Code
-        *        }
-        *    }
-        *    break;
-        */
-
-
             }
             ++cmdCounter_;
         }
