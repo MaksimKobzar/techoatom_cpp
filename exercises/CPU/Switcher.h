@@ -26,7 +26,7 @@
         //! @Constructor
         //! Create class Switcher
         //---------------------------------------------
-        Switcher(const std::deque<value_type> *otherMemory, std::array<value_type> *otherRegs);
+        Switcher(const std::deque<value_type> &otherMemory, std::array<value_type> &otherRegs);
         Switcher(Switcher &other) = delete;
         ~Switcher();
 
