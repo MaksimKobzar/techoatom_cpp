@@ -336,15 +336,33 @@
                 }
                 break;
             // --------------------------------- Move data --------------------------------------------------
-                case PS_CMD :
+                case SW_CMD :
                 {
-                    stack_->push_back(getFieldData(cmdWord));
+                    if(stack->empty())
+                    {
+                        return STACK_UNDERFLOW;
+                    }
+                    else
+                    {
+                        regs_[getFieldR0(cmdWord)] = stack->front();
+                        stack_->pop_front();
+                    }
+
                 }
                 break;
-                case POP_CMD :
+                case LW_CMD :
                 {
-                    reg_[getFieldR0(cmdWord)] = stack_->front();
-                    stack_->pop_front();
+                    stack->push_back(regs_[getFieldR0(cmdWord)]);
+                }
+                break;
+                case PS_CMD :
+                {
+                    stack_->push_back(regs_[getFieldData(cmdWord)]);
+                }
+                break;
+                case PSI_CMD :
+                {
+                    stack_->push_back(getFieldData(cmdWord));
                 }
                 break;
             }
