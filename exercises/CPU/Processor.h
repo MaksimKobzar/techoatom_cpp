@@ -31,15 +31,15 @@ namespace cpuns
 			using MEM_WIDTH 	= 256;
 			using STACK_DEPTH 	= 32;
 		public:
-			explicit Processor();
+			explicit Processor(size_t memWidth, size_t stackDepth);
 			Processor &Processor(const Processor &other);
 			~Processor();
 
 			bool fillMemory();
 			bool run();
 
-		private:
 			std::array<type_value, REG_NUM> 	*regs_;
+		private:
 			std::deque<type_value> 				*cmdMemory_;
 			StackType 							*stack_;
 			Switcher<type_value> 				*switcher_;

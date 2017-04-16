@@ -9,9 +9,7 @@
 
 #define NDEBUG
 
-#include "debug_macros.h"
-#include "Stack.h"
-#include "Vector(bool).h"
+#include "Processor.h"
 
 using namespace sns;
 
@@ -42,10 +40,9 @@ int main() {
     std::cout << "Top element of stack1: " << *stack1.top() << "." << std::endl;*/
 
 
-
     // for Bool
-    Vector<bool> someVector(100);
-    someVector[0] = 1;
-    someVector[1] = someVector[0];
-
+    Processor<unsigned> proc(256, 32);
+    proc.fillMemory();
+    proc.run();
+    std::cout << "Reg[2] = " << *(proc.regs_)[2] << std::endl;
 }
