@@ -43,6 +43,15 @@ int main() {
     // for Bool
     Processor<unsigned> proc(256, 32);
     proc.fillMemory("path");
+    for (size_t i = 0; i < 32; ++i)
+    {
+        std::cout << std::dec << "Reg[" << i << "] = " << std::hex << proc.getRegValue(i) << "." << std::endl;
+    }
+    std::cout << "-------------------------------------------------------------------------------------" << std::endl;
     proc.run();
-    std::cout << "Reg[2] = " << proc.getRegValue(2) << std::endl;
+    std::cout << "-------------------------------------------------------------------------------------" << std::endl;
+    for (size_t i = 0; i < 32; ++i)
+    {
+        std::cout << std::dec << "Reg[" << i << "] = " << std::hex << proc.getRegValue(i) << "." << std::endl;
+    }
 }

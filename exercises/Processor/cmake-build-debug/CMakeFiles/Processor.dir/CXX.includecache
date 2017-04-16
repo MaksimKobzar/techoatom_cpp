@@ -17,6 +17,8 @@ string
 -
 array
 -
+debug_macros.h
+D:/techoatom_cpp/exercises/Processor/debug_macros.h
 Switcher.h
 D:/techoatom_cpp/exercises/Processor/Switcher.h
 
@@ -33,6 +35,8 @@ stack
 -
 deque
 -
+math.h
+-
 cmd_defines.h
 D:/techoatom_cpp/exercises/Processor/cmd_defines.h
 error_code_defines.h
@@ -45,6 +49,12 @@ D:/techoatom_cpp/exercises/Processor/unaryOperators.h
 D:/techoatom_cpp/exercises/Processor/binaryOperators.h
 
 D:/techoatom_cpp/exercises/Processor/cmd_defines.h
+
+D:/techoatom_cpp/exercises/Processor/debug_macros.h
+iostream
+-
+stdexcept
+-
 
 D:/techoatom_cpp/exercises/Processor/error_code_defines.h
 

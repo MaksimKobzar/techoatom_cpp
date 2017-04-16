@@ -5,6 +5,7 @@ CMakeFiles/Processor.dir/main.cpp.obj: ../Processor.h
 CMakeFiles/Processor.dir/main.cpp.obj: ../Switcher.h
 CMakeFiles/Processor.dir/main.cpp.obj: ../binaryOperators.h
 CMakeFiles/Processor.dir/main.cpp.obj: ../cmd_defines.h
+CMakeFiles/Processor.dir/main.cpp.obj: ../debug_macros.h
 CMakeFiles/Processor.dir/main.cpp.obj: ../error_code_defines.h
 CMakeFiles/Processor.dir/main.cpp.obj: ../main.cpp
 CMakeFiles/Processor.dir/main.cpp.obj: ../unaryOperators.h

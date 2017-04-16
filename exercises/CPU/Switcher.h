@@ -17,11 +17,11 @@
         typename T = unsigned
     >class Switcher
     {
-        using LABEL_TABLE_WIDTH = 32;
-        using INSTR_WIDTH       = 6;
-        using REG_NUM_WIDTH     = log2(regs_.size()); // 5
-        using HALF_CMD          = sizeof(unsigned)/2; // 16
-        using value_type        = T; /*TODO ограниченное разнообразие возможных T*/
+        const size_t LABEL_TABLE_WIDTH  = 32;
+        const size_t INSTR_WIDTH        = 6;
+        const size_t REG_NUM_WIDTH      = log2(regs_.size()); // 5
+        const size_t HALF_CMD           = sizeof(unsigned)/2; // 5
+        using value_type                = T; /*TODO ограниченное разнообразие возможных T*/
         //---------------------------------------------
         //! @Constructor
         //! Create class Switcher
