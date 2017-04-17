@@ -42,19 +42,21 @@ template<
         void clearLableTable();
         void fillLabelTable();
         char switchCmds();
+
         //---------------------------------------------
         //! @Constructor
-        //! Get different fields of comand word
+        //! Get different fields of command word
         //---------------------------------------------
-        value_type getFieldInstr(value_type word) const;
-        value_type getFieldR0(value_type word) const;
-        value_type getFieldR1(value_type word) const;
-        value_type getFieldData(value_type word) const;
+        type_value getFieldInstr(value_type word) const;
+        type_value getFieldR0(value_type word) const;
+        type_value getFieldR1(value_type word) const;
+        type_value getFieldData(value_type word) const;
 
         //---------------------------------------------
         //! @Operators:
-        //! operator =
-        //! operator<<
+        //! Run processing commands.
+        //! If run failed return false, otherwise true.
+        //! False if cmdCounter_ isnt equal 0 or failed in switching commands.
         //---------------------------------------------
         bool run();
 
@@ -71,17 +73,15 @@ Switcher<value_type, REG_NUM, StackType, LABEL_TABLE_WIDTH>::Switcher(const std:
         : cmdMemoryPtr_ (otherMemory), stack_(stack), regs_(otherRegs), cmdCounter_(0)
 {
     DEBUG_INFO("PROCESSOR: SWITCHER: Constructor.");
-    #ifdef NDEBUG
-        clearLableTable();
-    #endif
+    clearLableTable();
 }
 
 template <typename value_type, const size_t REG_NUM, class StackType, const size_t LABEL_TABLE_WIDTH>
 Switcher<value_type, REG_NUM, StackType, LABEL_TABLE_WIDTH>::~Switcher()
 {
     DEBUG_INFO("PROCESSOR: SWITCHER: Destructor.");
+    clearLableTable();
     #ifdef NDEBUG
-        clearLableTable();
         cmdCounter_ = 0;
     #endif
 }

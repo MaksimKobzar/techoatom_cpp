@@ -41,7 +41,13 @@ namespace cpuns
 			bool fillMemory(std::string filePath);
 			void run();
 
+			//---------------------------------------------
+	        //! @Constructor
+	        //! Functions to get and to set value of Processor`s registers.
+	        //! Throw std::out_of_range exception if index out of range.
+	        //---------------------------------------------
 			value_type getRegValue(size_t num) const;
+			void setRegValue(size_t num, value_type value);
 
 		private:
 			std::array<value_type, REG_NUM> 		*regs_;
@@ -113,6 +119,20 @@ namespace cpuns
 		if(0 <= num && num < REG_NUM)
 		{
 			return regs_->at(num);
+		}
+		else
+		{
+            throw std::out_of_range("Try get reg of Processor with index more than existed.");
+		}
+	}
+
+	template <typename value_type, const size_t REG_NUM, class StackType>
+	void Processor<value_type, REG_NUM, StackType>::setRegValue(size_t num, value_type value)
+	{
+		DEBUG_INFO("PROCESSOR: Get reg value.");
+		if(0 <= num && num < REG_NUM)
+		{
+			regs_[num] = value;
 		}
 		else
 		{

@@ -19,7 +19,7 @@
     {
         const size_t LABEL_TABLE_WIDTH  = 32;
         const size_t INSTR_WIDTH        = 6;
-        const size_t REG_NUM_WIDTH      = log2(regs_.size()); // 5
+        const size_t REG_NUM_WIDTH      = 5; // 5
         const size_t HALF_CMD           = sizeof(unsigned)/2; // 5
         using value_type                = T; /*TODO ограниченное разнообразие возможных T*/
         //---------------------------------------------
@@ -32,7 +32,7 @@
 
         //---------------------------------------------
         //! @Constructor
-        //! Get different fields of comand word
+        //! Get different fields of command word
         //---------------------------------------------
         type_value getFieldInstr(value_type word) const;
         type_value getFieldR0(value_type word) const;
@@ -41,8 +41,9 @@
 
         //---------------------------------------------
         //! @Operators:
-        //! operator =
-        //! operator<<
+        //! Run processing commands.
+        //! If run failed return false, otherwise true.
+        //! False if cmdCounter_ isnt equal 0 or failed in switching commands.
         //---------------------------------------------
         bool run();
 
@@ -58,16 +59,14 @@
     Switcher::Switcher(const std::deque<value_type> &otherMemory, const std::array<value_type> &otherRegs)
         : cmdMemoryPtr_ (otherMemory), regs_ (otherRegs), cmdCounter_(0)
     {
-        #ifdef NDEBUG
-            clearLableTable();
-        #endif
+        clearLableTable();
     }
 
     template <typename value_type>
     Switcher<value_type>::~Switcher()
     {
+        clearLableTable();
         #ifdef NDEBUG
-            clearLableTable();
             cmdCounter_ = 0;
         #endif
     }
