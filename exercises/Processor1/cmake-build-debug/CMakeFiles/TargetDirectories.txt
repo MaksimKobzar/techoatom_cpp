@@ -1,3 +1,0 @@
-/home/maksim/git/techoatom_cpp/exercises/Processor/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/maksim/git/techoatom_cpp/exercises/Processor/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/maksim/git/techoatom_cpp/exercises/Processor/cmake-build-debug/CMakeFiles/Processor.dir

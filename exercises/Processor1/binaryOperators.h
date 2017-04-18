@@ -1,7 +1,0 @@
-func(ADD_CMD, 	+)
-func(MUL_CMD, 	*)
-func(SUB_CMD, 	-)
-func(DIV_CMD, 	/)
-func(AND_CMD, 	&)
-func(OR_CMD, 		|)
-func(XOR_CMD, 	^)
