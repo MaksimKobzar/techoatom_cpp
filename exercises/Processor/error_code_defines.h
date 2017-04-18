@@ -1,3 +1,0 @@
-#define STACK_UNDERFLOW 1
-#define OUT_OF_MEM_RANGE 2
-#define OKAY 0

@@ -1,7 +1,0 @@
-func(ADDI_CMD, 	+, regNum, imm)
-func(MULI_CMD, 	*, regNum, imm)
-func(SUBI_CMD, 	-, regNum, imm)
-func(DIVI_CMD, 	/, regNum, imm)
-func(ANDI_CMD, 	&, regNum, imm)
-func(ORI_CMD, 	|, regNum, imm)
-func(XORI_CMD, 	^, regNum, imm)

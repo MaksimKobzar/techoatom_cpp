@@ -1,3 +1,0 @@
-D:/techoatom_cpp/exercises/Processor/cmake-build-debug/CMakeFiles/Processor.dir
-D:/techoatom_cpp/exercises/Processor/cmake-build-debug/CMakeFiles/edit_cache.dir
-D:/techoatom_cpp/exercises/Processor/cmake-build-debug/CMakeFiles/rebuild_cache.dir
