@@ -1,4 +1,4 @@
-#define NOOP_CMD 	0x0
+#define NOP_CMD 	0x0
 // arithmetic
 #define ADD_CMD  	0x1
 #define ADDI_CMD 	0x2
@@ -21,6 +21,7 @@
 #define JAL_CMD 	0x11
 #define JR_CMD 		0x12
 #define JLB_CMD 	0x13
+#define CAL_CMD		
 // shifts
 #define SLL_CMD 	0x14
 #define SLLV_CMD 	0x15

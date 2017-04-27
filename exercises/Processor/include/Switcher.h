@@ -226,6 +226,17 @@ char Switcher<value_type, REG_NUM, StackType, LABEL_TABLE_WIDTH>::switchCmds()
         #endif // NDEBUG
         switch(getFieldInstr(cmdWord))
         {
+
+            #define func(name, value) \
+                case value : name(); \
+                break;
+            #include "operators.h"
+            #undef func
+
+
+
+
+
             case NOOP_CMD :
             { }
                 break;
@@ -352,6 +363,17 @@ char Switcher<value_type, REG_NUM, StackType, LABEL_TABLE_WIDTH>::switchCmds()
                     }
                     else {
                         regs_[getFieldR0(cmdWord)] = stack_.top() >> getFieldData(cmdWord);
+                        stack_.pop();
+                    }
+                }
+                    break;
+                case SRLV_CMD :
+                {
+                    if(stack_.size() == 0) {
+                        return STACK_UNDERFLOW;
+                    }
+                    else {
+                        regs_[getFieldR0(cmdWord)] = stack_.top() >> regs_[getFieldR1(cmdWord)];
                         stack_.pop();
                     }
                 }

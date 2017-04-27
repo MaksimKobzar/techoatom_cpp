@@ -24,8 +24,7 @@ int main(int argc, char* argv[])
     }
     std::string path(argv[1]);
 
-    while(1)
-    {
+
         try
         {
             Processor<unsigned> proc(256, 32);
@@ -46,7 +45,7 @@ int main(int argc, char* argv[])
             }
             else if(runResult == STACK_UNDERFLOW)
             {
-                throw std::underflow_error("Stack undeflow.");
+                throw std::underflow_error("Stack underflow.");
             }
             else if(runResult == SUCCESS)
             {   
