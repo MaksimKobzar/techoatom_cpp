@@ -213,86 +213,113 @@ void Switcher<value_type, REG_NUM, StackType, LABEL_TABLE_WIDTH>::fillLabelTable
     cmdCounter_ = 0;
 }
 
+
+#define func(name, cmd_value, cmd_operator, arg_num) \
+    template <typename value_type, const size_t REG_NUM, class StackType, const size_t LABEL_TABLE_WIDTH> \
+    void Switcher<value_type, REG_NUM, StackType, LABEL_TABLE_WIDTH>::name() \
+    { \
+        if(stack_.size() < arg_num) \
+        { \
+            return STACK_UNDERFLOW; \
+        } \
+        else \
+        { \
+           value_type op1 = stack_.top(); \
+           value_type op2; \
+           stack_.pop(); \
+           if(arg_num == 2) \
+           { \
+                op2 = stack_.top(); \
+                stack_.pop(); \
+           } \
+           else \
+           { \
+            value_type op2 = getFieldData(cmdWord); \
+           } \
+           regs_[getFieldR0(cmdWord)] = op1 cmd_operator op2; \
+        } \
+    }
+#include "arlog_cmds.h"
+#undef func
+
+#define func(name, cmd_value, cmd_operator, arg_num) \
+    template <typename value_type, const size_t REG_NUM, class StackType, const size_t LABEL_TABLE_WIDTH> \
+    void Switcher<value_type, REG_NUM, StackType, LABEL_TABLE_WIDTH>::name() \
+    { \
+        if(stack_.size() == 0) \
+        { \
+            return STACK_UNDERFLOW; \
+        } \
+        else \
+        { \
+            if(arg_num) \
+            { \
+                regs_[getFieldR0(cmdWord)] = stack_.top() cmd_operator getFieldData(cmdWord); \
+            } \
+            else \
+            { \
+                regs_[getFieldR0(cmdWord)] = stack_.top() cmd_operator regs_[getFieldR1(cmdWord)]; \
+            } \
+            stack_.pop(); \
+        } \
+    }
+#include "shift_cmds.h"
+#undef func
+
+
+#define func(name, cmd_value, cmd_operator, arg_num) \
+    template <typename value_type, const size_t REG_NUM, class StackType, const size_t LABEL_TABLE_WIDTH> \
+    void Switcher<value_type, REG_NUM, StackType, LABEL_TABLE_WIDTH>::name() \
+    { \
+        if(stack_.size() == 0) \
+        { \
+            return STACK_UNDERFLOW; \
+        } \
+        else \
+        { \
+            if(arg_num) \
+            { \
+                regs_[getFieldR0(cmdWord)] = stack_.top() cmd_operator getFieldData(cmdWord); \
+            } \
+            else \
+            { \
+                regs_[getFieldR0(cmdWord)] = stack_.top() cmd_operator regs_[getFieldR1(cmdWord)]; \
+            } \
+            stack_.pop(); \
+        } \
+    }
+#include "branch_cmds.h"
+#undef func
+
 template <typename value_type, const size_t REG_NUM, class StackType, const size_t LABEL_TABLE_WIDTH>
-char Switcher<value_type, REG_NUM, StackType, LABEL_TABLE_WIDTH>::switchCmds()
+void Switcher<value_type, REG_NUM, StackType, LABEL_TABLE_WIDTH>::j_cmd(value_type word)
 {
-    DEBUG_INFO("SWITCHER: SwicthCmds.");
-    value_type cmdWord = 0;
-    while((cmdWord = cmdMemory_[cmdCounter_]) != '\0')
-    {   
-        #ifdef NDEBUG
-            std::cout << "cmdWord = " << std::hex << cmdMemory_[cmdCounter_] << std::endl;
-            std::cout << "Instrac = " << std::hex << getFieldInstr(cmdWord) << std::endl;
-        #endif // NDEBUG
-        switch(getFieldInstr(cmdWord))
-        {
+    if(0 <= getFieldData(word) && getFieldData(word) < cmdMemory_.size())
+    {
+        cmdCounter_ = getFieldData(word);
+    // continue;
+    else
+    {
+        return OUT_OF_MEM_RANGE; // return Error Code
+    }
+}
 
-            #define func(name, value) \
-                case value : name(); \
-                break;
-            #include "operators.h"
-            #undef func
+template <typename value_type, const size_t REG_NUM, class StackType, const size_t LABEL_TABLE_WIDTH>
+void Switcher<value_type, REG_NUM, StackType, LABEL_TABLE_WIDTH>::jal_cmd(value_type word)
+{
+    if(0 <= getFieldData(cmdWord) && getFieldData(cmdWord) < cmdMemory_.size())
+    {
+        cmdCounter_ = getFieldData(cmdWord);
+        stack_.push(getFieldData(cmdWord));
+        // continue;
+    }
+    else
+    {
+        return OUT_OF_MEM_RANGE; // return Error Code
+    }
+}
 
 
-
-
-
-            case NOOP_CMD :
-            { }
-                break;
-            // --------------------------------- Ariphm -----------------------------------------------------
-                #define func(name, op) \
-                    case name : \
-                    { \
-                        if(stack_.size() < 2) \
-                        { \
-                            return STACK_UNDERFLOW; \
-                        } \
-                        else \
-                        { \
-                           value_type op1 = stack_.top(); \
-                           stack_.pop(); \
-                           value_type op2 = stack_.top(); \
-                           stack_.pop();\
-                           regs_[getFieldR0(cmdWord)] = op1 op op2; \
-                        } \
-                    } \
-                    break;
-                #include "binaryOperators.h"
-                #undef func
-            // --------------------------------- Logic ------------------------------------------------------
-                #define func(name, op) \
-                    case name : \
-                    { \
-                        if(stack_.size() < 1) \
-                        { \
-                            return STACK_UNDERFLOW; \
-                        } \
-                        else \
-                        { \
-                           value_type op1 = stack_.top(); \
-                           stack_.pop(); \
-                           value_type op2 = getFieldData(cmdWord); \
-                           regs_[getFieldR0(cmdWord)] = op1 op op2; \
-                        } \
-                    } \
-                    break;
-                #include "unaryOperators.h"
-                #undef func
-            // --------------------------------- Jumps ------------------------------------------------------
-                case J_CMD :
-                {
-                    if(0 <= getFieldData(cmdWord) && getFieldData(cmdWord) < cmdMemory_.size())
-                    {
-                        cmdCounter_ = getFieldData(cmdWord);
-                        continue;
-                    }
-                    else
-                    {
-                        return OUT_OF_MEM_RANGE; // return Error Code
-                    }
-                }
-                    break;
                 case JAL_CMD :
                 {
                     if(0 <= getFieldData(cmdWord) && getFieldData(cmdWord) < cmdMemory_.size())
@@ -333,62 +360,39 @@ char Switcher<value_type, REG_NUM, StackType, LABEL_TABLE_WIDTH>::switchCmds()
                     }
                 }
                     break;
-            // --------------------------------- Shifts -----------------------------------------------------
-                case SLL_CMD :
-                {
-                    if(stack_.size() == 0) {
-                        return STACK_UNDERFLOW;
-                    }
-                    else {
-                        regs_[getFieldR0(cmdWord)] = stack_.top() << getFieldData(cmdWord);
-                        stack_.pop();
-                    }
-                }
-                    break;
-                case SLLV_CMD :
-                {
-                    if(stack_.size() == 0) {
-                        return STACK_UNDERFLOW;
-                    }
-                    else {
-                        regs_[getFieldR0(cmdWord)] = stack_.top() << regs_[getFieldR1(cmdWord)];
-                        stack_.pop();
-                    }
-                }
-                    break;
-                case SRL_CMD :
-                {
-                    if(stack_.size() == 0) {
-                        return STACK_UNDERFLOW;
-                    }
-                    else {
-                        regs_[getFieldR0(cmdWord)] = stack_.top() >> getFieldData(cmdWord);
-                        stack_.pop();
-                    }
-                }
-                    break;
-                case SRLV_CMD :
-                {
-                    if(stack_.size() == 0) {
-                        return STACK_UNDERFLOW;
-                    }
-                    else {
-                        regs_[getFieldR0(cmdWord)] = stack_.top() >> regs_[getFieldR1(cmdWord)];
-                        stack_.pop();
-                    }
-                }
-                    break;
-                case SRA_CMD :
-                {
-                    if(stack_.size() == 0) {
-                        return STACK_UNDERFLOW;
-                    }
-                    else {
-                        regs_[getFieldR0(cmdWord)] = stack_.top() >> getFieldData(cmdWord);
-                        stack_.pop();
-                    }
-                }
-                    break;
+
+
+
+
+
+
+template <typename value_type, const size_t REG_NUM, class StackType, const size_t LABEL_TABLE_WIDTH>
+char Switcher<value_type, REG_NUM, StackType, LABEL_TABLE_WIDTH>::switchCmds()
+{
+    DEBUG_INFO("SWITCHER: SwicthCmds.");
+    value_type cmdWord = 0;
+    while((cmdWord = cmdMemory_[cmdCounter_]) != '\0')
+    {   
+        #ifdef NDEBUG
+            std::cout << "cmdWord = " << std::hex << cmdMemory_[cmdCounter_] << std::endl;
+            std::cout << "Instrac = " << std::hex << getFieldInstr(cmdWord) << std::endl;
+        #endif // NDEBUG
+        switch(getFieldInstr(cmdWord))
+        {
+
+            #define func(name, cmd_value, cmd_operator, arg_num) \
+                case cmd_value : \
+                { \
+                    name(cmdWord); \
+                } \
+                break;
+            #include "jump_cmds.h"
+            #include "move_cmds.h"
+            #include "nop_cmds.h"
+            #include "branch_cmds.h"
+            #include "shift_cmds.h"
+            #include "arlog_cmds.h"
+            #undef func
             // --------------------------------- Branches ---------------------------------------------------
                 case BEQ_CMD :
                 {

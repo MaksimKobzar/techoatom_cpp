@@ -1,0 +1,5 @@
+func(j_cmd,			0x10, , )
+func(jal_cmd, 		0x11, , )
+func(jr_cmd, 		0x12, , )
+func(jlb_cmd, 		0x13, , )
+func(cal_cmd, 		0x13, , )

@@ -1,0 +1,7 @@
+func(beq_cmd, 		0x1A, , 0)
+func(bgez_cmd, 		0x1B, ==, 1)
+func(bgezal_cmd,	0x1C, >=, 1)
+func(bgtz_cmd, 		0x1D, >, 1)
+func(blez_cmd, 		0x1E, , 0)
+func(bltz_cmd, 		0x1F, , 0)
+func(bne_cmd, 		0x20, , 0)
