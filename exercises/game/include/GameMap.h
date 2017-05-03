@@ -12,14 +12,16 @@
 #include <string>
 #include "Coordinates.h"
 
+/*
+* TODO Размеры статических объектов могут быть просто захардкожены?
+*/
+
 class GameMap: public GameObject
 {
 public:
 	GameMap(std::string name);
 	virtual ~GameMap();
 
-	
-	
 	void accept(Visitor *v)
 	{
 		v->visit(this);

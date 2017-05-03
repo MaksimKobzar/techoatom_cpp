@@ -31,6 +31,7 @@ private:
 	static GameState gameState_;
 	static sf::RenderWindow mainWindow_;
 	GameObjectManager GameObjectManager_;
+	/* TODO Сделать статическим, чтобы видеть везде? */
 };
 
 
@@ -58,7 +59,7 @@ void Game::showGameLogo()
 }
 
 void Game::showMainMenu()
-{	
+{
 	MainMenu mainMenu;
 	MainMenu::MenuResult result = mainMenu.show(mainWindow_);
 
@@ -67,7 +68,7 @@ void Game::showMainMenu()
 		gameState_ = Game::Exiting;
 	}
 	else if(result == MainMenu::Play)
-	{	
+	{
 		/* Я тут возвращаю ссылку. Как мне это сделать синтксически?! */
 		GameObjectManager_ = GameObjectManager::getInstance();
 		// GameObjectManager_.Registrate("Hero0", &Hero::Create);
@@ -82,7 +83,7 @@ void Game::showMainMenu()
 }
 
 void Game::showMenu()
-{	
+{
 	Menu menu;
 	Menu::MenuResult result = menu.show(mainWindow_);
 
@@ -109,17 +110,17 @@ bool Game::isExiting()
 	if(gameState_ == Game::Exiting)
 	{
 		return true;
-	} 
+	}
 	else
 	{
 		return false;
-	} 
+	}
 }
 
 void Game::GameLoop()
 {
 	switch(gameState_)
-	{	
+	{
 		case Game::ShowingMainMenu:
 			ShowMainMenu();
 			break;
@@ -149,6 +150,11 @@ void Game::playGame()
 		{
 			gameState_ = Game::Exiting;
 		}
+		/*
+		*	TODO Как круто обрабатыать нажатия клавиш?
+		*	Нажатие любой кнопки имеет смысл лишь в стадии PLAYING крмое кнопки ESCAPE
+		*	Нажатием клавиш идет управление только объекта Hero
+		*/
 		else if(currentEvent.Type == sf::Event::KeyPressed)
 		{
 			if(currentEvent.Key.Code == sf::Key::Escape){
