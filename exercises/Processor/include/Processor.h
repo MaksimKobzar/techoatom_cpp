@@ -70,6 +70,8 @@ namespace cpuns
 	        //! 2 - OUT_OF_MEM_RANGE
 	        //---------------------------------------------
 			char run();
+			char reset();
+			bool active();
 
 			//---------------------------------------------
 	        //! @getRegValue
@@ -142,6 +144,35 @@ namespace cpuns
 		return (switcher_->run());
 	}
 
+	template <typename value_type, const size_t REG_NUM, class StackType>
+	char Processor<value_type, REG_NUM, StackType>::reset()
+	{
+		DEBUG_INFO("PROCESSOR: Reset.");
+		if(switcher_->getCmdCounter() != 0)
+		{
+			return UNFINISHED_RUN;
+		}
+		regs_->fill(0);
+		while(!stack_.empty())
+		{
+			stack_.pop();
+		}
+		return SUCCESS;
+	}
+
+	template <typename value_type, const size_t REG_NUM, class StackType>
+	bool Processor<value_type, REG_NUM, StackType>::active()
+	{
+		DEBUG_INFO("PROCESSOR: Reset.");
+		if(switcher_->getCmdCounter() == 0)
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
 
 	template <typename value_type, const size_t REG_NUM, class StackType>
 	value_type Processor<value_type, REG_NUM, StackType>::getRegValue(size_t num) const

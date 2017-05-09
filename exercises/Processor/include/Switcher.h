@@ -19,8 +19,6 @@
 #include "error_code_defines.h"
 
 
-
-
 template<
     typename T,
     const size_t REG_NUM,
@@ -61,6 +59,12 @@ template<
         //! 2 - OUT_OF_MEM_RANGE
         //---------------------------------------------
         char run();
+
+        //---------------------------------------------
+        //! @getCmdCounter:
+        //! Return cmdCounter_ value.
+        //---------------------------------------------
+        size_t getCmdCounter();
 
     private:
         //---------------------------------------------
@@ -191,6 +195,13 @@ char Switcher<value_type, REG_NUM, StackType, LABEL_TABLE_WIDTH>::run()
 }
 
 template <typename value_type, const size_t REG_NUM, class StackType, const size_t LABEL_TABLE_WIDTH>
+size_t Switcher<value_type, REG_NUM, StackType, LABEL_TABLE_WIDTH>::getCmdCounter()
+{
+    DEBUG_INFO("SWITCHER: getCmdCounter.");
+    return cmdCounter_;
+}
+
+template <typename value_type, const size_t REG_NUM, class StackType, const size_t LABEL_TABLE_WIDTH>
 void Switcher<value_type, REG_NUM, StackType, LABEL_TABLE_WIDTH>::clearLableTable()
 {
     DEBUG_INFO("SWITCHER: Clear Lable Table.");
@@ -267,29 +278,32 @@ void Switcher<value_type, REG_NUM, StackType, LABEL_TABLE_WIDTH>::fillLabelTable
 #undef func
 
 
-#define func(name, cmd_value, cmd_operator, arg_num) \
+#define func(name, code, dw, with_zero, op, link) \
     template <typename value_type, const size_t REG_NUM, class StackType, const size_t LABEL_TABLE_WIDTH> \
     void Switcher<value_type, REG_NUM, StackType, LABEL_TABLE_WIDTH>::name() \
     { \
-        if(stack_.size() == 0) \
+        if(with_zero) \
         { \
-            return STACK_UNDERFLOW; \
+            if(regs_[getFieldR0(cmdWord)] op 0) \
+            { \
+                cmdCounter_ = getFieldData(cmdWord); \
+            } \
         } \
         else \
         { \
-            if(arg_num) \
+            if(regs_[getFieldR0(cmdWord)] op regs_[getFieldR1(cmdWord)]) \
             { \
-                regs_[getFieldR0(cmdWord)] = stack_.top() cmd_operator getFieldData(cmdWord); \
+                cmdCounter_ = getFieldData(cmdWord); \
             } \
-            else \
-            { \
-                regs_[getFieldR0(cmdWord)] = stack_.top() cmd_operator regs_[getFieldR1(cmdWord)]; \
-            } \
-            stack_.pop(); \
         } \
+        if(link) \
+        { \
+            returnStack.push(cmdCounter_); \
+        }
     }
 #include "branch_cmds.h"
 #undef func
+
 
 template <typename value_type, const size_t REG_NUM, class StackType, const size_t LABEL_TABLE_WIDTH>
 void Switcher<value_type, REG_NUM, StackType, LABEL_TABLE_WIDTH>::j_cmd(value_type word)
