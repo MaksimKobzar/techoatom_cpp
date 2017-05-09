@@ -16,25 +16,49 @@ class Game
 {
 public:
 	static void startGame();
+	static Game& getGame()
+	{
+		return game_;
+	}
+
+	GameLogger& getGameLogger()
+	{
+		return *gameLogger_;
+	}
+	ObjectManager& getObjectManager()
+	{
+		return *ObjectManager_;
+	}
 
 private:
-	static bool isExiting();
-	static void gameLoop();
-	static void showGameLogo();
-	static void showMainMenu();
-	static void showMenu();
-	static void GameLoop();
-	static void playGame();
+	static Game game_;
 
-	enum GameState { Uninitialized, ShowingLogo, Paused, ShowingMenu, ShowingMainMenu, Playing, Exiting, LoadSaving };
+	bool isExiting();
+	void gameLoop();
+	void showGameLogo();
+	void showMainMenu();
+	void showMenu();
+	void gameLoop();
+	void playGame();
+
+	enum GameState { Uninitialized, ShowingLogo, Paused,
+			ShowingMenu, ShowingMainMenu, Playing, Exiting, LoadSaving };
 
 	static GameState gameState_;
+
+	GameObjectManager 	*gameObjectManager_;
+	PhysicEngine		*gamePhysicEngine_;
+	GraphicEngine		*gameGraphicEngine_;
+	AudioEngine			*gameAudioEngine_;
+	AIEngine			*gameAIEngine_;
+	Logger				*gameLogger_;
+
 	static sf::RenderWindow mainWindow_;
-	GameObjectManager GameObjectManager_;
-	/* TODO Сделать статическим, чтобы видеть везде? */
 };
 
-
+// ----------------------------------------------------------------------------------
+// Implementation
+// ----------------------------------------------------------------------------------
 void Game::startGame()
 {
 	mainWindow_.Create(sf::VideoMode(1024,768,32),"Pang!");
@@ -47,7 +71,7 @@ void Game::startGame()
 	{
 		gameLoop();
 	}
-	gameManager.clearAll();
+	gameObjectManager_.clear();
 	mainWindow_.close();
 }
 
@@ -59,7 +83,7 @@ void Game::showGameLogo()
 }
 
 void Game::showMainMenu()
-{
+{	
 	MainMenu mainMenu;
 	MainMenu::MenuResult result = mainMenu.show(mainWindow_);
 
@@ -68,12 +92,8 @@ void Game::showMainMenu()
 		gameState_ = Game::Exiting;
 	}
 	else if(result == MainMenu::Play)
-	{
-		/* Я тут возвращаю ссылку. Как мне это сделать синтксически?! */
-		GameObjectManager_ = GameObjectManager::getInstance();
-		// GameObjectManager_.Registrate("Hero0", &Hero::Create);
-		GameObjectManager_.createLevel();
-		GameObjectManager_.createHero();
+	{	
+		createGame();
 		gameState_ = Game::Playing;
 	}
 	else if(gameState_ == MainMenu::LoadSaving)
@@ -82,8 +102,21 @@ void Game::showMainMenu()
 	}
 }
 
+void Game::createGame()
+{	
+	GameObjectManager_ 	= new GameObjectManager();
+	gamePhysicEngine_ 	= new PhysicEngine();
+	gameGraphicEngine_ 	= new GraphicEngine();
+	gameAudioEngine_ 	= new AudioEngine();
+	gameAIEngine_ 		= new AIEngine();
+	gameLogger_ 		= new Logger();
+
+	GameObjectManager_.createLevel(0);
+	GameObjectManager_.createHero();
+}
+
 void Game::showMenu()
-{
+{	
 	Menu menu;
 	Menu::MenuResult result = menu.show(mainWindow_);
 
@@ -110,17 +143,17 @@ bool Game::isExiting()
 	if(gameState_ == Game::Exiting)
 	{
 		return true;
-	}
+	} 
 	else
 	{
 		return false;
-	}
+	} 
 }
 
-void Game::GameLoop()
+void Game::gameLoop()
 {
 	switch(gameState_)
-	{
+	{	
 		case Game::ShowingMainMenu:
 			ShowMainMenu();
 			break;
@@ -134,12 +167,17 @@ void Game::GameLoop()
 			loadSaving();
 			break;
 	}
-	GameObjectManager_.moveAll();
-	GameObjectManager_.drawAll();
+	GameObjectManager_.step(gameAIEngine_);
+	GameObjectManager_.step(gamePhysicEngine_);
+	GameObjectManager_.step(gameAudioEngine_);
+	GameObjectManager_.step(gameGraphicEngine_);
+	sleep(2 - dqwsewqed);
 }
 
 void Game::playGame()
-{
+{	
+
+	// press Keys
 	sf::Event currentEvent;
 	while(mainWindow_.GetEvent(currentEvent))
 	{
@@ -150,11 +188,6 @@ void Game::playGame()
 		{
 			gameState_ = Game::Exiting;
 		}
-		/*
-		*	TODO Как круто обрабатыать нажатия клавиш?
-		*	Нажатие любой кнопки имеет смысл лишь в стадии PLAYING крмое кнопки ESCAPE
-		*	Нажатием клавиш идет управление только объекта Hero
-		*/
 		else if(currentEvent.Type == sf::Event::KeyPressed)
 		{
 			if(currentEvent.Key.Code == sf::Key::Escape){

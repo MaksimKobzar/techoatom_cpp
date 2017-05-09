@@ -12,12 +12,19 @@
 #include <string>
 #include "Coordinates.h"
 
-// static position on map moved
+/*
+* 1) constant position on map
+* 2) when colide with other weak object he is destroy
+* 3) cant go throw that object
+*/
 class LandscapObject: public GameObject
 {
 public:
-	LandscapObject();
-	~LandscapObject();
+	LandscapObject(std::string name, Coordinates coordinates = 0, bool visible = true)
+		: GameObject(name, coordinates, false, 0, visible)
+	{ }
+
+	virtual ~LandscapObject();
 
 	void accept(Visitor *v)
 	{

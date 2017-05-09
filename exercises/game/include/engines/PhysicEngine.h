@@ -37,6 +37,10 @@ public:
 	{
 		/* TODO */
 	}
+	virtual void visit(HealHeart *)
+	{
+		/* TODO */
+	}
 };
 
 #endif // _PHYSIC_ENGINE_H_

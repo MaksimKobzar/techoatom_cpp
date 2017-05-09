@@ -1,12 +1,12 @@
 //---------------------------------------------
-//! @file Enemy.h
-//! Header file Enemy structure
+//! @file Turret.h
+//! Header file Turret structure
 //!
 //! @author Maksim_Kobzar, 2017
 //---------------------------------------------
 
-#ifndef __ENEMY_H__
-#define __ENEMY_H__
+#ifndef __Turret_H__
+#define __Turret_H__
 
 #include <iostream>
 #include <string>
@@ -15,14 +15,11 @@
 /*
 *	контролируется только CPU
 */
-class Enemy: public CharacterObject
+class Turret: public Enemy
 {
 public:
-	Enemy()
-	: CharacterObject(, 0 /*friendly*/)
-	{
-	}
-	~Enemy();
+	Turret();
+	~Turret();
 
 	/*
 		TODO показать явно какие функции будут переписываться/дописываться относительно базовой реализации
@@ -44,8 +41,9 @@ public:
 		gameAIEngine->setHeroRange(gameObjectManager_->getHeroRange(coordinates_));
 		gameAIEngine->run();
 		while(!gameAIEngine->idle());
+		coordinates_ = gameAIEngine->getCoordinate();
 		velocity_	 = gameAIEngine->getVelocity();
 	}
 };
 
-#endif // __ENEMY_H__
+#endif // __Turret_H__

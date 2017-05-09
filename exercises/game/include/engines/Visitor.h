@@ -1,12 +1,10 @@
 #ifndef _VISITOR_H_
 #define	_VISITOR_H_
 
-class GameMap;
-class Hero;
-class Enemy;
-class Bullet;
-class Bomb;
-class HealHeart;
+class LandscapeObject;
+class CharacterObject;
+class WhizBangObject;
+class MyNewClass;
 
 class Visitor
 {

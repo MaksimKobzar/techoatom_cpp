@@ -1,25 +1,25 @@
 //---------------------------------------------
-//! @file GameMap.h
-//! Header file GameMap structure
+//! @file Rock.h
+//! Header file Rock structure
 //!
 //! @author Maksim_Kobzar, 2017
 //---------------------------------------------
 
-#ifndef __GAME_MAP_H__
-#define __GAME_MAP_H__
+#ifndef __ROCK_H__
+#define __ROCK_H__
 
 #include <iostream>
 #include <string>
 #include "Coordinates.h"
 
-class GameMap: public LandscapObject
+class Rock: public LandscapObject
 {
 public:
-	GameMap(std::string name)
+	Rock(std::string name)
 		: LandscapObject(name)
 	{}
 
-	virtual ~GameMap();
+	virtual ~Rock();
 	
 	void accept(Visitor *v)
 	{
@@ -28,4 +28,4 @@ public:
 };
 
 
-#endif //__GAME_MAP_H__
+#endif //__ROCK_H__

@@ -22,9 +22,15 @@ class GameObject
 {
 public:
 	GameObject(std::string name, Coordinates coordinates = 0, bool mobile = false, int velocity_ = 0, bool visible_ = true)
-		: name_(name), coordinates_(coordinates), mobile_(mobile), velocity_(velocity), visible_(visible) {}
+		: name_(name), coordinates_(coordinates), mobile_(mobile), velocity_(velocity), visible_(visible)
+	{
+		Game::getGame().getGameLogger.logInfo("Game Object with name %s is created.", name);
+	}
 
-	virtual ~GameObject();
+	virtual ~GameObject()
+	{
+		Game::getGame().getGameLogger.logInfo("Game Object with name %s is destroyed.", name);
+	}
 
 
 	virtual std::string getName() const
@@ -80,7 +86,8 @@ public:
 		return Coordinates;
 	}
 	virtual inline void setNewCoordinates()
-	{
+	{	
+		priorCoordinates_ = coordinates_;
 		coordinates_ = getNewCoordinates();
 	}
 	virtual inline Coordinates getNewCoordinates() const
@@ -88,12 +95,19 @@ public:
 		return Coordinates(coordinates_ + velocity_);
 	}
 
+	virtual inline Coordinates getPriorCoordinates() const
+	{
+		return priorCoordinates_;
+	}
+
 	virtual void accept(Visitor *v) = delete;
 
 private:
 	std::string 		name_;
 	bool 				mobile_;
+	Coordinates 		width_;
 	Coordinates 		coordinates_;
+	Coordinates 		priorCoordinates_;
 	Coordinates 		velocity_;
 	bool 				visible_;
 };
