@@ -105,6 +105,7 @@ template<
 
         const std::deque<value_type>                    &cmdMemory_;
         StackType                                       &stack_;
+        std::stack<size_t>                              returnStack_
         std::array<value_type, REG_NUM>                 &regs_;
         std::array<size_t, LABEL_TABLE_WIDTH>           labelTable_;
         size_t                                          cmdCounter_;
@@ -225,7 +226,7 @@ void Switcher<value_type, REG_NUM, StackType, LABEL_TABLE_WIDTH>::fillLabelTable
 }
 
 
-#define func(name, cmd_value, cmd_operator, arg_num) \
+#define func(name, code, dw, arg_num, op) \
     template <typename value_type, const size_t REG_NUM, class StackType, const size_t LABEL_TABLE_WIDTH> \
     void Switcher<value_type, REG_NUM, StackType, LABEL_TABLE_WIDTH>::name() \
     { \
@@ -235,8 +236,8 @@ void Switcher<value_type, REG_NUM, StackType, LABEL_TABLE_WIDTH>::fillLabelTable
         } \
         else \
         { \
-           value_type op1 = stack_.top(); \
            value_type op2; \
+           value_type op1 = stack_.top(); \
            stack_.pop(); \
            if(arg_num == 2) \
            { \
@@ -245,15 +246,15 @@ void Switcher<value_type, REG_NUM, StackType, LABEL_TABLE_WIDTH>::fillLabelTable
            } \
            else \
            { \
-            value_type op2 = getFieldData(cmdWord); \
+                op2 = getFieldData(cmdWord); \
            } \
-           regs_[getFieldR0(cmdWord)] = op1 cmd_operator op2; \
+           regs_[getFieldR0(cmdWord)] = op1 op op2; \
         } \
     }
 #include "arlog_cmds.h"
 #undef func
 
-#define func(name, cmd_value, cmd_operator, arg_num) \
+#define func(name, code, dw, arg_num, op) \
     template <typename value_type, const size_t REG_NUM, class StackType, const size_t LABEL_TABLE_WIDTH> \
     void Switcher<value_type, REG_NUM, StackType, LABEL_TABLE_WIDTH>::name() \
     { \
@@ -265,11 +266,11 @@ void Switcher<value_type, REG_NUM, StackType, LABEL_TABLE_WIDTH>::fillLabelTable
         { \
             if(arg_num) \
             { \
-                regs_[getFieldR0(cmdWord)] = stack_.top() cmd_operator getFieldData(cmdWord); \
+                regs_[getFieldR0(cmdWord)] = stack_.top() op getFieldData(cmdWord); \
             } \
             else \
             { \
-                regs_[getFieldR0(cmdWord)] = stack_.top() cmd_operator regs_[getFieldR1(cmdWord)]; \
+                regs_[getFieldR0(cmdWord)] = stack_.top() op regs_[getFieldR1(cmdWord)]; \
             } \
             stack_.pop(); \
         } \
@@ -282,24 +283,15 @@ void Switcher<value_type, REG_NUM, StackType, LABEL_TABLE_WIDTH>::fillLabelTable
     template <typename value_type, const size_t REG_NUM, class StackType, const size_t LABEL_TABLE_WIDTH> \
     void Switcher<value_type, REG_NUM, StackType, LABEL_TABLE_WIDTH>::name() \
     { \
-        if(with_zero) \
+        value_type rop = with_zero ? 0 : regs_[getFieldR1(cmdWord)]; \
+        if(regs_[getFieldR0(cmdWord)] op rop) \
         { \
-            if(regs_[getFieldR0(cmdWord)] op 0) \
-            { \
-                cmdCounter_ = getFieldData(cmdWord); \
-            } \
-        } \
-        else \
-        { \
-            if(regs_[getFieldR0(cmdWord)] op regs_[getFieldR1(cmdWord)]) \
-            { \
-                cmdCounter_ = getFieldData(cmdWord); \
-            } \
+            cmdCounter_ = getFieldData(cmdWord); \
         } \
         if(link) \
         { \
-            returnStack.push(cmdCounter_); \
-        }
+            returnStack_.push(cmdCounter_); \
+        } \
     }
 #include "branch_cmds.h"
 #undef func

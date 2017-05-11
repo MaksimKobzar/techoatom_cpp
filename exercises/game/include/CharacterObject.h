@@ -23,6 +23,9 @@ private:
 	enum FaceSide { Left, Right /* TODO мб когда нибудь появится еще вверх/вниз. */ };
 	FaceSide 	faceSide_;
 	bool 		friendly_;
+	double 		fireRate_; // shot per sec
+	double 		shotDamage_;
+	double 		healPoints_;
 };
 
 #endif // __GHARACTER_OBJECT_H__
