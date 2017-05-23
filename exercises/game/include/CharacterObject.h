@@ -23,8 +23,13 @@ private:
 	enum FaceSide { Left, Right /* TODO мб когда нибудь появится еще вверх/вниз. */ };
 	FaceSide 	faceSide_;
 	bool 		friendly_;
+
+	// fire Characteristics
+	enum WeaponType { Tears, Laser, Gun }; 
+	WeaponType	weapon_;
 	double 		fireRate_; // shot per sec
 	double 		shotDamage_;
+	
 	double 		healPoints_;
 };
 

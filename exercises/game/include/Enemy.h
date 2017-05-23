@@ -45,6 +45,7 @@ public:
 		gameAIEngine->run();
 		while(!gameAIEngine->idle());
 		velocity_	 = gameAIEngine->getVelocity();
+		if(gameAIEngine)
 	}
 };
 

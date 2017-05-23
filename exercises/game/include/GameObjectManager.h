@@ -31,30 +31,58 @@ public:
 		else
 		{
 			containerGameObject["Map"] = new GameMap("Map");
-			switch(levelNumber)
+			if(levelNumber == 0)
 			{
-				0: containerGameObject["Turret"] = new Turret("Turret");
-				break;
+				containerGameObject["Turret"] = new Turret("Turret");
+				containerGameObject["Rock"] = new Rock("Rock", Coordinates(40, 100)/*Centre*/, Coordinates(10, 20)/*Size*/);
+			}
+			else if(levelNumber == 1){
+				containerGameObject["Slug"] = new Slug("Slug");
+			}
+			else if(levelNumber == 2){
+				containerGameObject["Slug0"] = new Slug("Slug0");
+				containerGameObject["Slug1"] = new Slug("Slug1");
+			}
+		}
+	}
+
+	//-----------------------------------------------------------------------------------------------------------
+	// Function delete all GameObjects from containerGameObject except Hero and Game Map.
+	//-----------------------------------------------------------------------------------------------------------
+	void deleteLevel()
+	{
+		for (std::map<std::string, GameObject*>::iterator it = containerGameObject.begin(); it != containerGameObject.end(); ++it)
+		{
+			key = ????;
+			if(!(key == "Hero" || key == "GameMap"))
+			{
+				delete gamePhysicEngine;
+				containerGameObject.erase(key); 
 			}
 		}
 	}
 	
 	void createHero()
 	{	
-		if(containerGameObject.find("Hero0"))
-		{	
-			if(containerGameObject.find("Hero1"))
-			{
-				throw std::unexpected_error("Try create more heroes than allows.");
-			}
-			else
-			{
-				containerGameObject["Hero1"] = new Hero("Hero1");
-			}
+		if(containerGameObject.find("Hero"))
+		{
+			throw std::unexpected_error("Try create more heroes than allows.");
 		}
 		else
 		{
-			containerGameObject["Hero0"] = new Hero("Hero0");
+			containerGameObject["Hero"] = new Hero("Hero");
+		}
+	}
+
+	void deleteHero()
+	{
+		if(containerGameObject.find("Hero"))
+		{
+			containerGameObject.erase("Hero");
+		}
+		else
+		{
+			throw std::unexpected_error("Couldnt find 'Hero' in GameMap.");
 		}
 	}
 

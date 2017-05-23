@@ -1,12 +1,12 @@
 //---------------------------------------------
-//! @file Turret.h
-//! Header file Turret structure
+//! @file Slug.h
+//! Header file Slug structure
 //!
 //! @author Maksim_Kobzar, 2017
 //---------------------------------------------
 
-#ifndef __TURRET_H__
-#define __TURRET_H__
+#ifndef __SLUG_H__
+#define __SLUG_H__
 
 #include <iostream>
 #include <string>
@@ -15,17 +15,17 @@
 /*
 *	контролируется только CPU
 */
-class Turret: public Enemy
+class Slug: public Enemy
 {
 public:
-	Turret();
-	~Turret();
+	Slug();
+	~Slug();
 
 	/*
 		TODO показать явно какие функции будут переписываться/дописываться относительно базовой реализации
 		а какие появились только в текущем классе.
 	*/
-	void shoot();
+	void shoot() = delete;
 	void invis();
 
 	void accept(Visitor *v)
@@ -46,4 +46,4 @@ public:
 	}
 };
 
-#endif // __TURRET_H__
+#endif // __SLUG_H__
